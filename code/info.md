@@ -1,4 +1,4 @@
-# Moduły
+# Modules
 
 ## Fire
 
@@ -24,5 +24,6 @@ The buisness documentation is in the repository under direcotory doc/
 
 ## Code
 The code documentation is rendered via Doxygen plugin.
+run with `doxygen pythonDox`
 https://www.doxygen.nl/manual/docblocks.html
 https://www.doxygen.nl/manual/docblocks.html#pythonblocks
