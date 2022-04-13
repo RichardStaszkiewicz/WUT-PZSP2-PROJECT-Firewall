@@ -9,7 +9,7 @@
 # rules.
 
 
-import netfilterqueue
+from netfilterqueue import NetfilterQueue
 
 
 ## Documentation of NetMessage
@@ -37,7 +37,8 @@ class FIRE(object):
     # @param self The object pointer
     # @param message The network message fulfiling the firewall requirenments to be send onward
     def accept_message(self, message : NetMessage):
-        pass
+        for pkt in NetMessage.packets:
+            pkt.accept()
 
     ## Method rejecting the given message due to some error
     # @param self The object pointer
@@ -45,6 +46,17 @@ class FIRE(object):
     def reject_message(self, message : NetMessage, error):
         pass
 
+def print_and_accept(pkt):
+    print(pkt)
+    pkt.accept()
 
 if __name__ == "__main__":
-    pass
+    # IP Tables configuration: (should work imo)
+    # iptables -I INPUT -d 192.168.0.0/24 -j NFQUEUE --queue-num 1
+    nfqueue = NetfilterQueue()
+    nfqueue.bind(1, print_and_accept)
+    try:
+        nfqueue.run()
+    except KeyboardInterrupt:
+        print('')
+    nfqueue.unbind()
