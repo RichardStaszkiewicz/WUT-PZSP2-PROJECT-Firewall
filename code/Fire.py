@@ -26,12 +26,27 @@ class NetMessage:
 ## Documentation of FIRE
 #
 # FIRE is an class containing all firewall executive functionalities
-class FIRE(object):
+class Fire(object):
 
     ## Constructor
     # @param self The object pointer
     def __init__(self) -> None:
         pass
+
+
+    ## Method reading packets from queue until a complete message is formed
+    # @param self The object pointer
+    # @returns NetMessage object
+    def read_message(self):
+        pass
+        
+  
+    ## Method analyzing complete message under firewall rules
+    # @param self The object pointer
+    # @message NetMessage object consisting of intercepted packets
+    def analyze_message(self, message : NetMessage):
+        pass
+
 
     ## Method forwarding the accepted message packeges onward to a defended subnet
     # @param self The object pointer
@@ -46,17 +61,22 @@ class FIRE(object):
     def reject_message(self, message : NetMessage, error):
         pass
 
-def print_and_accept(pkt):
-    print(pkt)
-    pkt.accept()
+
 
 if __name__ == "__main__":
+    
+    fire = Fire()
+
+    
     # IP Tables configuration: (should work imo)
     # iptables -I INPUT -d 192.168.0.0/24 -j NFQUEUE --queue-num 1
     nfqueue = NetfilterQueue()
     nfqueue.bind(1, print_and_accept)
+    
     try:
         nfqueue.run()
+        fd = nfqueue.get_fd()
+        print(type(fd))
     except KeyboardInterrupt:
         print('')
     nfqueue.unbind()
