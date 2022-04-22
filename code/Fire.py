@@ -8,15 +8,11 @@
 # on application layer after being judged by a configuration
 # rules.
 from netfilterqueue import NetfilterQueue
-from scapy.all import *
-
 ## Documentation of NetMessage
 #
 # NetMessage is a class storing a composed, readable message
 # along with the packages upholding it
-from scapy.layers.inet import IP, TCP
-
-from scapy.layers.l2 import Ether
+from scapy.layers.inet import IP, TCP, UDP
 
 
 class NetMessage:
@@ -47,6 +43,12 @@ class Fire(object):
             ip_pkt.remove_payload()
             tcp_pkt.remove_payload()
             ip_pkt /= tcp_pkt
+            print(ip_pkt.show(dump=True))
+        if ip_pkt.haslayer(UDP):
+            udp_pkt = ip_pkt[UDP]
+            ip_pkt.remove_payload()
+            udp_pkt.remove_payload()
+            ip_pkt /= udp_pkt
             print(ip_pkt.show(dump=True))
 
         pkt.accept()
