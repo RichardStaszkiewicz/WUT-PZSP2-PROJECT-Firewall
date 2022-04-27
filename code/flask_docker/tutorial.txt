@@ -7,8 +7,8 @@ WYMAGANIA:
 2. Docker (automatyczna instalacja ze skryptu)
 
 1. Uruchom komendę:
-        sh setup_frontend.sh
-uruchomi się plik przeznaczony dla dockera, ale zawiera tez podstawowe pakiety jak Flask czy sam docker
+        sh requirements.sh
+    uruchomi się plik przeznaczony dla dockera, ale zawiera tez podstawowe pakiety jak Flask czy sam docker
 2.Export ustawien flaska jest domyslnie w setup_frontend.sh, jesli wyjdzie error, to ponizej w "KOMENDY z palca"
 3.Uruchom skrypt run_docker.sh. Kontener się zbuduje i uruchomi
 4.Wyłączanie kontenera:
