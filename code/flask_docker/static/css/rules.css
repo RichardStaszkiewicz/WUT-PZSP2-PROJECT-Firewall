@@ -1,0 +1,9 @@
+.rule {
+    font-size: 18px;
+    padding: 8px 12px;
+    border-bottom: 2px solid rgb(78, 129, 82);
+}
+
+.rule:last-child {
+    border: none;
+}

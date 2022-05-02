@@ -3,18 +3,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-    <title>Firewall</title>
+    {% endblock %}
+    <title>{% block title %} {% endblock %} Firewall</title>
 </head>
 <body>
     <div class="wrapper">
         <h1 class="title">Firewall</h1>
         <ul class="box">
 
-            <!--For now its some dummy data-->
-            <li class="rule">Some packet</li>
-            <li class="rule">Some packet</li>
-            <li class="rule">Some packet</li>
+            {% block content %}
+            {% endblock %}
             
         </ul>
         <div class="buttons">

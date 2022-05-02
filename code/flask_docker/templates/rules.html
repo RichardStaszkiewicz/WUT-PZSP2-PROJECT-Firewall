@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/rules.css') }}">
+{% endblock %}
+{% block content %}
+    {% for rule in messages %}
+        <li class="rule">
+            {{ rule['name'] }}
+        </li>
+    {% endfor %}
+{% endblock %}
