@@ -18,5 +18,5 @@ rules = [
 ]
 
 
-def getRules():
+def get_rules():
     return rules
