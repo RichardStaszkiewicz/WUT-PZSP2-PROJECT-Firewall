@@ -2,21 +2,18 @@ from flask import Flask, render_template, request
 import os
 
 # mocks
-from static.mocks.rules import getRules
+from rules import get_rules
+from static.mocks.logs import get_logs
 
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def rules():
-    rules = getRules()
-    return render_template('rules.html', messages=rules)
-
-
-@app.route('/')
 def home():
-    return render_template('index.html')
+    rules = get_rules()
+    logs = get_logs()
+    return render_template('index.html', logs=logs, rules=rules)
 
 
 if __name__ == "__main__":
