@@ -1,47 +1,9 @@
-@import "./variables.css";
-
-.ruleWrapper {
-    display: flex;
-    flex-direction: column;
-}
-
 .rule {
     font-size: 18px;
     padding: 8px 12px;
-    display: flex;
-    cursor: pointer;
-    justify-content: space-between;
-    transition: background-color 0.2s ease-out, color 0.2s ease-out;
-    border-bottom: 2px solid var(--dark-green-c);
-}
-
-.ruleName {
-    flex-grow: 1;
-}
-
-.rule:hover {
-    background-color: var(--light-green-c);
-    color: var(--white-c);
-}
-
-.checkButton {
-    width: 20px;
-    height: 20px;
-    color: var(--dark-green-c);
-    transition: background-color 0.2s ease-out, color 0.2s ease-out;
-}
-
-.checkButton:hover {
-    color: var(--white-c);
-}
-
-.rule:first-of-type {
-    border-top-right-radius: var(--xs-radius);
-    border-top-left-radius:  var(--xs-radius);
+    border-bottom: 2px solid rgb(78, 129, 82);
 }
 
 .rule:last-child {
-    border-bottom: none;
-    border-bottom-right-radius:  var(--xs-radius);
-    border-bottom-left-radius:  var(--xs-radius);
+    border: none;
 }

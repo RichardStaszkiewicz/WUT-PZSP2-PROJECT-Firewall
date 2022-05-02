@@ -1,10 +1,12 @@
+@import "./variables.css";
+
 body {
-    background-color: rgb(56, 83, 58);
+    background-color: var(--background-c);
     font-family: 'Lato', sans-serif;
     font-weight: bold;
     min-height: 100vh;
     width: 100vw;
-    color: rgb(255, 255, 255);
+    color: var(--white-c);
 }
 
 * {
@@ -30,21 +32,11 @@ body {
 
 .box {
     width: 100%;
-    background-color: #fff;
-    border: 2px solid rgb(78, 129, 82);
+    background-color: var(--white-c);
+    border: 2px solid var(--dark-green-c);
     border-radius: 8px;
     list-style-type: none;
     color:rgb(48, 81, 51);
-}
-
-.rule {
-    font-size: 18px;
-    padding: 8px 12px;
-    border-bottom: 2px solid rgb(78, 129, 82);
-}
-
-.rule:last-child {
-    border: none;
 }
 
 .buttons {
@@ -54,16 +46,16 @@ body {
 }
 
 .button {
-    background-color: #fff;
+    background-color: var(--white-c);
     font-size: 16px;
     padding: 8px 12px;
-    border: 2px solid rgb(48, 81, 51);
+    border: 2px solid var(--dark-green-c);
     border-radius: 8px;
 }
 
 .button:hover {
-    background-color: rgb(93, 207, 103);
-    color: #fff;
+    background-color: var(--light-green-c);
+    color: var(--white-c);
 }
 
 .logs {
