@@ -1,6 +1,10 @@
 :root {
     --background-c: rgb(56, 83, 58);
     --white-c: #fff;
+    --basic-white-c: rgb(239, 239, 239);
+    --grey-c: rgb(187, 187, 187);
     --dark-green-c: rgb(48, 81, 51);
     --light-green-c: rgb(93, 207, 103);
+    --fallback-dark-green: rgba(48, 81, 51, 0.4);
+    --z-modal: 1;
 }
