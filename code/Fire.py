@@ -12,6 +12,9 @@ from netfilterqueue import NetfilterQueue
 from scapy.layers.inet import IP, TCP, UDP
 from Conf import Conf
 from Logger import Logger
+from Rules import Rule
+import json
+
 
 ## Documentation of NetMessage
 #
@@ -30,11 +33,15 @@ class NetMessage:
 #
 # FIRE is an class containing all firewall executive functionalities
 class Fire(object):
-
+    
+    ## Keeps all rules required for filtering
+    rules = []    
+    
     ## Constructor
     # @param self The object pointer
     def __init__(self) -> None:
         self.logger = Logger("events.log")
+        
 
     ## Method analyzing packets in terms of TCP/IP rules
     # @param self The object pointer
@@ -66,6 +73,25 @@ class Fire(object):
         if not drop:
             pkt.accept()
         self.logger.log(ip_pkt.show(dump=True))
+
+
+
+
+
+    ## Method reading rules from config file 
+    # 
+    #
+    def update_rules(self) -> None:
+        f = open('./code/Conf.json')
+        data = json.load(f)
+        self.rules.clear() 
+        for rule in data:
+            new_rule = Rule(rule['id'], rule["name"], rule['protocol'], rule['profile'], rule['direction'], rule['analysed_param'], rule['expected_val'])
+            self.rules.append(new_rule)
+
+
+
+
 
 
     ## Method reading packets from queue until a complete message is formed
