@@ -7,12 +7,16 @@
 # Basing on NetFilter the messages are being filtered
 # on application layer after being judged by a configuration
 # rules.
+
 from netfilterqueue import NetfilterQueue
+from scapy.layers.inet import IP, TCP, UDP
+from Conf import Conf
+from Logger import Logger
+
 ## Documentation of NetMessage
 #
 # NetMessage is a class storing a composed, readable message
 # along with the packages upholding it
-from scapy.layers.inet import IP, TCP, UDP
 
 
 class NetMessage:
@@ -30,12 +34,11 @@ class Fire(object):
     ## Constructor
     # @param self The object pointer
     def __init__(self) -> None:
-        pass
+        self.logger = Logger("events.log")
 
     ## Method analyzing packets in terms of TCP/IP rules
     # @param self The object pointer
     # @param pkt Packet recieved from netfilter queue
-
     def analyze_headers(self, pkt):
         ip_pkt = IP(pkt.get_payload())
         if ip_pkt.haslayer(TCP):
@@ -43,25 +46,37 @@ class Fire(object):
             ip_pkt.remove_payload()
             tcp_pkt.remove_payload()
             ip_pkt /= tcp_pkt
-            print(ip_pkt.show(dump=True))
         if ip_pkt.haslayer(UDP):
             udp_pkt = ip_pkt[UDP]
             ip_pkt.remove_payload()
             udp_pkt.remove_payload()
             ip_pkt /= udp_pkt
-            print(ip_pkt.show(dump=True))
 
-        pkt.accept()
+        conf = Conf()
+        drop = False
+        for rule in conf._list_of_rules:
+            if ip_pkt.src == rule.get_src() \
+            and ip_pkt.dst == rule.get_dst() \
+            and (ip_pkt.haslayer(TCP) and rule.get_protocol() == 'tcp'
+            or ip_pkt.haslayer(UDP) and rule.get_protocol() == 'udp') \
+            and (ip_pkt.haslayer(TCP) and str(tcp_pkt.dport) == rule.get_dport()
+            or ip_pkt.haslayer(UDP) and str(udp_pkt.dport) == rule.get_dport()):
+                drop = True
+                pkt.drop()
+        if not drop:
+            pkt.accept()
+        self.logger.log(ip_pkt.show(dump=True))
+
 
     ## Method reading packets from queue until a complete message is formed
     # @param self The object pointer
     # @returns NetMessage object
-    def read_message(self):
+    def read_message(self, pkt):
         pass
 
     ## Method analyzing complete message under firewall rules
     # @param self The object pointer
-    # @message NetMessage object consisting of intercepted packets
+    # @param message NetMessage object consisting of intercepted packets
     def analyze_message(self, message: NetMessage):
         pass
 
