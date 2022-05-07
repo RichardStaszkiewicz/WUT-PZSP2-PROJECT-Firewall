@@ -14,16 +14,20 @@ from Rules import Rule
 import json
 from collections import namedtuple
 
-## MyEncoder is a class needed to pasre all the data into the json file
+## Documentation of CONF
+
+# MyEncoder is a class needed to pasre all the data into the json file
 
 class MyEncoder(json.JSONEncoder):
     def default(self, obj):
         return {k.lstrip('_'): v for k, v in vars(obj).items()}
 
-##
+#
 # CONF is a class that contains all created rules and allows users
 # to manage them. It is responsible for reading data from and writing
-# into a file called Conf.json.
+# into a file called Conf_tmp.json.
+
+
 class Conf:
 
     ## Constructor responsible for processing json file into a list of rules
@@ -34,15 +38,14 @@ class Conf:
         self._list_of_rules = []
         self._id_next = 0
 
-        with open('./code/Conf.json', 'r') as file:
+        with open('Conf_tmp.json', 'r') as file:
             data = file.read().replace('\n', '')
 
         all_rules = list(json.loads(data, object_hook=lambda d: namedtuple('X', d.keys())(*d.values())))
         for single_rule in all_rules:
-            rule = Rule(single_rule[0], single_rule[1], single_rule[2], single_rule[3], single_rule[4], single_rule[5], single_rule[6])
+            rule = Rule(single_rule[0], single_rule[1], single_rule[2], single_rule[3], single_rule[4], single_rule[5], single_rule[6], single_rule[7], single_rule[8], single_rule[9])
             self._list_of_rules.append(rule)
             self._id_next = max(self._id_next, single_rule[0])
-
 
     ## Method processing list of rules into json
     # @param self the object pointer
@@ -63,7 +66,7 @@ class Conf:
     # @param Json data in json format
 
     def write_config_file(self, Json) -> None:
-        with open('./code/Conf.json', 'w') as file:
+        with open('Conf_tmp.json', 'w') as file:
             file.write(Json)
 
     ## Method adding one rule into the config with an unique id
@@ -75,8 +78,8 @@ class Conf:
     # @param analysed_param determines what parameter is being checked
     # @param expected_val determines the value of the parameter that is allowed
 
-    def add_rule(self, name, protocol, profile, direction, analysed_param, expected_val):
-        rule = Rule(self._id_next + 1, name, protocol, profile, direction, analysed_param, expected_val)
+    def add_rule(self, src, dst, protocol, dport, direction, action):
+        rule = Rule(self._id_next + 1, src, dst, protocol, dport, direction, action)
         self._id_next += 1
         self._list_of_rules.append(rule)
 
