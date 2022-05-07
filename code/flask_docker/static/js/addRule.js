@@ -19,25 +19,31 @@ window.onclick = (event) => {
 }
 
 //inputs 
-const ruleName = document.getElementById('ruleName').value;
-const ruleProtocol = document.getElementById('ruleProtocol').value;
-const ruleProfile = document.getElementById('ruleProfile').value;
-const ruleDirection = document.getElementById('ruleDirection').value;
-const ruleParameters = document.getElementById('ruleParameters').value;
-const ruleExpectedValue = document.getElementById('ruleExpectedValue').value;
-
 const addRuleBtn = document.getElementById('confirmAddRule');
 
-const rule = {
-    name: ruleName,
-    protocol: ruleProtocol,
-    profile: ruleProfile,
-    direction: ruleDirection,
-    analysed_param: ruleParameters,
-    expected_val: ruleExpectedValue,
-}
-
 addRuleBtn.onclick = () => {
-    //TODO: create addRule function
+    const ruleName = document.getElementById('ruleName').value;
+    const ruleProtocol = document.getElementById('ruleProtocol').value;
+    const ruleProfile = document.getElementById('ruleProfile').value;
+    const ruleDirection = document.getElementById('ruleDirection').value;
+    const ruleParameters = document.getElementById('ruleParameters').value;
+    const ruleExpectedValue = document.getElementById('ruleExpectedValue').value;
+
+    const rule = {
+        name: ruleName,
+        protocol: ruleProtocol,
+        profile: ruleProfile,
+        direction: ruleDirection,
+        analysed_param: ruleParameters,
+        expected_val: ruleExpectedValue,
+    }
+
+    fetch('/getRules', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json',
+        },
+        body: JSON.stringify(rule),
+    });
 }
 
