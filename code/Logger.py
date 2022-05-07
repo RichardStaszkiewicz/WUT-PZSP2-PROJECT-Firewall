@@ -21,11 +21,14 @@ class Logger:
     def __init__(self, logfile, level=logging.DEBUG):
         self.logfile = logfile
         self.level = level
-        logging.basicConfig(filename=logfile, format='%(levelname)s: %(asctime)s %(message)s', filemode='w', level=level)
+        logging.basicConfig(filename=logfile, filemode='w', level=level)
+        formatter = logging.Formatter('%(levelname)s: %(asctime)s %(message)s')
         self.logger = logging.getLogger("Rotating Log")
-        handler = RotatingFileHandler(logfile, maxBytes=4096,
+        handler = RotatingFileHandler(logfile, maxBytes=524288,
                                       backupCount=3)
+        handler.setFormatter(formatter)
         self.logger.addHandler(handler)
+
 
     ## Method logging a message to the file
     # @param self The object pointer
