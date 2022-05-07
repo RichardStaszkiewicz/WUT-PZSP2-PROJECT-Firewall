@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 import os
 
 # mocks
@@ -8,10 +8,20 @@ from static.mocks.logs import get_logs
 
 app = Flask(__name__)
 
+rules = get_rules()
+
+
+@app.route('/getRules', methods=['GET', 'POST'])
+def update_rules():
+    if request.method == 'POST':
+        rule_data = request.get_json()
+        rules.append(rule_data)
+
+    return redirect(url_for('/'))
+
 
 @app.route('/')
 def home():
-    rules = get_rules()
     logs = get_logs()
     return render_template('index.html', logs=logs, rules=rules)
 
