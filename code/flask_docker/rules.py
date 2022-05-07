@@ -19,4 +19,6 @@ rules = [
 
 
 def get_rules():
+    for rule in rules:
+        rule['is_active'] = True
     return rules
