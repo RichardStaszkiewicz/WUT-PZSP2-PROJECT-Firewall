@@ -1,9 +1,37 @@
+@import "./variables.css";
+
 .rule {
     font-size: 18px;
     padding: 8px 12px;
-    border-bottom: 2px solid rgb(78, 129, 82);
+    border-bottom: 2px solid var(--dark-green-c);
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+
+}
+
+.rule:hover {
+    background-color: var(--light-green-c);
+    color: var(--white-c);
+}
+
+.check-button {
+    color: var(--dark-green-c);
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+.check-button:hover {
+    color: var(--white-c);
+}
+
+.rule:first-of-type {
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
 }
 
 .rule:last-child {
-    border: none;
+    border-bottom: none;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
