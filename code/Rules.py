@@ -9,7 +9,7 @@
 
 ## Documentation of RULE
 #
-# RULE is a class containing all information about a single 
+# RULE is a class containing all information about a single
 # firewall filtration rule.
 class Rule:
 
@@ -23,30 +23,42 @@ class Rule:
     # @param analysed_param determines what parameter is being checked
     # @param expected_val determines the value of the parameter that is allowed
 
-
-    def __init__(self, id, name, protocol, profile, direction, analysed_param, expected_val) -> None:
+    def __init__(self, id, src, dst, protocol, dport, function_code, starting_address, register_quantity, direction, action) -> None:
         self._id = id
-        self._name = name
+        self._src = src
+        self._dst = dst
         self._protocol = protocol
-        self._profile = profile
+        self._dport = dport
         self._direction = direction
-        self._analysed_param = analysed_param
-        self._expected_val = expected_val
+        self._action = action
+        self._function_code = function_code
+        self._starting_address = starting_address
+        self._register_quantity = register_quantity
 
     ## Getter method
     # @param self the object pointer
     def get_id(self):
         return self._id
-    
+
     ## Getter method
     # @param self the object pointer
-    def get_name(self):
-        return self._name
+    def get_src(self):
+        return self._src
+
+    ## Getter method
+    # @param self the object pointer
+    def get_dst(self):
+        return self._dst
 
     ## Getter method
     # @param self the object pointer
     def get_protocol(self):
         return self._protocol
+
+    ## Getter method
+    # @param self the object pointer
+    def get_dport(self):
+        return self._dport
 
     ## Getter method
     # @param self the object pointer
@@ -60,8 +72,24 @@ class Rule:
 
     ## Getter method
     # @param self the object pointer
-    def get_analysed_param(self):
-        return self._analysed_param
+    def get_action(self):
+        return self._action
+
+    ## Getter method
+    # @param self the object pointer
+    def get_function_code(self):
+        return self._function_code
+
+    ## Getter method
+    # @param self the object pointer
+    def get_starting_address(self):
+        return self._starting_address
+
+    ## Getter method
+    # @param self the object pointer
+    def get_register_quantity(self):
+        return self._register_quantity
+
 
     ## Getter method
     # @param self the object pointer
@@ -72,7 +100,7 @@ class Rule:
     # @param self the object pointer
     def set_id(self, id):
         self._id = id
-    
+
     ## Setter method
     # @param self the object pointer
     # @param name user's name of the rule
