@@ -35,3 +35,13 @@ The code documentation is rendered via Doxygen plugin.
 run with `doxygen pythonDox`
 https://www.doxygen.nl/manual/docblocks.html
 https://www.doxygen.nl/manual/docblocks.html#pythonblocks
+
+# Must-Know
+
+## Protocols filtered
+Each portocola has it's own specific header. The filtration taking place is
+targeting the
+### SLMP
+![SLMP request ](./../materials/SLMP/slmp-request.png?raw=true "SLMP request header constists of 30B")
+![SLMP response ](./../materials/SLMP/slmp-response.png?raw=true "SLMP response header constists of 22B")
+### Modbus
