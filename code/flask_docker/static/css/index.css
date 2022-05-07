@@ -36,7 +36,7 @@ body {
     border: 2px solid var(--dark-green-c);
     border-radius: 8px;
     list-style-type: none;
-    color:rgb(48, 81, 51);
+    color: var(--dark-green-c);
 }
 
 .buttons {
@@ -52,6 +52,7 @@ body {
     border: 2px solid var(--dark-green-c);
     border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
 }
 
 .button:hover {
