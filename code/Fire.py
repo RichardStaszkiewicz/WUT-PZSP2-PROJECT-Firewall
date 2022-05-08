@@ -7,6 +7,7 @@
 # Basing on NetFilter the messages are being filtered
 # on application layer after being judged by a configuration
 # rules.
+import logging
 
 from netfilterqueue import NetfilterQueue
 from scapy.layers.inet import IP, TCP, UDP
@@ -33,15 +34,13 @@ class NetMessage:
 #
 # FIRE is an class containing all firewall executive functionalities
 class Fire(object):
-    
     ## Keeps all rules required for filtering
-    rules = []    
-    
+    rules = []
+
     ## Constructor
     # @param self The object pointer
     def __init__(self) -> None:
         self.logger = Logger("events.log")
-        
 
     ## Method analyzing packets in terms of TCP/IP rules
     # @param self The object pointer
@@ -50,14 +49,10 @@ class Fire(object):
         ip_pkt = IP(pkt.get_payload())
         if ip_pkt.haslayer(TCP):
             tcp_pkt = ip_pkt[TCP]
-            ip_pkt.remove_payload()
-            tcp_pkt.remove_payload()
-            ip_pkt /= tcp_pkt
-        if ip_pkt.haslayer(UDP):
+        elif ip_pkt.haslayer(UDP):
             udp_pkt = ip_pkt[UDP]
-            ip_pkt.remove_payload()
-            udp_pkt.remove_payload()
-            ip_pkt /= udp_pkt
+        else:
+            pkt.accept()
 
         conf = Conf()
         drop = False
@@ -71,27 +66,7 @@ class Fire(object):
                 drop = True
                 pkt.drop()
         if not drop:
-            pkt.accept()
-        self.logger.log(ip_pkt.show(dump=True))
-
-
-
-
-
-    ## Method reading rules from config file 
-    # 
-    #
-    def update_rules(self) -> None:
-        f = open('./code/Conf.json')
-        data = json.load(f)
-        self.rules.clear() 
-        for rule in data:
-            new_rule = Rule(rule['id'], rule["name"], rule['protocol'], rule['profile'], rule['direction'], rule['analysed_param'], rule['expected_val'])
-            self.rules.append(new_rule)
-
-
-
-
+            self.analyze_message(pkt)
 
 
     ## Method reading packets from queue until a complete message is formed
@@ -102,9 +77,43 @@ class Fire(object):
 
     ## Method analyzing complete message under firewall rules
     # @param self The object pointer
-    # @param message NetMessage object consisting of intercepted packets
-    def analyze_message(self, message: NetMessage):
-        pass
+    # @param pkt Packet recieved from netfilter queue
+    def analyze_message(self, pkt):
+        ip_pkt = IP(pkt.get_payload())
+        tcp_pkt = ip_pkt[TCP]
+        conf = Conf()
+        client_address = '127.0.0.1'
+        drop = False
+        if ip_pkt.src == client_address:
+            message_bytes = bytes(tcp_pkt.payload)
+            if message_bytes[:4] == b'\x00\x01\x00\x00':
+                function_code = int(message_bytes[7])
+                starting_address = int.from_bytes(message_bytes[8:10], 'little')
+                quantity = int.from_bytes(message_bytes[11:13], 'little')
+                for rule in conf._list_of_rules:
+                    if function_code == int(rule.get_function_code()) \
+                    and starting_address == int(rule.get_starting_address()) \
+                    and quantity > int(rule.get_register_quantity()):
+                        drop = True
+                        self.logger.log("Packet rejected\n" + ip_pkt.show(dump=True), logging.WARNING)
+                        pkt.drop()
+                        break
+        if not drop:
+            self.logger.log(ip_pkt.show(dump=True))
+            pkt.accept()
+
+
+    ## Method reading rules from config file
+    #
+    #
+    def update_rules(self) -> None:
+        f = open('Conf_tmp.json')
+        data = json.load(f)
+        self.rules.clear()
+        for rule in data:
+            new_rule = Rule(rule['id'], rule["src"], rule['dst'], rule['protocol'], rule['dport'], rule['direction'], rule['action'])
+            self.rules.append(new_rule)
+
 
     ## Method forwarding the accepted message packeges onward to a defended subnet
     # @param self The object pointer
@@ -120,12 +129,13 @@ class Fire(object):
         pass
 
 
+fire = Fire()
+
 if __name__ == "__main__":
 
     # IP Tables configuration: (should work imo)
     # iptables -I INPUT -d 192.168.0.0/24 -j NFQUEUE --queue-num 1
 
-    fire = Fire()
     nfqueue = NetfilterQueue()
     nfqueue.bind(1, fire.analyze_headers)
 
