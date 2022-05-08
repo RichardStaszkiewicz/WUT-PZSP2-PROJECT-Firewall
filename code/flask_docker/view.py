@@ -1,9 +1,9 @@
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, jsonify, redirect, render_template, request, url_for
 import os
 
 # mocks
 from rules import get_rules
-from static.mocks.logs import get_logs
+from logs import get_logs
 
 
 app = Flask(__name__)
@@ -16,8 +16,10 @@ def update_rules():
     if request.method == 'POST':
         rule_data = request.get_json()
         rules.append(rule_data)
+        return redirect(url_for('/'))
 
-    return redirect(url_for('/'))
+    if request.method == 'GET':
+        return jsonify(rules)
 
 
 @app.route('/')

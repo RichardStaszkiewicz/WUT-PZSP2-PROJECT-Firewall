@@ -15,32 +15,46 @@
                 <div class="inputWrapper">
                     <label for="protocol">Choose Protocol</label>
                     <select name="protocol" id="ruleProtocol" class="input">
-                        <option value="p1">First protocol</option>
-                        <option value="p2">Second protocol</option>
+                        <option value="p1">IP/TCP</option>
+                        <option value="p2">MODBUS</option>
                     </select>
                 </div>
-                <div class="inputWrapper">
+                <!--<div class="inputWrapper">
                     <label for="profile">Rule Profile</label>
                     <input label="profile" type="number" id="ruleProfile" class="input" placeholder="Profile...">
-                </div>
+                </div> -->
                 <div class="inputWrapper">
                     <label for="direction">Direction</label>
                     <select name="direction" id="ruleDirection" class="input">
-                        <option value="d1">First direction</option>
-                        <option value="d2">Second direction</option>
+                        <option value="d1">IN</option>
+                        <option value="d2">OUT</option>
                     </select>
                 </div>
+                <!--
                 <div class="inputWrapper">
-                    <!--TODO: make this select a multiselect-->
                     <label for="parameter">Analysed Parameter</label>
                     <select name="parameter" id="ruleParameters" class="input">
                         <option value="p1">First parameter</option>
                         <option value="p2">Second parameter</option>
                     </select>
                 </div>
+                
                 <div class="inputWrapper">
                     <label to="expectedValue">Expected Value</label>
                     <input label="expectedValue" type="text" id="ruleExpectedValue" class="input" placeholder="Expected Value...">
+                </div>
+                -->
+                <div class="inputWrapper">
+                    <label to="source">Source</label>
+                    <input label="source" type="text" id="ruleSource" class="input" placeholder="Source...">
+                </div>
+                <div class="inputWrapper">
+                    <label to="destination">Destination</label>
+                    <input label="destination" type="text" id="ruleDestination" class="input" placeholder="Destination...">
+                </div>
+                <div class="inputWrapper">
+                    <label to="destinationPort">Destination Port</label>
+                    <input label="destinationPort" type="number" id="ruleDestinationPort" class="input" placeholder="Destination Port...">
                 </div>
             </div>
             
