@@ -6,5 +6,9 @@
     --dark-green-c: rgb(48, 81, 51);
     --light-green-c: rgb(93, 207, 103);
     --fallback-dark-green: rgba(48, 81, 51, 0.4);
+    --transparent: rgba(255, 255, 255, 0);
     --z-modal: 1;
+    --xs-radius: 4px;
+    --sm-radius: 6px;
+    --md-radius: 8px;
 }

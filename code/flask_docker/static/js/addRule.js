@@ -24,18 +24,29 @@ const addRuleBtn = document.getElementById('confirmAddRule');
 addRuleBtn.onclick = () => {
     const ruleName = document.getElementById('ruleName').value;
     const ruleProtocol = document.getElementById('ruleProtocol').value;
-    const ruleProfile = document.getElementById('ruleProfile').value;
-    const ruleDirection = document.getElementById('ruleDirection').value;
-    const ruleParameters = document.getElementById('ruleParameters').value;
-    const ruleExpectedValue = document.getElementById('ruleExpectedValue').value;
-
+    const ruleSource = document.getElementById('ruleSource').value;
+    const ruleDestination = document.getElementById('ruleDestination').value;
+    const ruleDestinationPort = document.getElementById('ruleDestinationPort').value;
+    //const ruleExpectedValue = document.getElementById('ruleExpectedValue').value;
+/*
     const rule = {
         name: ruleName,
         protocol: ruleProtocol,
         profile: ruleProfile,
         direction: ruleDirection,
         analysed_param: ruleParameters,
+        is_active: true,
         expected_val: ruleExpectedValue,
+    }
+    */
+
+    const rule = {
+        name: ruleName,
+        protocol: ruleProtocol,
+        source: ruleSource,
+        destination: ruleDestination,
+        destination_port: ruleDestinationPort,
+        is_active: true,
     }
 
     fetch('/getRules', {
