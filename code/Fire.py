@@ -30,6 +30,10 @@ class NetMessage:
         pass
 
 
+
+
+
+
 ## Documentation of FIRE
 #
 # FIRE is an class containing all firewall executive functionalities
@@ -39,8 +43,21 @@ class Fire(object):
 
     ## Constructor
     # @param self The object pointer
-    def __init__(self) -> None:
+    def __init__(self,rules_file) -> None:
         self.logger = Logger("events.log")
+        self.rules_file = rules_file
+
+    ## Method reading rules from config file
+    #
+    #
+    def update_rules(self) -> None:
+        f = open(self.rules_file)
+        data = json.load(f)
+        self.rules.clear()
+        for rule in data:
+            new_rule = Rule(rule['id'], rule["src"], rule['dst'], rule['protocol'], rule['dport'], rule['direction'], rule['action'])
+            self.rules.append(new_rule)
+
 
     ## Method analyzing packets in terms of TCP/IP rules
     # @param self The object pointer
@@ -51,11 +68,13 @@ class Fire(object):
             tcp_pkt = ip_pkt[TCP]
         elif ip_pkt.haslayer(UDP):
             udp_pkt = ip_pkt[UDP]
-        else:
-            pkt.accept()
+        # else:
+        #     # każdy inny pakiet niż udp/tcp jest akceptowany?
+        #     pkt.accept()
 
         conf = Conf()
         drop = False
+        
         for rule in conf._list_of_rules:
             if ip_pkt.src == rule.get_src() \
             and ip_pkt.dst == rule.get_dst() \
@@ -103,17 +122,6 @@ class Fire(object):
             pkt.accept()
 
 
-    ## Method reading rules from config file
-    #
-    #
-    def update_rules(self) -> None:
-        f = open('Conf_tmp.json')
-        data = json.load(f)
-        self.rules.clear()
-        for rule in data:
-            new_rule = Rule(rule['id'], rule["src"], rule['dst'], rule['protocol'], rule['dport'], rule['direction'], rule['action'])
-            self.rules.append(new_rule)
-
 
     ## Method forwarding the accepted message packeges onward to a defended subnet
     # @param self The object pointer
@@ -129,7 +137,7 @@ class Fire(object):
         pass
 
 
-fire = Fire()
+fire = Fire("rules.json")
 
 if __name__ == "__main__":
 
