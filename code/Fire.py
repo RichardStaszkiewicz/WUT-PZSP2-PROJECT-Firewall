@@ -40,8 +40,7 @@ class Fire(object):
     ## Constructor
     # @param self The object pointer
     def __init__(self) -> None:
-        self.logger = Logger("events.log")
-        
+        self.logger = Logger("../logs/events.log")
 
     ## Method analyzing packets in terms of TCP/IP rules
     # @param self The object pointer
@@ -53,6 +52,8 @@ class Fire(object):
         elif ip_pkt.haslayer(UDP):
             udp_pkt = ip_pkt[UDP]
         else:
+            self.logger.log("\nPacket accepted\n" + ip_pkt.show(dump=True))
+            print("\nPacket accepted\n" + ip_pkt.show(dump=True))
             pkt.accept()
 
         conf = Conf()
@@ -65,6 +66,8 @@ class Fire(object):
             and (ip_pkt.haslayer(TCP) and str(tcp_pkt.dport) == rule.get_dport()
             or ip_pkt.haslayer(UDP) and str(udp_pkt.dport) == rule.get_dport()):
                 drop = True
+                self.logger.log("\nPacket rejected\n" + ip_pkt.show(dump=True), logging.WARNING)
+                print("\nPacket rejected\n" + ip_pkt.show(dump=True))
                 pkt.drop()
         if not drop:
             self.analyze_message(pkt)
@@ -116,10 +119,12 @@ class Fire(object):
                     and quantity > int(rule.get_register_quantity()):
                         drop = True
                         self.logger.log("Packet rejected\n" + ip_pkt.show(dump=True), logging.WARNING)
+                        print("\nPacket rejected\n" + ip_pkt.show(dump=True))
                         pkt.drop()
                         break
         if not drop:
-            self.logger.log(ip_pkt.show(dump=True))
+            self.logger.log("\nPacket accepted\n" + ip_pkt.show(dump=True))
+            print("\nPacket accepted\n" + ip_pkt.show(dump=True))
             pkt.accept()
 
 
