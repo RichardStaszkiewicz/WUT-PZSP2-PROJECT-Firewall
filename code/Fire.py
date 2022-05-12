@@ -24,6 +24,17 @@ SLMP_SERVER_PORT = 1280
 # along with the packages upholding it
 
 
+class NetMessage:
+    ## Constructor
+    # @param self The object pointer
+    def __init__(self) -> None:
+        pass
+
+
+
+
+
+
 ## Documentation of FIRE
 #
 # FIRE is an class containing all firewall executive functionalities
@@ -112,8 +123,21 @@ class Fire(object):
 
     ## Constructor
     # @param self The object pointer
-    def __init__(self) -> None:
-        self.logger = Logger('../logs/events.log')
+    def __init__(self,rules_file) -> None:
+        self.logger = Logger("events.log")
+        self.rules_file = rules_file
+
+    ## Method reading rules from config file
+    #
+    #
+    def update_rules(self) -> None:
+        f = open(self.rules_file)
+        data = json.load(f)
+        self.rules.clear()
+        for rule in data:
+            new_rule = Rule(rule['id'], rule["src"], rule['dst'], rule['protocol'], rule['dport'], rule['direction'], rule['action'])
+            self.rules.append(new_rule)
+
 
     ## Method analyzing packets in terms of TCP/IP rules
     # @param self The object pointer
@@ -124,23 +148,23 @@ class Fire(object):
             tran_pkt = ip_pkt[TCP]
             protocol = 'TCP'
         elif ip_pkt.haslayer(UDP):
-            tran_pkt = ip_pkt[UDP]
-            protocol = 'UDP'
-        else:
-            self.reject_packet(pkt, '\nPacket rejected\n' + ip_pkt.show(dump=True))
-            return
+            udp_pkt = ip_pkt[UDP]
+        # else:
+        #     # każdy inny pakiet niż udp/tcp jest akceptowany?
+        #     pkt.accept()
 
-        sport = tran_pkt.sport
-        dport = tran_pkt.dport
-        attributes = {
-            'source address': ip_pkt.src,
-            'destination address': ip_pkt.dst,
-            'protocol': protocol,
-            'sport': str(sport),
-            'dport': str(dport)
-        }
-
-        drop = self.compare_with_rules(attributes)
+        conf = Conf()
+        drop = False
+        
+        for rule in conf._list_of_rules:
+            if ip_pkt.src == rule.get_src() \
+            and ip_pkt.dst == rule.get_dst() \
+            and (ip_pkt.haslayer(TCP) and rule.get_protocol() == 'tcp'
+            or ip_pkt.haslayer(UDP) and rule.get_protocol() == 'udp') \
+            and (ip_pkt.haslayer(TCP) and str(tcp_pkt.dport) == rule.get_dport()
+            or ip_pkt.haslayer(UDP) and str(udp_pkt.dport) == rule.get_dport()):
+                drop = True
+                pkt.drop()
         if not drop:
             if dport == MODBUS_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
@@ -253,17 +277,6 @@ class Fire(object):
 
 
 
-    ## Method reading rules from config file
-    #
-    #
-    def update_rules(self) -> None:
-        f = open('Conf_tmp.json')
-        data = json.load(f)
-        self.rules.clear()
-        for rule in data:
-            new_rule = Rule(rule['id'], rule["src"], rule['dst'], rule['protocol'], rule['dport'], rule['direction'], rule['action'])
-            self.rules.append(new_rule)
-
 
     ## Method forwarding the accepted message packeges onward to a defended subnet
     # @param self The object pointer
@@ -280,7 +293,7 @@ class Fire(object):
         pkt.drop()
 
 
-fire = Fire()
+fire = Fire("rules.json")
 
 if __name__ == "__main__":
 
