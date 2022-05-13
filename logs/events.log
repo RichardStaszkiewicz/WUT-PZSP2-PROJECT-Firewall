@@ -1,0 +1,579 @@
+DEBUG: 2022-05-13 17:05:49,325 
+Packet accepted
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 60
+  id        = 12044
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xdad
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156425
+     ack       = 0
+     dataofs   = 10
+     reserved  = 0
+     flags     = S
+     window    = 65495
+     chksum    = 0xb34a
+     urgptr    = 0
+     options   = [('MSS', 65495), ('SAckOK', b''), ('Timestamp', (597831686, 0)), ('NOP', None), ('WScale', 7)]
+
+DEBUG: 2022-05-13 17:05:49,327 
+Packet accepted
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 60
+  id        = 0
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0x3cb9
+  src       = 127.0.0.2
+  dst       = 127.0.0.1
+  \options   \
+###[ TCP ]### 
+     sport     = zenginkyo_1
+     dport     = 40867
+     seq       = 2916067929
+     ack       = 881156426
+     dataofs   = 10
+     reserved  = 0
+     flags     = SA
+     window    = 65483
+     chksum    = 0x684c
+     urgptr    = 0
+     options   = [('MSS', 65495), ('SAckOK', b''), ('Timestamp', (1362403739, 597831686)), ('NOP', None), ('WScale', 7)]
+
+DEBUG: 2022-05-13 17:05:49,329 
+Packet accepted
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 52
+  id        = 12045
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xdb4
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = A
+     window    = 512
+     chksum    = 0x8f04
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597831690, 1362403739))]
+
+WARNING: 2022-05-13 17:05:49,331 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12046
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xda7
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x8e80
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597831692, 1362403739))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:05:49,538 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12047
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xda6
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x8db1
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597831899, 1362403739))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:05:49,748 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12048
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xda5
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x8cdf
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597832109, 1362403739))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:05:50,178 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12049
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xda4
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x8b31
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597832539, 1362403739))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:05:51,004 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12050
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xda3
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x87f6
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597833366, 1362403739))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+DEBUG: 2022-05-13 17:05:52,338 
+Packet accepted
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 52
+  id        = 12051
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xdae
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156438
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = FA
+     window    = 512
+     chksum    = 0x8337
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597834698, 1362403739))]
+
+DEBUG: 2022-05-13 17:05:52,342 
+Packet accepted
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 49746
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0x7a62
+  src       = 127.0.0.2
+  dst       = 127.0.0.1
+  \options   \
+###[ TCP ]### 
+     sport     = zenginkyo_1
+     dport     = 40867
+     seq       = 2916067930
+     ack       = 881156426
+     dataofs   = 11
+     reserved  = 0
+     flags     = A
+     window    = 512
+     chksum    = 0x216e
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (1362406754, 597831690)), ('NOP', None), ('NOP', None), ('SAck', (881156438, 881156439))]
+
+WARNING: 2022-05-13 17:05:52,344 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12052
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xda1
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x76f4
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597834705, 1362406754))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:05:52,552 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12053
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xda0
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x7624
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597834913, 1362406754))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:05:52,982 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12054
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xd9f
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x747a
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597835339, 1362406754))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:05:53,832 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12055
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xd9e
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x7124
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597836193, 1362406754))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:05:55,511 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12056
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xd9d
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x6a94
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597837873, 1362406754))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:05:59,032 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12057
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xd9c
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x5cd4
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597841393, 1362406754))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:06:05,861 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12058
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xd9b
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0x422a
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597848219, 1362406754))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:06:19,304 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12059
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xd9a
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0xda6
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597861663, 1362406754))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
+WARNING: 2022-05-13 17:06:46,607 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 64
+  id        = 12060
+  flags     = DF
+  frag      = 0
+  ttl       = 64
+  proto     = tcp
+  chksum    = 0xd99
+  src       = 127.0.0.1
+  dst       = 127.0.0.2
+  \options   \
+###[ TCP ]### 
+     sport     = 40867
+     dport     = zenginkyo_1
+     seq       = 881156426
+     ack       = 2916067930
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 512
+     chksum    = 0xa2fe
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (597888966, 1362406754))]
+###[ Raw ]### 
+        load      = '\x00\x01\x00\x00\x00\x06\x00\x03\x00\x01\x00c'
+
