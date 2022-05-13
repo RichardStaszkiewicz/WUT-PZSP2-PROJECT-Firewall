@@ -7,6 +7,7 @@
 # Basing on NetFilter the messages are being filtered
 # on application layer after being judged by a configuration
 # rules.
+from copy import deepcopy
 import logging
 
 from netfilterqueue import NetfilterQueue
@@ -126,18 +127,19 @@ class Fire(object):
     def __init__(self,rules_file) -> None:
         self.logger = Logger("events.log")
         self.rules_file = rules_file
+        self.update_rules()
 
     ## Method reading rules from config file
-    #
+    # @param self The object pointer
     #
     def update_rules(self) -> None:
         f = open(self.rules_file)
         data = json.load(f)
-        self.rules.clear()
-        for rule in data:
-            new_rule = Rule(rule['id'], rule["src"], rule['dst'], rule['protocol'], rule['dport'], rule['direction'], rule['action'])
-            self.rules.append(new_rule)
+        self.rules = data["rules"]
+    
 
+    def get_rules(self):
+        return self.rules
 
     ## Method analyzing packets in terms of TCP/IP rules
     # @param self The object pointer
@@ -293,20 +295,20 @@ class Fire(object):
         pkt.drop()
 
 
-fire = Fire("rules.json")
+# fire = Fire("rules.json")
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    # IP Tables configuration: (should work imo)
-    # iptables -I INPUT -d 192.168.0.0/24 -j NFQUEUE --queue-num 1
+#     # IP Tables configuration: (should work imo)
+#     # iptables -I INPUT -d 192.168.0.0/24 -j NFQUEUE --queue-num 1
 
-    nfqueue = NetfilterQueue()
-    nfqueue.bind(1, fire.analyze_tcp_ip)
+#     nfqueue = NetfilterQueue()
+#     nfqueue.bind(1, fire.analyze_headers)
 
-    try:
-        nfqueue.run()
-        fd = nfqueue.get_fd()
-        print(type(fd))
-    except KeyboardInterrupt:
-        print('')
-    nfqueue.unbind()
+#     try:
+#         nfqueue.run()
+#         fd = nfqueue.get_fd()
+#         print(type(fd))
+#     except KeyboardInterrupt:
+#         print('')
+#     nfqueue.unbind()
