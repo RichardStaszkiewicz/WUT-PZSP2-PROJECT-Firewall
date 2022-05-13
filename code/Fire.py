@@ -31,86 +31,7 @@ SLMP_SERVER_PORT = 1280
 # FIRE is an class containing all firewall executive functionalities
 class Fire(object):
     ## Keeps all rules required for filtering
-    rules = [
-        {
-            "id": 1,
-            "name": "Accept All",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "SLMP",
-            "command": "Device Read (Batch)",
-            "expected_value": "x"
-        },
-        {
-            "id": 2,
-            "name": "Accept All",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "SLMP",
-            "command": "Device Write (Batch)",
-            "expected_value": "x"
-        },
-        {
-            "id": 3,
-            "name": "Accept All",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "SLMP",
-            "command": "Device Read Random",
-            "expected_value": "x"
-        },
-        {
-            "id": 4,
-            "name": "Accept All",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "SLMP",
-            "command": "Device Write Random",
-            "expected_value": "x"
-        },
-        {
-            "id": 5,
-            "name": "Accept MODBUS TCP from 127.0.0.1 to 127.0.0.2",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "TCP",
-            "source address": "127.0.0.1",
-            "destination address": "127.0.0.2",
-            "sport": "ANY",
-            "dport": "5020"
-        },
-        {
-            "id": 5,
-            "name": "Accept MODBUS TCP from 127.0.0.2 to 127.0.0.1",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "TCP",
-            "source address": "127.0.0.2",
-            "destination address": "127.0.0.1",
-            "sport": "5020",
-            "dport": "ANY"
-        },
-        {
-            "id": 11,
-            "name": "Allow all writes on register 9",
-            "direction": "IN",
-            "protocol": "MODBUS",
-            "command": "Write Single Register",
-            "starting address": "ANY",
-            "quantity": "ANY",
-            "register": "9"
-        },
-        {
-            "id": 101,
-            "name": "Wszystkie multiple read readujące mniej niż 100",
-            "direction": "IN",
-            "protocol": "MODBUS",
-            "command": "Read Holding Registers",
-            "starting address": "ANY",
-            "quantity": "99",
-            "comparison": "MAX"
-        }
-    ]
+    rules = []
 
     ## Constructor
     # @param self The object pointer
@@ -287,9 +208,9 @@ class Fire(object):
         pkt.drop()
 
 
-# fire = Fire("rules.json")
+fire = Fire("rules.json")
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
 #     # IP Tables configuration: (should work imo)
 #     # iptables -I INPUT -d 192.168.0.0/24 -j NFQUEUE --queue-num 1
@@ -298,10 +219,10 @@ class Fire(object):
     nfqueue.bind(1, fire.analyze_tcp_ip)
 
 
-#     try:
-#         nfqueue.run()
-#         fd = nfqueue.get_fd()
-#         print(type(fd))
-#     except KeyboardInterrupt:
-#         print('')
-#     nfqueue.unbind()
+    try:
+        nfqueue.run()
+        fd = nfqueue.get_fd()
+        print(type(fd))
+    except KeyboardInterrupt:
+        print('')
+    nfqueue.unbind()
