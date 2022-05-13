@@ -14,19 +14,16 @@ from Rules import Rule
 import json
 from collections import namedtuple
 
-## Documentation of CONF
-
-# MyEncoder is a class needed to pasre all the data into the json file
+## MyEncoder is a class needed to pasre all the data into the json file
 
 class MyEncoder(json.JSONEncoder):
     def default(self, obj):
         return {k.lstrip('_'): v for k, v in vars(obj).items()}
 
-#
+##
 # CONF is a class that contains all created rules and allows users
 # to manage them. It is responsible for reading data from and writing
 # into a file called Conf_tmp.json.
-
 
 class Conf:
 

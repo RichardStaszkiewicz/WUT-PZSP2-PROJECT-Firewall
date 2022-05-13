@@ -1,50 +1,6 @@
 {
     "rules": [
         {
-            "id": 1,
-            "name": "Accept All",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "SLMP",
-            "Command": "Device Read (Batch)",
-            "expected_value": "x"
-        },
-        {
-            "id": 2,
-            "name": "Accept All",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "SLMP",
-            "Command": "Device Write (Batch)",
-            "expected_value": "x"
-        },
-        {
-            "id": 3,
-            "name": "Accept All",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "SLMP",
-            "Command": "Device Read Random",
-            "expected_value": "x"
-        },
-        {
-            "id": 4,
-            "name": "Accept All",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "SLMP",
-            "Command": "Device Write Random",
-            "expected_value": "x"
-        },
-        {
-            "id": 11,
-            "name": "Allow all writes on register 9",
-            "direction": "IN",
-            "protocol": "MODBUS",
-            "Command": "Write Register",
-            "Register": "9"
-        },
-        {
             "id": 101,
             "name": "Wszystkie multiple read readujące mniej niż 100",
             "direction": "IN",
@@ -52,6 +8,16 @@
             "Command": "Device Read Mutiple Registers",
             "Start Register": "Any",
             "Quantity": 100,
+            "Comparison": "MAX"
+        },
+        {
+            "id": 102,
+            "name": "Wszystkie multiple read readujące mniej niż 150",
+            "direction": "IN",
+            "protocol": "MODBUS",
+            "Command": "Device Read Mutiple Registers",
+            "Start Register": "Any",
+            "Quantity": 150,
             "Comparison": "MAX"
         }
     ]

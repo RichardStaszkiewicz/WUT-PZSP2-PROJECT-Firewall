@@ -7,6 +7,7 @@
 # Basing on NetFilter the messages are being filtered
 # on application layer after being judged by a configuration
 # rules.
+from copy import deepcopy
 import logging
 
 from netfilterqueue import NetfilterQueue
@@ -22,6 +23,7 @@ SLMP_SERVER_PORT = 1280
 #
 # NetMessage is a class storing a composed, readable message
 # along with the packages upholding it
+
 
 
 ## Documentation of FIRE
@@ -112,8 +114,23 @@ class Fire(object):
 
     ## Constructor
     # @param self The object pointer
-    def __init__(self) -> None:
-        self.logger = Logger('../logs/events.log')
+
+    def __init__(self,rules_file) -> None:
+        self.logger = Logger("events.log")
+        self.rules_file = rules_file
+        self.update_rules()
+
+    ## Method reading rules from config file
+    # @param self The object pointer
+    #
+    def update_rules(self) -> None:
+        f = open(self.rules_file)
+        data = json.load(f)
+        self.rules = data["rules"]
+    
+
+    def get_rules(self):
+        return self.rules
 
     ## Method analyzing packets in terms of TCP/IP rules
     # @param self The object pointer
@@ -141,6 +158,7 @@ class Fire(object):
         }
 
         drop = self.compare_with_rules(attributes)
+
         if not drop:
             if dport == MODBUS_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
@@ -253,17 +271,6 @@ class Fire(object):
 
 
 
-    ## Method reading rules from config file
-    #
-    #
-    def update_rules(self) -> None:
-        f = open('Conf_tmp.json')
-        data = json.load(f)
-        self.rules.clear()
-        for rule in data:
-            new_rule = Rule(rule['id'], rule["src"], rule['dst'], rule['protocol'], rule['dport'], rule['direction'], rule['action'])
-            self.rules.append(new_rule)
-
 
     ## Method forwarding the accepted message packeges onward to a defended subnet
     # @param self The object pointer
@@ -280,20 +287,21 @@ class Fire(object):
         pkt.drop()
 
 
-fire = Fire()
+# fire = Fire("rules.json")
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    # IP Tables configuration: (should work imo)
-    # iptables -I INPUT -d 192.168.0.0/24 -j NFQUEUE --queue-num 1
+#     # IP Tables configuration: (should work imo)
+#     # iptables -I INPUT -d 192.168.0.0/24 -j NFQUEUE --queue-num 1
 
     nfqueue = NetfilterQueue()
     nfqueue.bind(1, fire.analyze_tcp_ip)
 
-    try:
-        nfqueue.run()
-        fd = nfqueue.get_fd()
-        print(type(fd))
-    except KeyboardInterrupt:
-        print('')
-    nfqueue.unbind()
+
+#     try:
+#         nfqueue.run()
+#         fd = nfqueue.get_fd()
+#         print(type(fd))
+#     except KeyboardInterrupt:
+#         print('')
+#     nfqueue.unbind()
