@@ -4,7 +4,7 @@ from pymodbus.factory import ClientDecoder
 decoder = ClientDecoder()
 client = ModbusClient('127.0.0.2', port=5020, framer=ModbusSocketFramer)
 
-rr = client.read_holding_registers(1, 99)
+rr = client.read_holding_registers(0, 99)
 print(rr.registers)
 
 
