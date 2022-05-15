@@ -25,23 +25,14 @@ addRuleBtn.onclick = () => {
     const ruleName = document.getElementById('ruleName').value;
     const ruleProtocol = document.getElementById('ruleProtocol').value;
     const ruleCommand = document.getElementById('ruleCommand').value;
+    const ruleDirection = document.getElementById('ruleDirection').value;
     const ruleStartRegister = document.getElementById('ruleStartRegister').value;
     const ruleQuantity = document.getElementById('ruleQuantity').value;
     const ruleComparison = document.getElementById('ruleComparison').value;
-/*
-    const rule = {
-        name: ruleName,
-        protocol: ruleProtocol,
-        profile: ruleProfile,
-        direction: ruleDirection,
-        analysed_param: ruleParameters,
-        is_active: true,
-        expected_val: ruleExpectedValue,
-    }
-    */
 
     const rule = {
         name: ruleName,
+        direction: ruleDirection,
         protocol: ruleProtocol,
         command: ruleCommand,
         start_register: ruleStartRegister,
