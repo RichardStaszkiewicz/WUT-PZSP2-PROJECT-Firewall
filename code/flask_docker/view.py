@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask import Flask, jsonify, render_template, request
 import os
 
 # mocks
@@ -15,7 +15,6 @@ rules = get_rules()
 def update_rules():
     if request.method == 'POST':
         rule_data = request.get_json()
-
         for i in range(len(rules)):
             if rules[i]['id'] == rule_data['id']:
                 rules[i] = rule_data

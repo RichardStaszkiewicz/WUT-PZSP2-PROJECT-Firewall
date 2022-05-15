@@ -1,0 +1,56 @@
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ruleForm.css') }}">
+{% endblock %}
+{% block ruleForm %}
+    <form id="ruleForm_{{ rule['id'] }}" class="ruleFormWrapper">
+        <div class="inputs ruleFormInputs">
+            <h3>Modify Rule</h3>
+
+            <div class="inputWrapper">
+                <label for="name">Name</label>
+                <input name="name" type="text" id="{{ rule['id'] }}_name" class="input" value="{{ rule['name'] }}">
+            </div>
+            <div class="inputWrapper">
+                <label for="protocol">Protocol</label>
+                <select name="protocol" id="{{ rule['id'] }}_protocol" class="input" selected="{{ rule['protocol'] }}">
+                    <option value="MODBUS">MODBUS</option>
+                    <option value="IP/TCP">IP/TCP</option>
+                </select>
+            </div>
+            <div class="inputWrapper">
+                <label for="direction">Direction</label>
+                <select name="direction" id="{{ rule['id'] }}_direction" class="input" selected="{{ rule['direction'] }}">
+                    <option value="IN">IN</option>
+                    <option value="OUT">OUT</option>
+                </select>
+            </div>
+            <div class="inputWrapper">
+                <label to="command">Command</label>
+                <input label="command" type="text" id="{{ rule['id'] }}_command" class="input" value="{{ rule['command'] }}">
+            </div>
+            <div class="inputWrapper">
+                <label to="startRegister">Start Register</label>
+                <input label="startRegister" type="text" id="{{ rule['id'] }}_startRegister" class="input" value="{{ rule['Start Register'] }}">
+            </div>
+            <div class="inputWrapper">
+                <label to="qantity">Quantity</label>
+                <input label="quantity" type="number" id="{{ rule['id'] }}_quantity" class="input" value="{{ rule['quantity'] }}">
+            </div>
+            <div class="inputWrapper">
+                <label to="comparison">Comparison</label>
+                <input label="comparison" type="text" id="{{ rule['id'] }}_comparison" class="input" value="{{ rule['comparison'] }}">
+            </div>
+            <div class="inputWrapper">
+                <label for="isActive">Is Active?</label>
+                <select name="isActive" id="{{ rule['id'] }}_isActive" class="input" selected="{{ rule['is_active'] }}">
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </div>
+        </div>
+        <div class="ruleFormButtons" class="buttons">
+            <button class="button" type="button" onClick="saveRuleForm(this.id)" id="{{ rule['id'] }}">Save</button>
+            <button class="button" type="button" onClick="closeRuleForm(this.id)" id="{{ rule['id'] }}">Cancel</button>
+        </div>   
+    </form>
+{% endblock %}

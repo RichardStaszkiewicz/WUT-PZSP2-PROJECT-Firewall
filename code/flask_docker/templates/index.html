@@ -17,12 +17,7 @@
         </ul>
 
         <div class="buttons">
-            <!--Buttons are not connected to any function-->
-            <button id="disableALl" class="button" type="button">Disable all</button>
-            <button id="enableAll" class="button" type="button">Enable all</button>
-            <button id="addRule" class="button" type="button">Add rule</button>
-            <button id="log" class="button" type="button">Log</button>
-            <button id="savePush" class="button" type="button">Save & Push</button>
+            {% include 'buttons.html' %}
         </div>
 
         <div class="box">
@@ -37,5 +32,6 @@
     
     <script src="{{ url_for('static', filename='js/addRule.js') }}"></script>
     <script src="{{ url_for('static', filename='js/ruleCheck.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ruleForm.js') }}"></script>
 </body>
 </html>
