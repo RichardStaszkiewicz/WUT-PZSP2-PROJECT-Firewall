@@ -158,6 +158,14 @@ class Fire(object):
                             match = request_start >= rule_start
                 else:
                     match = False
+            # simple rule checking, no final rule structure yet
+            elif attributes['protocol'] == 'SLMP':
+                if rule['protocol'] == 'SLMP':
+                    #if rule['direction'] == attributes['direction']
+                    if rule['command'] != attributes['command']:
+                        match = False
+
+                
             else:
                 match = False
             if match:
@@ -198,6 +206,46 @@ class Fire(object):
             return False
 
 
+    def analyze_slmp_message(self, payload):
+        function_codes2names = { 
+            '0401' : 'Read',
+            '1401' : 'Write',
+            '0403' : 'Device Read Random',
+            '1402' : 'Device Write Random',
+            '0406' : 'Device Read (Batch)', #block
+            '1406' : 'Device Write (Batch)' #block'
+        }
+        subcommand_names = {
+            1 : "Read from bit dev in 1 point units",
+            3 : "Read from bit dev in 1 point units",
+            0 : "Read from bit dev in 16 point units",
+            2 : "Read from word devices in 1 word units"
+        }
+
+        req_data_len = str(int(payload[16:20]))
+        command = str(int(payload[22:26]))
+        subcommand =  str(int(payload[26:30]))
+
+        attributes = {
+                'protocol': 'SLMP',
+                'command': function_codes2names[command],
+                'subcommand': subcommand_names[subcommand]
+            }
+        
+     
+        
+
+        return self.compare_with_rules(attributes)
+    # 0x50 0x0  - subheader 
+    # 0x0 0xff - request dest net/station 
+    # 0xff 0x3 - request destination module
+    # 0x0 - request destination multidrop No. 
+    # 0xc 0x0 - request data length 12 bytes
+    # 0x4 0x0 - monitoring timer
+    # ^^^ 22 BYTES 
+    # 
+    #   0x1 0x4                0x0 0x0         0x32 0x0               0x0 0xa8              0x1 0x0                 12 BYTES TOTAL, CORRECT LEN
+    # |22-26 READ|   | 26-30 READ IN WORDS|    | HEAD DEV NO.|      | DEV CODE const |    | NO OF DEV POINTS |        
 
 
 
