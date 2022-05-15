@@ -2,138 +2,55 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/ruleForm.css') }}">
 {% endblock %}
 {% block ruleForm %}
-<form id="ruleForm_{{ rule['id'] }}" class="ruleFormWrapper">
-    <div class="inputs ruleFormInputs">
-        <h3>Modify Rule</h3>
+    <form id="ruleForm_{{ rule['id'] }}" class="ruleFormWrapper">
+        <div class="inputs ruleFormInputs">
+            <h3>Modify Rule</h3>
 
-        <div class="inputWrapper">
-            <label for="name">Name</label>
-            <input name="name" type="text" id="{{ rule['id'] }}_name" class="input" value="{{ rule['name'] }}">
-        </div>
-        <div class="inputWrapper">
-            <label for="protocol">Protocol</label>
-            <select name="protocol" id="{{ rule['id'] }}_protocol" class="input" selected="{{ rule['protocol'] }}" onchange="triggerProtocolField(this.value, `{{ rule['id'] }}`)">
-                <option value="MODBUS">MODBUS</option>
-                <option value="IP/TCP">IP/TCP</option>
-                <option value="SLMP">SLMP</option>
-            </select>
-        </div>
-        <div id="{{ rule['id'] }}_IP/TCP" class="ruleFormField">
             <div class="inputWrapper">
-                <label to="source_address">Source Address</label>
-                <input label="source_address" type="text" id="{{ rule['id'] }}_source_address" class="input" value="{{ rule['source_address'] }}">
+                <label for="name">Name</label>
+                <input name="name" type="text" id="{{ rule['id'] }}_name" class="input" value="{{ rule['name'] }}">
             </div>
             <div class="inputWrapper">
-                <label to="destination_address">Destination Address</label>
-                <input label="destination_address" type="text" id="{{ rule['id'] }}_destination_address" class="input" value="{{ rule['destination_address'] }}">
-            </div>
-            <div class="inputWrapper">
-                <label to="source_port">Source Port</label>
-                <input label="source_port" type="text" id="{{ rule['id'] }}_source_port" class="input" value="{{ rule['source_port'] }}">
-            </div>
-            <div class="inputWrapper">
-                <label to="destination_port">Destination Port</label>
-                <input label="destination_port" type="text" id="{{ rule['id'] }}_destination_port" class="input" value="{{ rule['destination_port'] }}">
-            </div>
-        </div>
-        <div id="{{ rule['id'] }}_MODBUS" class="ruleFormField">
-            <label for="function">Function</label>
-            <select name="function" id="{{ rule['id'] }}_function" class="input" selected="{{ rule['function'] }}" onchange="triggerFunctionField(this.value, `{{ rule['id'] }}`)">
-                <option value="f1">Read Coils</option>
-                <option value="f1">Read Discrete Input</option>
-                <option value="f1">Read Holding Registers</option>
-                <option value="f1">Read Input Registers</option>
-                <option value="f5">Write Single Coil</option>
-                <option value="f6">Write Single Registers</option>
-                <option value="f1">Write Multiple Coils</option>
-                <option value="f1">Write Multiple Registers</option>
-                <option value="f23">Read/Write Multiple Registers</option>
-            </select>
-            <div id="{{ rule['id'] }}_f1" class="ruleFormField">
-                <div class="inputWrapper">
-                    <label to="starting_address">Starting Address</label>
-                    <input label="starting_address" type="text" id="{{ rule['id'] }}_starting_address" class="input" value="{{ rule['starting_address'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="last_address">Last Address</label>
-                    <input label="last_address" type="text" id="{{ rule['id'] }}_last_address" class="input" value="{{ rule['last_address'] }}">
-                </div>
-            </div>
-            <div id="{{ rule['id'] }}_f5" class="ruleFormField">
-                <div class="inputWrapper">
-                    <label to="output_address">Output Address</label>
-                    <input label="output_address" type="text" id="{{ rule['id'] }}_output_address" class="input" value="{{ rule['output_address'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="value">Value</label>
-                    <input label="value" type="text" id="{{ rule['id'] }}_value" class="input" value="{{ rule['value'] }}">
-                </div>
-            </div>
-            <div id="{{ rule['id'] }}_f6" class="ruleFormField">
-                <div class="inputWrapper">
-                    <label to="output_address">Output Address</label>
-                    <input label="output_address" type="text" id="{{ rule['id'] }}_output_address" class="input" value="{{ rule['output_address'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="min_value">Minimum Value</label>
-                    <input label="min_value" type="text" id="{{ rule['id'] }}_min_value" class="input" value="{{ rule['min_value'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="max_value">Maximum Value</label>
-                    <input label="max_value" type="text" id="{{ rule['id'] }}_max_value" class="input" value="{{ rule['max_value'] }}">
-                </div>
-            </div>
-            <div id="{{ rule['id'] }}_f23" class="ruleFormField">
-                <div class="inputWrapper">
-                    <label to="read_starting_address">Read Starting Address</label>
-                    <input label="read_starting_address" type="text" id="{{ rule['id'] }}_read_starting_address" class="input" value="{{ rule['read_starting_address'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="read_last_address">Read Last Address</label>
-                    <input label="read_last_address" type="text" id="{{ rule['id'] }}_read_last_address" class="input" value="{{ rule['read_last_address'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="write_starting_address">Write Starting Address</label>
-                    <input label="write_starting_address" type="text" id="{{ rule['id'] }}_write_starting_address" class="input" value="{{ rule['write_starting_address'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="write_last_address">Read Last Address</label>
-                    <input label="write_last_address" type="text" id="{{ rule['id'] }}_write_last_address" class="input" value="{{ rule['write_last_address'] }}">
-                </div>
-            </div>
-        </div>
-        <div id="{{ rule['id'] }}_SLMP" class="ruleFormField">
-            <div class="inputWrapper">
-                <label for="command">Command</label>
-                <select name="command" id="{{ rule['id'] }}_rule_command" class="input" selected="{{ rule['command'] }}">
-                    <option value="Read">Read</option>
-                    <option value="Write">Write</option>
+                <label for="protocol">Protocol</label>
+                <select name="protocol" id="{{ rule['id'] }}_protocol" class="input" selected="{{ rule['protocol'] }}">
+                    <option value="MODBUS">MODBUS</option>
+                    <option value="IP/TCP">IP/TCP</option>
                 </select>
             </div>
             <div class="inputWrapper">
-                <label to="subcommand">Subcommand</label>
-                <input label="subcommand" type="text" id="{{ rule['id'] }}_rule_subcommand" class="input" value="{{ rule['subcommand'] }}">
+                <label for="direction">Direction</label>
+                <select name="direction" id="{{ rule['id'] }}_direction" class="input" selected="{{ rule['direction'] }}">
+                    <option value="IN">IN</option>
+                    <option value="OUT">OUT</option>
+                </select>
             </div>
             <div class="inputWrapper">
-                <label to="max_value">Maximum Value</label>
-                <input label="max_value" type="text" id="{{ rule['id'] }}_max_value" class="input" value="{{ rule['max_value'] }}">
+                <label to="command">Command</label>
+                <input label="command" type="text" id="{{ rule['id'] }}_command" class="input" value="{{ rule['command'] }}">
             </div>
             <div class="inputWrapper">
-                <label to="min_value">Minimum Value</label>
-                <input label="min_value" type="text" id="{{ rule['id'] }}_min_value" class="input" value="{{ rule['min_value'] }}">
+                <label to="startRegister">Start Register</label>
+                <input label="startRegister" type="text" id="{{ rule['id'] }}_startRegister" class="input" value="{{ rule['Start Register'] }}">
+            </div>
+            <div class="inputWrapper">
+                <label to="qantity">Quantity</label>
+                <input label="quantity" type="number" id="{{ rule['id'] }}_quantity" class="input" value="{{ rule['quantity'] }}">
+            </div>
+            <div class="inputWrapper">
+                <label to="comparison">Comparison</label>
+                <input label="comparison" type="text" id="{{ rule['id'] }}_comparison" class="input" value="{{ rule['comparison'] }}">
+            </div>
+            <div class="inputWrapper">
+                <label for="isActive">Is Active?</label>
+                <select name="isActive" id="{{ rule['id'] }}_isActive" class="input" selected="{{ rule['is_active'] }}">
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
             </div>
         </div>
-        <div class="inputWrapper">
-            <label for="isActive">Is Active?</label>
-            <select name="isActive" id="{{ rule['id'] }}_isActive" class="input" selected="{{ rule['is_active'] }}">
-                <option value="True">True</option>
-                <option value="False">False</option>
-            </select>
-        </div>
-    </div>
-    <div class="ruleFormButtons" class="buttons">
-        <button class="button" type="button" onClick="saveRuleForm(this.id)" id="{{ rule['id'] }}">Save</button>
-        <button class="button" type="button" onClick="closeRuleForm(this.id)" id="{{ rule['id'] }}">Cancel</button>
-    </div>   
-</form>
+        <div class="ruleFormButtons" class="buttons">
+            <button class="button" type="button" onClick="saveRuleForm(this.id)" id="{{ rule['id'] }}">Save</button>
+            <button class="button" type="button" onClick="closeRuleForm(this.id)" id="{{ rule['id'] }}">Cancel</button>
+        </div>   
+    </form>
 {% endblock %}
