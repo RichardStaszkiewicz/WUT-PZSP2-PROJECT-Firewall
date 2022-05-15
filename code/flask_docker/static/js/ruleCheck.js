@@ -1,20 +1,18 @@
-//const enableBtn = document.getElementById('checkButtonEnable');
-//const disableBtn = document.getElementById('checkButtonDisable');
-
-const getItemId = (event) => {
-    return event.srcElement.id;
-}
-
-const getRules = () => {
-    fetch('/getRules').then((response) => {
+const getRules = async () => {
+    return fetch('/getRules').then((response) => {
         return response.json();
     }).then((data) => {
-        return data;
-    })
+        const rules = [];
+        for(var i in data) {
+            rules.push(data[i])
+        }
+        return rules;
+    });
+
 };
 
-const triggerCheck = (value, rule) => {
-    rule.is_active = value;
+const updateRule = (rule) => {
+    rule.is_active = !rule.is_active;
 
     fetch('/getRules', {
         method: 'POST',
@@ -25,13 +23,19 @@ const triggerCheck = (value, rule) => {
     });
 };
 
+const triggerCheck = async (eventItemId) => {
+    const rules = await getRules();
 
-/*
-enableBtn.onclick = () => {
-    //triggerCheck(false, {});
-}
+    const currentRule = rules.find(rule => rule['id'] == eventItemId);
+    if(!currentRule) {
+        return;
+    }
 
-disableBtn.onclick = () => {
-    //triggerCheck(true, {});
+    const checkBtn = document.getElementById(eventItemId);
+
+    checkBtn.onclick = () => {
+        updateRule(currentRule);
+        window.location.reload(true);
+    }
+
 }
-*/
