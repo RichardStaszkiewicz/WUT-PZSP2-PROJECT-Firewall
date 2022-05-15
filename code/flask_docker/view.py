@@ -14,6 +14,17 @@ rules = get_rules()
 @app.route('/getRules', methods=['GET', 'POST'])
 def update_rules():
     if request.method == 'POST':
+
+        if request.args.get('action') == 'disableAll':
+            for rule in rules:
+                rule['is_active'] = False
+            return 'ok'
+
+        if request.args.get('action') == 'enableAll':
+            for rule in rules:
+                rule['is_active'] = True
+            return 'ok'
+
         rule_data = request.get_json()
         for i in range(len(rules)):
             if rules[i]['id'] == rule_data['id']:
