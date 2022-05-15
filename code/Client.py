@@ -2,7 +2,7 @@ from pymodbus.client.sync import ModbusTcpClient as ModbusClient
 from pymodbus.framer.socket_framer import ModbusSocketFramer
 from pymodbus.factory import ClientDecoder
 decoder = ClientDecoder()
-client = ModbusClient('127.0.0.2', port=5080, framer=ModbusSocketFramer)
+client = ModbusClient('127.0.0.2', port=5020, framer=ModbusSocketFramer)
 
 starting_register = 0
 quantity = 100

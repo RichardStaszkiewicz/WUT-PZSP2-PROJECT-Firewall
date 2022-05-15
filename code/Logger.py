@@ -21,12 +21,10 @@ class Logger:
     def __init__(self, logfile, level=logging.DEBUG):
         self.logfile = logfile
         self.level = level
-        logging.basicConfig(filename=logfile, format='%(levelname)s: %(asctime)s\n%(message)s', filemode='w', level=level)
-        #formatter = logging.Formatter('%(levelname)s: %(asctime)s %(message)s')
-        self.logger = logging.getLogger("")
+        logging.basicConfig(filename=logfile, format='%(levelname)s: %(asctime)s %(message)s', filemode='w', level=level)
+        self.logger = logging.getLogger("Rotating Log")
         handler = RotatingFileHandler(logfile, maxBytes=524288,
                                       backupCount=3)
-        #handler.setFormatter(formatter)
         self.logger.addHandler(handler)
 
 

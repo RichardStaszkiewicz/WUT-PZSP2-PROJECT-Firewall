@@ -6,7 +6,7 @@
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
-            "Command": "Device Read (Batch)",
+            "command": "Device Read (Batch)",
             "expected_value": "x"
         },
         {
@@ -15,7 +15,7 @@
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
-            "Command": "Device Write (Batch)",
+            "command": "Device Write (Batch)",
             "expected_value": "x"
         },
         {
@@ -24,7 +24,7 @@
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
-            "Command": "Device Read Random",
+            "command": "Device Read Random",
             "expected_value": "x"
         },
         {
@@ -33,26 +33,50 @@
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
-            "Command": "Device Write Random",
+            "command": "Device Write Random",
             "expected_value": "x"
+        },
+        {
+            "id": 5,
+            "name": "Accept MODBUS TCP from 127.0.0.1 to 127.0.0.2",
+            "profile": 0,
+            "direction": "IN",
+            "protocol": "TCP",
+            "source address": "127.0.0.1",
+            "destination address": "127.0.0.2",
+            "sport": "ANY",
+            "dport": "5020"
+        },
+        {
+            "id": 6,
+            "name": "Accept MODBUS TCP from 127.0.0.2 to 127.0.0.1",
+            "profile": 0,
+            "direction": "IN",
+            "protocol": "TCP",
+            "source address": "127.0.0.2",
+            "destination address": "127.0.0.1",
+            "sport": "5020",
+            "dport": "ANY"
         },
         {
             "id": 11,
             "name": "Allow all writes on register 9",
             "direction": "IN",
             "protocol": "MODBUS",
-            "Command": "Write Register",
-            "Register": "9"
+            "command": "Write Single Register",
+            "starting address": "ANY",
+            "quantity": "ANY",
+            "register": "9"
         },
         {
             "id": 101,
             "name": "Wszystkie multiple read readujące mniej niż 100",
             "direction": "IN",
             "protocol": "MODBUS",
-            "Command": "Device Read Mutiple Registers",
-            "Start Register": "Any",
-            "Quantity": 100,
-            "Comparison": "MAX"
+            "command": "Read Holding Registers",
+            "starting address": "ANY",
+            "quantity": "50",
+            "comparison": "MAX"
         }
     ]
 }
