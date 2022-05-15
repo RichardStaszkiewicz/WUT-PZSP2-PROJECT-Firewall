@@ -17,14 +17,3 @@ const disableAll = () => {
     })
     window.location.reload(true);
 }
-
-const savePush = () => {
-    fetch('/getRules?action=save', {
-        method: 'POST',
-        headers: {
-            "Content-Type": 'application/json',
-        },
-        body: JSON.stringify(RULES)
-    })
-    window.location.reload(true);
-}
