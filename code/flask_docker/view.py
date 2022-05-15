@@ -15,8 +15,14 @@ rules = get_rules()
 def update_rules():
     if request.method == 'POST':
         rule_data = request.get_json()
+
+        for i in range(len(rules)):
+            if rules[i]['id'] == rule_data['id']:
+                rules[i] = rule_data
+                return 'ok'
+
         rules.append(rule_data)
-        return redirect(url_for('/'))
+        return 'ok'
 
     if request.method == 'GET':
         return jsonify(rules)

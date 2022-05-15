@@ -33,5 +33,11 @@ const triggerCheck = async (eventItemId) => {
 
     updateRule(currentRule);
     window.location.reload(true);
+    const checkBtn = document.getElementById(eventItemId);
+
+    checkBtn.onclick = () => {
+        updateRule(currentRule);
+        window.location.reload(true);
+    }
 
 }

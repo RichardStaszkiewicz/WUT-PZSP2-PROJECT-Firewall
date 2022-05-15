@@ -1,28 +1,27 @@
 rules = [
     {
         'id': 101,
-        "name": 'Accept multiple read less than 100',
+        "name": 'Wszystkie multiple read readujące mniej niz 100',
         'direction': 'IN',
         'protocol': 'MODBUS',
         'Command': 'Device Read Multiple Registers',
         'Start Register': 'Any',
         'Quantity': 100,
-        "Comparison": "MAX"
+        "Comparison": "MAX",
+        "is_active": True
     },
     {
-        'id': 100,
-        "name": 'Accept All',
+        'id': 102,
+        "name": 'Wszystkie multiple read readujące mniej niz 100',
         'direction': 'IN',
-        'protocol': 'IP/TCP',
-        'Source': 'all',
-        'Destination': 'All',
-        'Destination Port': 'All'
-
+        'protocol': 'MODBUS',
+        'Command': 'Device Read Multiple Registers',
+        'Start Register': 'Any',
+        'Quantity': 100,
+        "is_active": True
     },
 ]
 
 
 def get_rules():
-    for rule in rules:
-        rule['is_active'] = True
     return rules
