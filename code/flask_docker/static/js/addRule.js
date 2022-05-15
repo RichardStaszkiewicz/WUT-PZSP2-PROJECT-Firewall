@@ -24,10 +24,10 @@ const addRuleBtn = document.getElementById('confirmAddRule');
 addRuleBtn.onclick = () => {
     const ruleName = document.getElementById('ruleName').value;
     const ruleProtocol = document.getElementById('ruleProtocol').value;
-    const ruleSource = document.getElementById('ruleSource').value;
-    const ruleDestination = document.getElementById('ruleDestination').value;
-    const ruleDestinationPort = document.getElementById('ruleDestinationPort').value;
-    //const ruleExpectedValue = document.getElementById('ruleExpectedValue').value;
+    const ruleCommand = document.getElementById('ruleCommand').value;
+    const ruleStartRegister = document.getElementById('ruleStartRegister').value;
+    const ruleQuantity = document.getElementById('ruleQuantity').value;
+    const ruleComparison = document.getElementById('ruleComparison').value;
 /*
     const rule = {
         name: ruleName,
@@ -43,9 +43,10 @@ addRuleBtn.onclick = () => {
     const rule = {
         name: ruleName,
         protocol: ruleProtocol,
-        source: ruleSource,
-        destination: ruleDestination,
-        destination_port: ruleDestinationPort,
+        command: ruleCommand,
+        start_register: ruleStartRegister,
+        quantity: ruleQuantity,
+        comparison: ruleComparison,
         is_active: true,
     }
 
