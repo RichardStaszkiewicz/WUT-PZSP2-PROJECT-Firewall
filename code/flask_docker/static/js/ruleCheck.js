@@ -31,11 +31,7 @@ const triggerCheck = async (eventItemId) => {
         return;
     }
 
-    const checkBtn = document.getElementById(eventItemId);
-
-    checkBtn.onclick = () => {
-        updateRule(currentRule);
-        window.location.reload(true);
-    }
+    updateRule(currentRule);
+    window.location.reload(true);
 
 }

@@ -1,0 +1,11 @@
+@import "./variables.css";
+
+.ruleFormWrapper {
+    display: none;
+    padding: 12px;
+    border-bottom: 2px solid var(--dark-green-c);
+}
+
+.ruleFormInputs {
+    padding-bottom: 16px;
+}

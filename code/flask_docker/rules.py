@@ -4,10 +4,10 @@ rules = [
         "name": 'Wszystkie multiple read readujące mniej niz 100',
         'direction': 'IN',
         'protocol': 'MODBUS',
-        'Command': 'Device Read Multiple Registers',
+        'command': 'Device Read Multiple Registers',
         'Start Register': 'Any',
-        'Quantity': 100,
-        "Comparison": "MAX",
+        'quantity': 100,
+        "comparison": "MAX",
         "is_active": True
     },
     {
@@ -15,9 +15,10 @@ rules = [
         "name": 'Wszystkie multiple read readujące mniej niz 100',
         'direction': 'IN',
         'protocol': 'MODBUS',
-        'Command': 'Device Read Multiple Registers',
+        'command': 'Device Read Multiple Registers',
         'Start Register': 'Any',
-        'Quantity': 100,
+        'quantity': 100,
+        "comparison": "MAX",
         "is_active": True
     },
 ]
