@@ -5,19 +5,21 @@ import Fire
 import json
 
 
+class TestFire(unittest.TestCase):
+
     def test_single_rule(self):
         sample_rule = {
-            "rules" : [
-            {
-            "id": 101,
-            "name": "Wszystkie multiple read readujące mniej niż 100",
-            "direction": "IN",
-            "protocol": "MODBUS",
-            "Command": "Device Read Mutiple Registers",
-            "Start Register": "Any",
-            "Quantity": 100,
-            "Comparison": "MAX"
-            }
+            "rules": [
+                {
+                    "id": 101,
+                    "name": "Wszystkie multiple read readujące mniej niż 100",
+                    "direction": "IN",
+                    "protocol": "MODBUS",
+                    "Command": "Device Read Mutiple Registers",
+                    "Start Register": "Any",
+                    "Quantity": 100,
+                    "Comparison": "MAX"
+                }
             ]
         }
         with open('unittest.json', 'w') as outfile:
@@ -36,21 +38,20 @@ import json
     def test_multiple_rules(self):
         pass
 
-
     def test_compare_ip_tcp_with_rules(self):
-        tcp_rule ={
-            "rules" [
-            {
-            "id": 5,
-            "name": "Accept MODBUS TCP from 127.0.0.1 to 127.0.0.2",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "TCP",
-            "source address": "127.0.0.1",
-            "destination address": "127.0.0.2",
-            "sport": "ANY",
-            "dport": "5020"
-            }
+        tcp_rule = {
+            "rules": [
+                {
+                    "id": 5,
+                    "name": "Accept MODBUS TCP from 127.0.0.1 to 127.0.0.2",
+                    "profile": 0,
+                    "direction": "IN",
+                    "protocol": "TCP",
+                    "source address": "127.0.0.1",
+                    "destination address": "127.0.0.2",
+                    "sport": "ANY",
+                    "dport": "5020"
+                }
             ]
         }
 
@@ -62,46 +63,42 @@ import json
             "source address": "127.0.0.1",
             "destination address": "127.0.0.2",
             "protocol": "TCP",
-            "sport": "1234", # ANY
+            "sport": "1234",  # ANY
             "dport": "5020"
         }
         fire = Fire.Fire("unittest.json")
-        self.assertTrue(fire.compare_with_rules(attributes))
+        self.assertFalse(fire.compare_with_rules(attributes))
 
-
-    def compare_modbus_with_rules(self):
-        modbus_rule ={
-            "rules" [
-            {
-            "id": 11,
-            "name": "Allow all writes on register 9",
-            "direction": "IN",
-            "protocol": "MODBUS",
-            "command": "Write Single Register",
-            "starting address": "ANY",
-            "quantity": "ANY",
-            "register": "9"
-            }
+    def test_compare_modbus_with_rules(self):
+        modbus_rule = {
+            "rules": [
+                {
+                    "id": 11,
+                    "name": "Allow all writes on register 9",
+                    "direction": "IN",
+                    "protocol": "MODBUS",
+                    "command": "Write Single Register",
+                    "starting address": "ANY",
+                    "quantity": "ANY",
+                    "register": "9"
+                }
             ]
         }
 
         with open('unittest.json', 'w') as outfile:
-            json.dump(self.sample_rule, outfile)
+            json.dump(modbus_rule, outfile)
         fire = Fire.Fire("unittest.json")
 
         attributes = {
             "protocol": "MODBUS",
             "command": "Write Single Register",
             "starting address": "0",
-            "quantity" : "50"
+            "quantity": "50"
         }
 
         fire = Fire.Fire("unittest.json")
-        self.assertTrue(fire.compare_with_rules(attributes))
+        self.assertFalse(fire.compare_with_rules(attributes))
 
-    
 
 if __name__ == '__main__':
-
     unittest.main()
-
