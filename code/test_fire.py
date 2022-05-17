@@ -5,10 +5,10 @@ import Fire
 import json
 
 
-class TestFire(unittest.TestCase):
-    sample_rule = {
-    "rules": [
-        {
+    def test_single_rule(self):
+        sample_rule = {
+            "rules" : [
+            {
             "id": 101,
             "name": "Wszystkie multiple read readujące mniej niż 100",
             "direction": "IN",
@@ -17,50 +17,11 @@ class TestFire(unittest.TestCase):
             "Start Register": "Any",
             "Quantity": 100,
             "Comparison": "MAX"
-        },
-        {
-            "id": 5,
-            "name": "Accept MODBUS TCP from 127.0.0.1 to 127.0.0.2",
-            "profile": 0,
-            "direction": "IN",
-            "protocol": "TCP",
-            "source address": "127.0.0.1",
-            "destination address": "127.0.0.2",
-            "sport": "ANY",
-            "dport": "5020"
-        }
-    ]
-}
-
-    sample_modbus_rules = {
-        "rules":
-            [
-                {
-                    "id": 1,
-                    "name": "Allow all writes on register 9",
-                    "direction": "IN",
-                    "protocol": "MODBUS",
-                    "command": "Write Single Register",
-                    "starting address": "ANY",
-                    "quantity": "ANY",
-                    "register": "9"
-                },
-                {
-                    "id": 2,
-                    "name": "Wszystkie multiple read readujące mniej niż 100",
-                    "direction": "IN",
-                    "protocol": "MODBUS",
-                    "command": "Read Holding Registers",
-                    "starting address": "ANY",
-                    "quantity": "5",
-                    "comparison": "MAX"
-                }
+            }
             ]
         }
-
-    def test_single_rule(self):
         with open('unittest.json', 'w') as outfile:
-            json.dump(self.sample_rule, outfile)
+            json.dump(sample_rule, outfile)
 
         with open('unittest.json', 'r') as infile:
             expected = json.load(infile)
@@ -76,9 +37,10 @@ class TestFire(unittest.TestCase):
         pass
 
 
-
     def test_compare_ip_tcp_with_rules(self):
         tcp_rule ={
+            "rules" [
+            {
             "id": 5,
             "name": "Accept MODBUS TCP from 127.0.0.1 to 127.0.0.2",
             "profile": 0,
@@ -88,7 +50,10 @@ class TestFire(unittest.TestCase):
             "destination address": "127.0.0.2",
             "sport": "ANY",
             "dport": "5020"
+            }
+            ]
         }
+
         with open('unittest.json', 'w') as outfile:
             json.dump(tcp_rule, outfile)
         fire = Fire.Fire("unittest.json")
@@ -106,6 +71,8 @@ class TestFire(unittest.TestCase):
 
     def compare_modbus_with_rules(self):
         modbus_rule ={
+            "rules" [
+            {
             "id": 11,
             "name": "Allow all writes on register 9",
             "direction": "IN",
@@ -114,7 +81,10 @@ class TestFire(unittest.TestCase):
             "starting address": "ANY",
             "quantity": "ANY",
             "register": "9"
+            }
+            ]
         }
+
         with open('unittest.json', 'w') as outfile:
             json.dump(self.sample_rule, outfile)
         fire = Fire.Fire("unittest.json")
