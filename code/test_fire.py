@@ -1,6 +1,5 @@
 import unittest
 
-from attr import attributes
 import Fire
 import json
 
@@ -34,7 +33,6 @@ class TestFire(unittest.TestCase):
                     "command": "Write Single Register",
                     "starting address": "ANY",
                     "quantity": "ANY",
-                    "register": "9"
                 },
                 {
                     "id": 2,
@@ -102,7 +100,7 @@ class TestFire(unittest.TestCase):
         payload = bytes(message_frame)
         self.assertFalse(fire.analyze_modbus_message(payload))
 
-    def test_analyze_modbus_message_drop(self):
+    def test_analyze_modbus_message_reject(self):
         with open('unittest.json', 'w') as outfile:
             json.dump(self.sample_modbus_rules, outfile)
 
@@ -137,7 +135,7 @@ class TestFire(unittest.TestCase):
 
 
 
-    def test_compare_ip_tcp_with_rules(self):
+    def test_compare_ip_tcp_with_rules_accept(self):
         tcp_rule = {
             "rules": [
                 {
@@ -156,7 +154,6 @@ class TestFire(unittest.TestCase):
 
         with open('unittest.json', 'w') as outfile:
             json.dump(tcp_rule, outfile)
-        fire = Fire.Fire("unittest.json")
 
         attributes = {
             "source address": "127.0.0.1",
@@ -168,25 +165,117 @@ class TestFire(unittest.TestCase):
         fire = Fire.Fire("unittest.json")
         self.assertFalse(fire.compare_with_rules(attributes))
 
-    def test_compare_modbus_with_rules(self):
+
+    def test_compare_ip_tcp_with_rules_reject_1(self):
+        tcp_rule = {
+            "rules": [
+                {
+                    "id": 5,
+                    "name": "Accept MODBUS TCP from 127.0.0.1 to 127.0.0.1",
+                    "profile": 0,
+                    "direction": "IN",
+                    "protocol": "TCP",
+                    "source address": "127.0.0.1",
+                    "destination address": "127.0.0.1",
+                    "sport": "ANY",
+                    "dport": "5020"
+                }
+            ]
+        }
+
+        with open('unittest.json', 'w') as outfile:
+            json.dump(tcp_rule, outfile)
+
+        attributes = {
+            "source address": "127.0.0.1",
+            "destination address": "127.0.0.2",
+            "protocol": "TCP",
+            "sport": "1234",  # ANY
+            "dport": "5020"
+        }
+        fire = Fire.Fire("unittest.json")
+        self.assertTrue(fire.compare_with_rules(attributes))
+
+
+    def test_compare_ip_tcp_with_rules_accept_2(self):
+        tcp_rule = {
+            "rules": [
+                {
+                    "id": 5,
+                    "name": "Accept any 127.0.0.1 traffic",
+                    "profile": 0,
+                    "direction": "IN",
+                    "protocol": "TCP",
+                    "source address": "127.0.0.1",
+                    "destination address": "127.0.0.1",
+                    "sport": "ANY",
+                    "dport": "ANY"
+                }
+            ]
+        }
+
+        with open('unittest.json', 'w') as outfile:
+            json.dump(tcp_rule, outfile)
+
+        attributes = {
+            "source address": "127.0.0.1",
+            "destination address": "127.0.0.1",
+            "protocol": "TCP",
+            "sport": "1234",  # ANY
+            "dport": "5555"   # ANY
+        }
+        fire = Fire.Fire("unittest.json")
+        self.assertFalse(fire.compare_with_rules(attributes))
+
+
+    def test_compare_ip_tcp_with_rules_reject_2(self):
+        tcp_rule = {
+            "rules": [
+                {
+                    "id": 5,
+                    "name": "Accept MODBUS TCP from 127.0.0.1 to 127.0.0.2",
+                    "profile": 0,
+                    "direction": "IN",
+                    "protocol": "UDP",
+                    "source address": "127.0.0.1",
+                    "destination address": "127.0.0.2",
+                    "sport": "ANY",
+                    "dport": "5020"
+                }
+            ]
+        }
+
+        with open('unittest.json', 'w') as outfile:
+            json.dump(tcp_rule, outfile)
+
+        attributes = {
+            "source address": "127.0.0.1",
+            "destination address": "127.0.0.2",
+            "protocol": "TCP",
+            "sport": "1234",  # ANY
+            "dport": "5020"
+        }
+        fire = Fire.Fire("unittest.json")
+        self.assertTrue(fire.compare_with_rules(attributes))
+
+
+    def test_compare_modbus_with_rules_accept(self):
         modbus_rule = {
             "rules": [
                 {
                     "id": 11,
-                    "name": "Allow all writes on register 9",
+                    "name": "Allow all writes on all registers",
                     "direction": "IN",
                     "protocol": "MODBUS",
                     "command": "Write Single Register",
                     "starting address": "ANY",
                     "quantity": "ANY",
-                    "register": "9"
                 }
             ]
         }
 
         with open('unittest.json', 'w') as outfile:
             json.dump(modbus_rule, outfile)
-        fire = Fire.Fire("unittest.json")
 
         attributes = {
             "protocol": "MODBUS",
@@ -197,6 +286,63 @@ class TestFire(unittest.TestCase):
 
         fire = Fire.Fire("unittest.json")
         self.assertFalse(fire.compare_with_rules(attributes))
+
+
+    def test_compare_modbus_with_rules_reject_1(self):
+        modbus_rule = {
+            "rules": [
+                {
+                    "id": 11,
+                    "name": "Allow all reads on all registers",
+                    "direction": "IN",
+                    "protocol": "MODBUS",
+                    "command": "Read Single Register",
+                    "starting address": "ANY",
+                    "quantity": "ANY",
+                }
+            ]
+        }
+
+        with open('unittest.json', 'w') as outfile:
+            json.dump(modbus_rule, outfile)
+
+        attributes = {
+            "protocol": "MODBUS",
+            "command": "Write Single Register",
+            "starting address": "0",
+            "quantity": "50"
+        }
+
+        fire = Fire.Fire("unittest.json")
+        self.assertTrue(fire.compare_with_rules(attributes))
+
+        def test_compare_modbus_with_rules_reject_2(self):
+            modbus_rule = {
+                "rules": [
+                    {
+                        "id": 11,
+                        "name": "Allow all writes on register 9",
+                        "direction": "IN",
+                        "protocol": "MODBUS",
+                        "command": "Write Single Register",
+                        "starting address": "51",
+                        "quantity": "ANY",
+                    }
+                ]
+            }
+
+            with open('unittest.json', 'w') as outfile:
+                json.dump(modbus_rule, outfile)
+
+            attributes = {
+                "protocol": "MODBUS",
+                "command": "Write Single Register",
+                "starting address": "0",
+                "quantity": "50"
+            }
+
+            fire = Fire.Fire("unittest.json")
+            self.assertTrue(fire.compare_with_rules(attributes))
 
 
 if __name__ == '__main__':
