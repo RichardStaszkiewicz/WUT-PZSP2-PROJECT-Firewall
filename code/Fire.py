@@ -113,7 +113,7 @@ class Fire(object):
         for rule in self.rules:
             match = True
             if attributes['protocol'] in ['TCP', 'UDP']:
-                if rule['protocol'] in ['TCP', 'UDP']:
+                if rule['protocol'] == attributes['protocol']:
                     if rule['source address'] != 'ANY':
                         if attributes['source address'] != rule['source address']:
                             match = False
@@ -126,6 +126,8 @@ class Fire(object):
                     if match and rule['sport'] != 'ANY':
                         if attributes['sport'] != rule['sport']:
                             match = False
+                else:
+                    match = False
             elif attributes['protocol'] == 'MODBUS':
                 if rule['protocol'] == 'MODBUS':
                     if attributes['command'] != rule['command']:
