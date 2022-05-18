@@ -78,7 +78,7 @@ class Fire(object):
             'dport': str(dport)
         }
 
-        drop = self.compare_with_rules(attributes)
+        drop = self.compare_with_rules_version2(attributes)
 
         if not drop:
             if dport == MODBUS_SERVER_PORT:
@@ -164,6 +164,43 @@ class Fire(object):
                 drop = False
                 break
         return drop
+
+
+
+  
+
+    def compare_with_rules_version2(self, attributes):
+
+     
+
+        for rule in self.rules:
+            print("\n\nRULE:", rule, "\n")
+            print("ATTR:",attributes, "\n")
+
+            match = True
+            for attr in attributes:
+                
+                if attr in rule:
+                    print("1.   ",attr, "=", attributes[attr])
+                    
+                    if rule[attr] != 'ANY':
+                        if rule[attr] == "MAX":
+                            match = int(attributes['quantity']) < int(rule['quantity'])
+                        elif rule[attr] == "EQUAL":
+                            match = int(attributes['quantity']) == int(rule['quantity'])
+                        elif rule[attr] == "EQUAL":
+                            match = int(attributes['quantity']) > int(rule['quantity'])
+                        else:
+                            match = (rule[attr] == attributes[attr])
+                else:
+                    print("ANY")
+                    match = False
+
+        drop = not match
+        print("\n\nPACKET DROP:", drop)
+
+        return drop
+
 
 
 
