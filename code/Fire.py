@@ -177,6 +177,36 @@ class Fire(object):
 
 
 
+  
+
+    def compare_with_rules_version2(self, attributes):
+
+        protocol_keys = {
+            "SLMP": ["direction","protocol","Command","Head Device","Number of devices"],
+            "MODBUS" : ["direction","protocol","command","starting address","quantity","register"],
+            "TCP" : ["profile","direction","protocol","source address",
+                                "destination address","sport","dport"], 
+            }
+        protocol = protocol_keys[attributes["protocol"]]
+
+
+
+        for rule in self.rules:
+            match = True
+            for attr in attributes:
+                if attr in rule:
+                    if rule[attr] != 'ANY':
+                        if rule[attr] == "MAX":
+                            match = int(attributes['quantity']) < int(rule['quantity'])
+                        elif rule[attr] == "EQUAL":
+                            match = int(attributes['quantity']) == int(rule['quantity'])
+                        elif rule[attr] == "EQUAL":
+                            match = int(attributes['quantity']) > int(rule['quantity'])
+                        else:
+                            match = (rule[attr] == attributes[attr])
+                else:
+                    match = False
+
     ## Method analyzing complete message under firewall rules
     # @param self The object pointer
     # @param payload Data from tcp/udp packet
