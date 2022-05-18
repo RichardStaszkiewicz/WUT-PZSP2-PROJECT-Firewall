@@ -71,10 +71,23 @@ class Fire(object):
             tran_pkt = ip_pkt[TCP]
             protocol = 'TCP'
         elif ip_pkt.haslayer(UDP):
-            udp_pkt = ip_pkt[UDP]
-        # else:
-        #     # każdy inny pakiet niż udp/tcp jest akceptowany?
-        #     pkt.accept()
+            tran_pkt = ip_pkt[UDP]
+            protocol = 'UDP'
+        else:
+            self.reject_packet(pkt, '\nPacket rejected\n' + ip_pkt.show(dump=True))
+            return
+
+        sport = tran_pkt.sport
+        dport = tran_pkt.dport
+        attributes = {
+            'source address': ip_pkt.src,
+            'destination address': ip_pkt.dst,
+            'protocol': protocol,
+            'sport': str(sport),
+            'dport': str(dport)
+        }
+
+        drop = self.compare_with_rules_version2(attributes)
 
         conf = Conf()
         drop = False
@@ -181,20 +194,18 @@ class Fire(object):
 
     def compare_with_rules_version2(self, attributes):
 
-        protocol_keys = {
-            "SLMP": ["direction","protocol","Command","Head Device","Number of devices"],
-            "MODBUS" : ["direction","protocol","command","starting address","quantity","register"],
-            "TCP" : ["profile","direction","protocol","source address",
-                                "destination address","sport","dport"], 
-            }
-        protocol = protocol_keys[attributes["protocol"]]
-
-
+     
 
         for rule in self.rules:
+            print("\n\nRULE:", rule, "\n")
+            print("ATTR:",attributes, "\n")
+
             match = True
             for attr in attributes:
+                
                 if attr in rule:
+                    print("1.   ",attr, "=", attributes[attr])
+                    
                     if rule[attr] != 'ANY':
                         if rule[attr] == "MAX":
                             match = int(attributes['quantity']) < int(rule['quantity'])
@@ -205,7 +216,16 @@ class Fire(object):
                         else:
                             match = (rule[attr] == attributes[attr])
                 else:
+                    print("ANY")
                     match = False
+
+        drop = not match
+        print("\n\nPACKET DROP:", drop)
+
+        return drop
+
+
+
 
     ## Method analyzing complete message under firewall rules
     # @param self The object pointer
