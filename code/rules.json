@@ -6,35 +6,42 @@
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
-            "command": "Device Read (Batch)",
-            "expected_value": "x"
+            "Command": "Device Read (Batch)",
+            "Head Device": "Any",
+            "Number of devices": "Any",
+            "Comparison": "MAX"
         },
         {
             "id": 2,
-            "name": "Accept All",
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
-            "command": "Device Write (Batch)",
-            "expected_value": "x"
+            "Command": "Device Write (Batch)",
+            "Head Device": "Any",
+            "Number of devices": "Any",
+            "Comparison": "MAX"
         },
         {
             "id": 3,
-            "name": "Accept All",
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
-            "command": "Device Read Random",
-            "expected_value": "x"
+            "Command": "Device Read Random",
+            "Word access points": 1,
+            "Double word access points": 1,
+            "Device number": "Any",
+            "Device code": "Any"
         },
         {
             "id": 4,
-            "name": "Accept All",
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
-            "command": "Device Write Random",
-            "expected_value": "x"
+            "Command": "Device Write Random",
+            "Bit access points": "x",
+            "Device code": "Any",
+            "Device number": "Any",
+            "Action": "SET"
         },
         {
             "id": 5,
