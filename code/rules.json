@@ -82,7 +82,7 @@
             "protocol": "MODBUS",
             "command": "Read Holding Registers",
             "starting address": "ANY",
-            "quantity": "50",
+            "quantity": "150",
             "comparison": "MAX"
         }
     ]
