@@ -77,8 +77,10 @@ class Fire(object):
             'sport': str(sport),
             'dport': str(dport)
         }
+        print("\n\nINSIDE ANALUZE:  ", attributes, "\n")
 
-        drop = self.compare_with_rules_version2(attributes)
+
+        drop = self.compare_with_rules(attributes)
 
         if not drop:
             if dport == MODBUS_SERVER_PORT:
@@ -87,7 +89,10 @@ class Fire(object):
             elif sport == MODBUS_SERVER_PORT:
                 drop = False
             elif dport == SLMP_SERVER_PORT:
-                drop = False
+                payload = bytes(tran_pkt.payload)
+                print(len(payload))
+                self.analyze_slmp_message(payload)
+                drop = self.analyze_slmp_message(payload)
             elif sport == SLMP_SERVER_PORT:
                 drop = False
 
@@ -101,84 +106,15 @@ class Fire(object):
     # @param self The object pointer
     # @param attributes List of packet attributes to compare with rules
     def compare_with_rules(self, attributes):
-        drop = True
         for rule in self.rules:
-            match = True
-            if attributes['protocol'] in ['TCP', 'UDP']:
-                if rule['protocol'] == attributes['protocol']:
-                    if rule['source address'] != 'ANY':
-                        if attributes['source address'] != rule['source address']:
-                            match = False
-                    if match and rule['destination address'] != 'ANY':
-                        if attributes['destination address'] != rule['destination address']:
-                            match = False
-                    if match and rule['dport'] != 'ANY':
-                        if attributes['dport'] != rule['dport']:
-                            match = False
-                    if match and rule['sport'] != 'ANY':
-                        if attributes['sport'] != rule['sport']:
-                            match = False
-            elif attributes['protocol'] == 'MODBUS':
-                if rule['protocol'] == 'MODBUS':
-                    if attributes['command'] != rule['command']:
-                        match = False
-                    if match and rule['starting address'] == 'ANY':
-                        if rule['quantity'] != 'ANY':
-                            if rule['comparison'] == 'MAX':
-                                match = int(attributes['quantity']) < int(rule['quantity'])
-
-                            if rule['comparison'] == 'EQUAL':
-                                match = int(attributes['quantity']) == int(rule['quantity'])
-
-                            if rule['comparison'] == 'MIN':
-                                match = int(attributes['quantity']) > int(rule['quantity'])
-
-                    if match and rule['starting address'] != 'ANY':
-                        rule_start = int(rule['starting address'])
-                        request_start = int(attributes['starting address'])
-                        if rule['quantity'] != 'ANY':
-                            rule_end = rule_start + int(rule['quantity']) - 1
-                            rule_range = range(rule_start, rule_end + 1)
-                            request_end = request_start + int(attributes['quantity']) - 1
-                            if rule['comparison'] == 'MAX':
-                                match = request_start in rule_range and request_end < rule_end
-                            if rule['comparison'] == 'EQUAL':
-                                match = request_start in rule_range and request_end == rule_end
-                            if rule['comparison'] == 'MIN':
-                                match = request_start in rule_range and request_end > rule_end
-                        else:
-                            match = request_start >= rule_start
-                else:
-                    match = False
-            # simple rule checking, no final rule structure yet
-            elif attributes['protocol'] == 'SLMP':
-                if rule['protocol'] == 'SLMP':
-                    #if rule['direction'] == attributes['direction']
-                    if rule['command'] != attributes['command']:
-                        match = False
-
-                
-            else:
-                match = False
-            if match:
-                drop = False
-                break
-        return drop
-
-
-
-  
-
-    def compare_with_rules_version2(self, attributes):
-        for rule in self.rules:
-            print("\n\nRULE:", rule, "\n")
-            print("ATTR:",attributes, "\n")
+            # print("\n\nRULE:", rule, "\n")
+            # print("ATTR:",attributes, "\n")
 
             match = True
             for attr in attributes:
                 
                 if attr in rule:
-                    print("1.   ",attr, "=", attributes[attr])
+                    # print("1.   ",attr, "=", attributes[attr])
                     
                     if rule[attr] != 'ANY':
                         if rule[attr] == "MAX":
@@ -190,14 +126,14 @@ class Fire(object):
                         else:
                             match = (rule[attr] == attributes[attr])
                 else:
-                    print("ANY")
+                    # print("ANY")
                     match = False
 
             if match:
                 break
 
         drop = not match
-        print("\n\nPACKET DROP:", drop)
+        # print("\n\nPACKET DROP:", drop)
 
         return drop
 
@@ -236,6 +172,7 @@ class Fire(object):
 
 
     def analyze_slmp_message(self, payload):
+
         function_codes2names = { 
             '0401' : 'Read',
             '1401' : 'Write',
@@ -250,18 +187,30 @@ class Fire(object):
             0 : "Read from bit dev in 16 point units",
             2 : "Read from word devices in 1 word units"
         }
-
-        req_data_len = str(int(payload[16:20]))
-        command = str(int(payload[22:26]))
-        subcommand =  str(int(payload[26:30]))
-
-        attributes = {
-                'protocol': 'SLMP',
-                'command': function_codes2names[command],
-                'subcommand': subcommand_names[subcommand]
-            }
-        
+        attributes = {}
      
+        if len(payload) > 0:
+            
+            print("PAYLOAD", payload.__str__())
+            
+
+            req_data_len = (payload[11:13])
+            command = str(payload[13:15])
+            subcommand =  str(payload[15:17])
+            print("\n\n",str(payload[11:19]))
+
+            # req_data_len = str(int.from_bytes(payload[11:13], 'little'))
+            # command = str(int.from_bytes(payload[44:46], 'little'))
+            # subcommand =  str(int.from_bytes(payload[26:30], 'little'))
+
+            print(req_data_len, "    ",command, "    ",subcommand)
+            # attributes = {
+            #         'protocol': 'SLMP',
+            #         'command': function_codes2names[command],
+            #         'subcommand': subcommand_names[subcommand]
+            #     }
+        
+
         
 
         return self.compare_with_rules(attributes)
@@ -269,7 +218,7 @@ class Fire(object):
     # 0x0 0xff - request dest net/station 
     # 0xff 0x3 - request destination module
     # 0x0 - request destination multidrop No. 
-    # 0xc 0x0 - request data length 12 bytes
+    # 0xc 0x0 - request data length 12 bytes             12-14 bytes
     # 0x4 0x0 - monitoring timer
     # ^^^ 22 BYTES 
     # 
