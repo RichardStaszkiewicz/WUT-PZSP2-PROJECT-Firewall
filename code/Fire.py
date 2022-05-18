@@ -46,7 +46,7 @@ class Fire(object):
     ## Constructor
     # @param self The object pointer
     def __init__(self,rules_file) -> None:
-        self.logger = Logger("events.log")
+        self.logger = Logger("../logs/events.log")
         self.rules_file = rules_file
         self.update_rules()
 
@@ -193,9 +193,6 @@ class Fire(object):
   
 
     def compare_with_rules_version2(self, attributes):
-
-     
-
         for rule in self.rules:
             print("\n\nRULE:", rule, "\n")
             print("ATTR:",attributes, "\n")
@@ -211,13 +208,16 @@ class Fire(object):
                             match = int(attributes['quantity']) < int(rule['quantity'])
                         elif rule[attr] == "EQUAL":
                             match = int(attributes['quantity']) == int(rule['quantity'])
-                        elif rule[attr] == "EQUAL":
+                        elif rule[attr] == "MIN":
                             match = int(attributes['quantity']) > int(rule['quantity'])
                         else:
                             match = (rule[attr] == attributes[attr])
                 else:
                     print("ANY")
                     match = False
+
+            if match:
+                break
 
         drop = not match
         print("\n\nPACKET DROP:", drop)
