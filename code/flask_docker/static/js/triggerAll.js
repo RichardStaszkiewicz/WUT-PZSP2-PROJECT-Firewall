@@ -17,3 +17,13 @@ const disableAll = () => {
     })
     window.location.reload(true);
 }
+
+const savePush = () => {
+    fetch('/getRules?action=save', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json',
+        },
+    })
+    window.location.reload(true);
+}

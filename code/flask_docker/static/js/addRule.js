@@ -31,6 +31,7 @@ addRuleBtn.onclick = () => {
     const ruleComparison = document.getElementById('ruleComparison').value;
 
     const rule = {
+        id: Math.random(),
         name: ruleName,
         direction: ruleDirection,
         protocol: ruleProtocol,
