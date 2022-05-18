@@ -25,6 +25,10 @@ def update_rules():
                 rule['is_active'] = True
             return 'ok'
 
+        if request.args.get('action') == 'save':
+            pass #code for save 
+            return 'ok'
+
         rule_data = request.get_json()
         for i in range(len(rules)):
             if rules[i]['id'] == rule_data['id']:
