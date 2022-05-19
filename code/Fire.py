@@ -8,6 +8,7 @@
 # on application layer after being judged by a configuration
 # rules.
 from copy import deepcopy
+from dataclasses import replace
 from itertools import count
 import logging
 
@@ -58,6 +59,7 @@ class Fire(object):
         f = open(self.rules_file)
         data = json.load(f)
         self.rules = data["rules"]
+        f.close()
     
 
     def get_rules(self):
@@ -87,9 +89,7 @@ class Fire(object):
             'sport': str(sport),
             'dport': str(dport)
         }
-        # print("\n\nINSIDE ANALUZE:  ", attributes, "\n")
-
-
+        
         drop = self.compare_with_rules(attributes)
 
         conf = Conf()
@@ -129,17 +129,18 @@ class Fire(object):
     # @param attributes List of packet attributes to compare with rules
     def compare_with_rules(self, attributes):
         drop = True
-
+        print("\n\nCAPTURED PACKET:  ", attributes)
         for rule in self.rules:
-            match = True
+            match = False
             missed_attr_count = 0
 
             print("\n\nRULE:", rule, "\n")
-            print("ATTR:",attributes, "\n\n\n\n")
+            # print("ATTR:",attributes, "\n\n\n\n")
 
             for attr in attributes:
                 if attr in rule:
-                    # print("1.   ",attr, "=", attributes[attr])
+                    print("1.   ",attr, "=", attributes[attr], "RULE", rule[attr])
+                    
                     if rule[attr] != 'ANY':
                         if rule[attr] == "MAX":
                             match = int(attributes['quantity']) < int(rule['quantity'])
@@ -149,14 +150,22 @@ class Fire(object):
                             match = int(attributes['quantity']) > int(rule['quantity'])
                         else:
                             match = (rule[attr] == attributes[attr])
+                    else:
+                        match = True
+
                     if not match:
+                        print("DID NOT MATCH")
                         break
                 else:
                     missed_attr_count += 1
+                    print(missed_attr_count)
+
             if missed_attr_count == len(attributes):
+                print("All attributes missed")
                 match = False
             else:
                 drop = not match
+                print("REACHED END, PACKET DROPPED:", drop)
                 return drop   
                        
         # print("\n\nPACKET DROP:", drop)
@@ -200,7 +209,7 @@ class Fire(object):
     def analyze_slmp_message(self, payload):
 
         function_codes2names = { 
-            '0401' : 'Read',
+            '0x04 0x01' : 'Read',
             '1401' : 'Write',
             '0403' : 'Device Read Random',
             '1402' : 'Device Write Random',
@@ -220,26 +229,25 @@ class Fire(object):
             print("PAYLOAD", payload.__str__())
             
 
-            req_data_len = (payload[11:13])
-            command = str(payload[13:15])
-            subcommand =  str(payload[15:17])
-            print("\n\n",str(payload[11:19]))
+            req_data_len = str(payload[11:13]).replace('b\\', '')
+            command = str(payload[13:15]).replace('b\\', '')
+            subcommand =  str(payload[15:17]).replace('b\\', '')
+            
 
             # req_data_len = str(int.from_bytes(payload[11:13], 'little'))
             # command = str(int.from_bytes(payload[44:46], 'little'))
             # subcommand =  str(int.from_bytes(payload[26:30], 'little'))
 
-            print(req_data_len, "    ",command, "    ",subcommand)
-            # attributes = {
-            #         'protocol': 'SLMP',
-            #         'command': function_codes2names[command],
-            #         'subcommand': subcommand_names[subcommand]
-            #     }
-        
-
+            print("AAAAAAAAAAAAAAAAAAAASASASA", req_data_len, "    ",command, "    ",subcommand)
+            attributes = {
+                    'protocol': 'SLMP',
+                    'command': function_codes2names[command],
+                    'subcommand': subcommand_names[subcommand]
+                }
         
 
         return self.compare_with_rules(attributes)
+        
     # 0x50 0x0  - subheader 
     # 0x0 0xff - request dest net/station 
     # 0xff 0x3 - request destination module
