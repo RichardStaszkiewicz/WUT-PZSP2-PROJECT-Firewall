@@ -1,5 +1,5 @@
-import unittest
 
+import unittest
 import Fire
 import json
 
@@ -41,30 +41,34 @@ class TestFire(unittest.TestCase):
                     "protocol": "MODBUS",
                     "command": "Read Holding Registers",
                     "starting address": "ANY",
-                    "quantity": "5",
+                    "quantity": "4",
                     "comparison": "MAX"
                 }
             ]
         }
 
-
-    def test_single_rule(self):
-        sample_rule = {
-            "rules": [
+    sample_slmp_rule = {
+        "rules":
+            [
                 {
-                    "id": 101,
-                    "name": "Wszystkie multiple read readujące mniej niż 100",
+                    "id": 1,
+                    "name": "Accept All",
+                    "profile": 0,
                     "direction": "IN",
-                    "protocol": "MODBUS",
-                    "Command": "Device Read Mutiple Registers",
-                    "Start Register": "Any",
-                    "Quantity": 100,
-                    "Comparison": "MAX"
+                    "protocol": "SLMP",
+                    "Command": "Read",
+                    "Head Device": "ANY",
+                    
                 }
             ]
         }
+
+
+
+    def test_single_rule(self):
+        
         with open('unittest.json', 'w') as outfile:
-            json.dump(sample_rule, outfile)
+            json.dump(self.sample_rule, outfile)
 
         with open('unittest.json', 'r') as infile:
             expected = json.load(infile)
@@ -73,14 +77,9 @@ class TestFire(unittest.TestCase):
         print(fire.get_rules())
         self.assertEqual(fire.get_rules()[0], expected["rules"][0])
 
-    def test_empty_rule(self):
-        pass
-
-    def test_multiple_rules(self):
-        pass
-
 
     def test_analyze_modbus_message_accept(self):
+        print("MODBUS ACCEPT")
         with open('unittest.json', 'w') as outfile:
             json.dump(self.sample_modbus_rules, outfile)
 
@@ -121,7 +120,6 @@ class TestFire(unittest.TestCase):
         self.assertTrue(fire.analyze_modbus_message(payload))
 
 
-
     def test_analyze_modbus_packet_with_no_message_accept(self):
         with open('unittest.json', 'w') as outfile:
             json.dump(self.sample_modbus_rules, outfile)
@@ -135,7 +133,39 @@ class TestFire(unittest.TestCase):
 
 
 
-    def test_compare_ip_tcp_with_rules_accept(self):
+
+
+
+#     def test_analyze_slmp_packet_accept(self):
+#         with open('unittest.json', 'w') as outfile:
+#             json.dump(self.sample_slmp_rule, outfile)
+#         fire = Fire.Fire("unittest.json")
+#  # 0x50 0x0  - subheader 
+#     # 0x0 0xff - request dest net/station 
+#     # 0xff 0x3 - request destination module
+#     # 0x0 - request destination multidrop No. 
+#     # 0xc 0x0 - request data length 12 bytes             12-14 bytes
+#     # 0x4 0x0 - monitoring timer
+#     # ^^^ 22 BYTES 
+#     # 
+#     #   0x1 0x4                0x0 0x0         0x32 0x0               0x0 0xa8              0x1 0x0                 12 BYTES TOTAL, CORRECT LEN
+#     # |22-26 READ|   | 26-30 READ IN WORDS|    | HEAD DEV NO.|      | DEV CODE const |    | NO OF DEV POINTS |        
+
+#         pre_payload = [b'0x50', b'0x0'] #0x0 0xff 0xff 0x3 0x0 0xc 0x0 0x4 0x0' 
+#         command = [b'0x4', b'0x1']
+#         subcommand = [b'0x0',  b'0x0']
+#         head_dev_no = [b'0x32', b'0x0']
+#         dev_code = [b'0x0', b'0xa8']
+#         dev_pts_no = [b'0x1', b'0x0']
+
+
+#         payload = pre_payload + command + subcommand + head_dev_no + dev_code + dev_pts_no
+#         # payload = bytes(message_frame)
+
+#         self.assertFalse(fire.analyze_slmp_message(payload))
+
+
+    def test_compare_ip_tcp_with_rules(self):
         tcp_rule = {
             "rules": [
                 {
