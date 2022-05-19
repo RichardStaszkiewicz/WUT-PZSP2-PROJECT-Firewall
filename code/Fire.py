@@ -8,6 +8,7 @@
 # on application layer after being judged by a configuration
 # rules.
 from copy import deepcopy
+from itertools import count
 import logging
 
 from netfilterqueue import NetfilterQueue
@@ -86,7 +87,7 @@ class Fire(object):
             'sport': str(sport),
             'dport': str(dport)
         }
-        print("\n\nINSIDE ANALUZE:  ", attributes, "\n")
+        # print("\n\nINSIDE ANALUZE:  ", attributes, "\n")
 
 
         drop = self.compare_with_rules(attributes)
@@ -127,16 +128,18 @@ class Fire(object):
     # @param self The object pointer
     # @param attributes List of packet attributes to compare with rules
     def compare_with_rules(self, attributes):
-        for rule in self.rules:
-            # print("\n\nRULE:", rule, "\n")
-            # print("ATTR:",attributes, "\n")
+        drop = True
 
+        for rule in self.rules:
             match = True
+            missed_attr_count = 0
+
+            print("\n\nRULE:", rule, "\n")
+            print("ATTR:",attributes, "\n\n\n\n")
+
             for attr in attributes:
-                
                 if attr in rule:
                     # print("1.   ",attr, "=", attributes[attr])
-                    
                     if rule[attr] != 'ANY':
                         if rule[attr] == "MAX":
                             match = int(attributes['quantity']) < int(rule['quantity'])
@@ -146,14 +149,16 @@ class Fire(object):
                             match = int(attributes['quantity']) > int(rule['quantity'])
                         else:
                             match = (rule[attr] == attributes[attr])
+                    if not match:
+                        break
                 else:
-                    # print("ANY")
-                    match = False
-
-            if match:
-                break
-
-        drop = not match
+                    missed_attr_count += 1
+            if missed_attr_count == len(attributes):
+                match = False
+            else:
+                drop = not match
+                return drop   
+                       
         # print("\n\nPACKET DROP:", drop)
 
         return drop
