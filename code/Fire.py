@@ -107,13 +107,15 @@ class Fire(object):
     # @param self The object pointer
     # @param attributes List of packet attributes to compare with rules
     def compare_with_rules(self, attributes):
+        
+        # w domysle drop true, na wypadek jesli przelecimy przez wszystkie rulesy i nic sie nie stanie albo rules = []
         drop = True
         print("\n\nCAPTURED PACKET:  ", attributes)
-        for rule in self.rules:
-            match = False
+        for rule in self.rules: 
+            match = True
             missed_attr_count = 0
 
-            print("\n\nRULE:", rule, "\n")
+            print("\nRULE:", rule, "\n Attr comparison:")
             # print("ATTR:",attributes, "\n\n\n\n")
 
             for attr in attributes:
@@ -129,26 +131,32 @@ class Fire(object):
                             match = int(attributes['quantity']) > int(rule['quantity'])
                         else:
                             match = (rule[attr] == attributes[attr])
-                    else:
-                        match = True
-
+                    
+                    # jesli chocby jeden atrybut sie nie zgadzal, to break
                     if not match:
                         print("DID NOT MATCH")
                         break
+                # jesli atrybutu nie ma w rulsie - to pozwoli na większa swobode definiowania,
+                #  jesli nagle rules zmniejszy sie o jeden atrybut to sie nie popsuje
                 else:
                     missed_attr_count += 1
                     print(missed_attr_count)
-
+            
+            # jesli zaden atrybut nie pasowal do rulesa, to znaczy, ze ten rules nie przepusci pakietu
             if missed_attr_count == len(attributes):
                 print("All attributes missed")
                 match = False
-            else:
-                drop = not match
-                print("REACHED END, PACKET DROPPED:", drop)
-                return drop   
-                       
+            
+            # Jesli przy danym rulesie jest match, to przerwij comparison i przepusc 
+            if match:
+                drop = False
+                return drop
+        
+
+               
         # print("\n\nPACKET DROP:", drop)
 
+        #jesli przelecimy przez wszystkie rulesy/ rules= [] to wtedy drop
         return drop
 
 
