@@ -91,8 +91,7 @@ class Fire(object):
                 drop = False
             elif dport == SLMP_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
-                print(len(payload))
-                self.analyze_slmp_message(payload)
+                print("PAYLOAD SIZE:",len(payload))
                 drop = self.analyze_slmp_message(payload)
             elif sport == SLMP_SERVER_PORT:
                 drop = False
@@ -120,7 +119,7 @@ class Fire(object):
 
             for attr in attributes:
                 if attr in rule:
-                    print("1.   ",attr, "=", attributes[attr], "RULE", rule[attr])
+                    print("-   ",attr, "=", attributes[attr], "RULE", rule[attr])
                     
                     if rule[attr] != 'ANY':
                         if rule[attr] == "MAX":
@@ -140,7 +139,7 @@ class Fire(object):
                 #  jesli nagle rules zmniejszy sie o jeden atrybut to sie nie popsuje
                 else:
                     missed_attr_count += 1
-                    print(missed_attr_count)
+                   
             
             # jesli zaden atrybut nie pasowal do rulesa, to znaczy, ze ten rules nie przepusci pakietu
             if missed_attr_count == len(attributes):
@@ -150,11 +149,12 @@ class Fire(object):
             # Jesli przy danym rulesie jest match, to przerwij comparison i przepusc 
             if match:
                 drop = False
+                print("PACKET DROP:", drop)
                 return drop
         
 
                
-        # print("\n\nPACKET DROP:", drop)
+        print("\n\nPACKET DROP:", drop)
 
         #jesli przelecimy przez wszystkie rulesy/ rules= [] to wtedy drop
         return drop
@@ -196,18 +196,21 @@ class Fire(object):
     def analyze_slmp_message(self, payload):
 
         function_codes2names = { 
-            '0x04 0x01' : 'Read',
-            '1401' : 'Write',
-            '0403' : 'Device Read Random',
-            '1402' : 'Device Write Random',
-            '0406' : 'Device Read (Batch)', #block
-            '1406' : 'Device Write (Batch)' #block'
+            b'\x01\x04' : 'Read',
+            b'\x01\x14' : 'Write',
+            # '0403' : 'Device Read Random',
+            # '1402' : 'Device Write Random',
+            # '0406' : 'Device Read (Batch)', #block
+            # '1406' : 'Device Write (Batch)' #block'
         }
+
+        # To Do:
+        # Variable length
         subcommand_names = {
-            1 : "Read from bit dev in 1 point units",
-            3 : "Read from bit dev in 1 point units",
-            0 : "Read from bit dev in 16 point units",
-            2 : "Read from word devices in 1 word units"
+            b'\x00' : "Read from bit dev in 16 point units"
+            # 1 : "Read from bit dev in 1 point units",
+            # 3 : "Read from bit dev in 1 point units",
+            # 2 : "Read from word devices in 1 word units"
         }
         attributes = {}
      
@@ -216,24 +219,24 @@ class Fire(object):
             print("PAYLOAD", payload.__str__())
             
 
-            req_data_len = str(payload[11:13]).replace('b\\', '')
-            command = str(payload[13:15]).replace('b\\', '')
-            subcommand =  str(payload[15:17]).replace('b\\', '')
-            
+            command = payload[11:13]
+            subcommand = payload[13:14]
+            head_dev_no =  payload[14:17]
+            dev_code = payload[17:19]
+            no_of_dev_pts = payload[19:21]
 
-            # req_data_len = str(int.from_bytes(payload[11:13], 'little'))
-            # command = str(int.from_bytes(payload[44:46], 'little'))
-            # subcommand =  str(int.from_bytes(payload[26:30], 'little'))
 
-            print("AAAAAAAAAAAAAAAAAAAASASASA", req_data_len, "    ",command, "    ",subcommand)
             attributes = {
                     'protocol': 'SLMP',
                     'command': function_codes2names[command],
                     'subcommand': subcommand_names[subcommand]
                 }
-        
 
-        return self.compare_with_rules(attributes)
+            print("COMMAND:", command, "subcommand:", subcommand,"         ", head_dev_no,  "          ",dev_code, "          ", no_of_dev_pts )            
+            return self.compare_with_rules(attributes)
+        else:
+            drop = False
+            return drop
         
     # 0x50 0x0  - subheader 
     # 0x0 0xff - request dest net/station 
@@ -243,7 +246,7 @@ class Fire(object):
     # 0x4 0x0 - monitoring timer
     # ^^^ 22 BYTES 
     # 
-    #   0x1 0x4                0x0 0x0         0x32 0x0               0x0 0xa8              0x1 0x0                 12 BYTES TOTAL, CORRECT LEN
+    #   0x1 0x4                0x0              0x0 0x32 0x0               0x0 0xa8              0x1 0x0                 12 BYTES TOTAL, CORRECT LEN
     # |22-26 READ|   | 26-30 READ IN WORDS|    | HEAD DEV NO.|      | DEV CODE const |    | NO OF DEV POINTS |        
 
 
