@@ -13,24 +13,13 @@ from itertools import count
 import logging
 
 from netfilterqueue import NetfilterQueue
-from scapy.layers.inet import IP, TCP, UDP, Ether
+from scapy.layers.inet import IP, TCP, UDP
 from Logger import Logger
 from Rules import Rule
 import json
 
 MODBUS_SERVER_PORT = 5020
 SLMP_SERVER_PORT = 1280
-
-
-
-class NetMessage:
-    ## Constructor
-    # @param self The object pointer
-    def __init__(self) -> None:
-        pass
-
-
-
 
 
 
@@ -87,19 +76,6 @@ class Fire(object):
         }
         
         drop = self.compare_with_rules(attributes)
-
-        conf = Conf()
-        drop = False
-        
-        for rule in conf._list_of_rules:
-            if ip_pkt.src == rule.get_src() \
-            and ip_pkt.dst == rule.get_dst() \
-            and (ip_pkt.haslayer(TCP) and rule.get_protocol() == 'tcp'
-            or ip_pkt.haslayer(UDP) and rule.get_protocol() == 'udp') \
-            and (ip_pkt.haslayer(TCP) and str(tcp_pkt.dport) == rule.get_dport()
-            or ip_pkt.haslayer(UDP) and str(udp_pkt.dport) == rule.get_dport()):
-                drop = True
-                pkt.drop()
         if not drop:
             if dport == MODBUS_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
@@ -108,11 +84,10 @@ class Fire(object):
                 drop = False
             elif dport == SLMP_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
-                print("PAYLOAD SIZE:",len(payload))
+               
                 drop = self.analyze_slmp_message(payload)
             elif sport == SLMP_SERVER_PORT:
                 drop = False
-
         if drop:
             self.reject_packet(pkt, "\nPacket rejected\n" + ip_pkt.show(dump=True))
         else:
@@ -123,20 +98,12 @@ class Fire(object):
     # @param self The object pointer
     # @param attributes List of packet attributes to compare with rules
     def compare_with_rules(self, attributes):
-        
-       
         drop = True
-        print("\n\nCAPTURED PACKET:  ", attributes)
         for rule in self.rules: 
             match = True
             missed_attr_count = 0
-
-            print("\nRULE:", rule, "\n Attr comparison:")
-           
             for attr in attributes:
                 if attr in rule:
-                    print("-   ",attr, "=", attributes[attr], "RULE", rule[attr])
-                    
                     if rule[attr] != 'ANY':
                         if rule[attr] == "MAX":
                             match = int(attributes['quantity']) < int(rule['quantity'])
@@ -146,34 +113,16 @@ class Fire(object):
                             match = int(attributes['quantity']) > int(rule['quantity'])
                         else:
                             match = (rule[attr] == attributes[attr])
-                   
                     if not match:
-                        print("DID NOT MATCH")
                         break
-           
                 else:
                     missed_attr_count += 1
-                   
-            
-            # jesli zaden atrybut nie pasowal do rulesa, to znaczy, ze ten rules nie przepusci pakietu
             if missed_attr_count == len(attributes):
-                print("All attributes missed")
                 match = False
-            
-            # Jesli przy danym rulesie jest match, to przerwij comparison i przepusc 
             if match:
                 drop = False
-                print("PACKET DROP:", drop)
                 return drop
-        
-
-               
-        print("\n\nPACKET DROP:", drop)
-
-        #jesli przelecimy przez wszystkie rulesy/ rules= [] to wtedy drop
         return drop
-
-
 
 
     ## Method analyzing complete message under firewall rules
@@ -206,7 +155,9 @@ class Fire(object):
         else:
             return False
 
-
+    ## Method analyzing captured SLMP packet message under fire rules
+    # @param self The object pointer
+    # @param payload Data from tcp/udp packet
     def analyze_slmp_message(self, payload):
 
         function_codes2names = { 
@@ -217,9 +168,6 @@ class Fire(object):
             # '0406' : 'Device Read (Batch)', #block
             # '1406' : 'Device Write (Batch)' #block'
         }
-
-        # To Do:
-        # Variable length
         subcommand_names = {
             b'\x00' : "Read from bit dev in 16 point units"
             # 1 : "Read from bit dev in 1 point units",
@@ -229,25 +177,17 @@ class Fire(object):
         attributes = {}
      
         if len(payload) > 0:
-            
-            print("PAYLOAD", payload.__str__())
-            
-
             command = payload[11:13]
             subcommand = payload[13:14]
             head_dev_no =  payload[14:17]
             dev_code = payload[17:19]
             no_of_dev_pts = payload[19:21]
 
-
             attributes = {
                     'protocol': 'SLMP',
                     'command': function_codes2names[command],
                     'subcommand': subcommand_names[subcommand],
-
                 }
-
-            print("COMMAND:", command, "subcommand:", subcommand,"         ", head_dev_no,  "          ",dev_code, "          ", no_of_dev_pts )            
             return self.compare_with_rules(attributes)
         else:
             drop = False
