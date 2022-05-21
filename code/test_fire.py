@@ -1,5 +1,5 @@
-import unittest
 
+import unittest
 import Fire
 import json
 
@@ -41,30 +41,34 @@ class TestFire(unittest.TestCase):
                     "protocol": "MODBUS",
                     "command": "Read Holding Registers",
                     "starting address": "ANY",
-                    "quantity": "5",
+                    "quantity": "4",
                     "comparison": "MAX"
                 }
             ]
         }
 
-
-    def test_single_rule(self):
-        sample_rule = {
-            "rules": [
+    sample_slmp_rule = {
+        "rules":
+            [
                 {
-                    "id": 101,
-                    "name": "Wszystkie multiple read readujące mniej niż 100",
+                    "id": 1,
+                    "name": "Accept All",
+                    "profile": 0,
                     "direction": "IN",
-                    "protocol": "MODBUS",
-                    "Command": "Device Read Mutiple Registers",
-                    "Start Register": "Any",
-                    "Quantity": 100,
-                    "Comparison": "MAX"
+                    "protocol": "SLMP",
+                    "Command": "Read",
+                    "Head Device": "ANY",
+                    
                 }
             ]
         }
+
+
+
+    def test_single_rule(self):
+        
         with open('unittest.json', 'w') as outfile:
-            json.dump(sample_rule, outfile)
+            json.dump(self.sample_rule, outfile)
 
         with open('unittest.json', 'r') as infile:
             expected = json.load(infile)
@@ -73,14 +77,9 @@ class TestFire(unittest.TestCase):
         print(fire.get_rules())
         self.assertEqual(fire.get_rules()[0], expected["rules"][0])
 
-    def test_empty_rule(self):
-        pass
-
-    def test_multiple_rules(self):
-        pass
-
 
     def test_analyze_modbus_message_accept(self):
+        print("MODBUS ACCEPT")
         with open('unittest.json', 'w') as outfile:
             json.dump(self.sample_modbus_rules, outfile)
 
@@ -119,7 +118,6 @@ class TestFire(unittest.TestCase):
 
         payload = bytes(message_frame)
         self.assertTrue(fire.analyze_modbus_message(payload))
-
 
 
     def test_analyze_modbus_packet_with_no_message_accept(self):
