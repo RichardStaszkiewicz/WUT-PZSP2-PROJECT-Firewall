@@ -13,7 +13,6 @@
         },
         {
             "id": 2,
-            "name": "Accept All",
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
@@ -24,7 +23,6 @@
         },
         {
             "id": 3,
-            "name": "Accept All",
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
@@ -36,7 +34,6 @@
         },
         {
             "id": 4,
-            "name": "Accept All",
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
@@ -85,7 +82,7 @@
             "protocol": "MODBUS",
             "command": "Read Holding Registers",
             "starting address": "ANY",
-            "quantity": "50",
+            "quantity": "150",
             "comparison": "MAX"
         }
     ]
