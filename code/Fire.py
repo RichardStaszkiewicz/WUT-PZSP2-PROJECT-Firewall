@@ -21,10 +21,6 @@ import json
 MODBUS_SERVER_PORT = 5020
 SLMP_SERVER_PORT = 1280
 
-## Documentation of NetMessage
-#
-# NetMessage is a class storing a composed, readable message
-# along with the packages upholding it
 
 
 
@@ -107,7 +103,7 @@ class Fire(object):
     # @param attributes List of packet attributes to compare with rules
     def compare_with_rules(self, attributes):
         
-        # w domysle drop true, na wypadek jesli przelecimy przez wszystkie rulesy i nic sie nie stanie albo rules = []
+       
         drop = True
         print("\n\nCAPTURED PACKET:  ", attributes)
         for rule in self.rules: 
@@ -115,8 +111,7 @@ class Fire(object):
             missed_attr_count = 0
 
             print("\nRULE:", rule, "\n Attr comparison:")
-            # print("ATTR:",attributes, "\n\n\n\n")
-
+           
             for attr in attributes:
                 if attr in rule:
                     print("-   ",attr, "=", attributes[attr], "RULE", rule[attr])
@@ -130,13 +125,11 @@ class Fire(object):
                             match = int(attributes['quantity']) > int(rule['quantity'])
                         else:
                             match = (rule[attr] == attributes[attr])
-                    
-                    # jesli chocby jeden atrybut sie nie zgadzal, to break
+                   
                     if not match:
                         print("DID NOT MATCH")
                         break
-                # jesli atrybutu nie ma w rulsie - to pozwoli na większa swobode definiowania,
-                #  jesli nagle rules zmniejszy sie o jeden atrybut to sie nie popsuje
+           
                 else:
                     missed_attr_count += 1
                    
@@ -229,7 +222,8 @@ class Fire(object):
             attributes = {
                     'protocol': 'SLMP',
                     'command': function_codes2names[command],
-                    'subcommand': subcommand_names[subcommand]
+                    'subcommand': subcommand_names[subcommand],
+
                 }
 
             print("COMMAND:", command, "subcommand:", subcommand,"         ", head_dev_no,  "          ",dev_code, "          ", no_of_dev_pts )            
@@ -238,18 +232,7 @@ class Fire(object):
             drop = False
             return drop
         
-    # 0x50 0x0  - subheader 
-    # 0x0 0xff - request dest net/station 
-    # 0xff 0x3 - request destination module
-    # 0x0 - request destination multidrop No. 
-    # 0xc 0x0 - request data length 12 bytes             12-14 bytes
-    # 0x4 0x0 - monitoring timer
-    # ^^^ 22 BYTES 
-    # 
-    #   0x1 0x4                0x0              0x0 0x32 0x0               0x0 0xa8              0x1 0x0                 12 BYTES TOTAL, CORRECT LEN
-    # |22-26 READ|   | 26-30 READ IN WORDS|    | HEAD DEV NO.|      | DEV CODE const |    | NO OF DEV POINTS |        
-
-
+    
 
     ## Method forwarding the accepted message packeges onward to a defended subnet
     # @param self The object pointer
