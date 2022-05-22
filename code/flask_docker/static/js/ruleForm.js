@@ -10,6 +10,44 @@ const closeRuleForm = (ruleId) => {
     ruleForm.style.display = "none";
 }
 
+const hideFields = (fieldsIds) => {
+    fieldsIds.forEach((id) => {
+        const field = document.getElementById(`${id}`);
+        field.style.display = 'none';
+    })
+}
+
+const showFormField = (fieldId) => {
+    console.log(fieldId)
+    const field = document.getElementById(`${fieldId}`);
+    field.style.display = "flex";
+}
+
+const triggerAddProtocolField = (fieldId) => {
+    console.log(fieldId)
+    const protocolsIds = ['add_MODBUS', 'add_IP/TCP', 'add_SLMP']
+    hideFields(protocolsIds)
+    showFormField(`add_${fieldId}`)
+}
+
+const triggerAddFunctionField = (fieldId) => {
+    const functionFieldsIds = ['add_f1', 'add_f5', 'add_f6', 'add_f23']
+    hideFields(functionFieldsIds)
+    showFormField(`add_${fieldId}`)
+}
+
+const triggerProtocolField = (fieldId) => {
+    const protocolsIds = ['MODBUS', 'IP/TCP', 'SLMP'];
+    hideFields(protocolsIds)
+    showFormField(fieldId);
+}
+
+const triggerFunctionField = (fieldId) => {
+    const functionFieldsIds = ['f1', 'f5', 'f6', 'f23'];
+    hideFields(functionFieldsIds);
+    showFormField(fieldId)
+}
+
 const saveRuleForm = async (ruleId) => {
     const ruleName = document.getElementById(`${ruleId}_name`).value;
     const ruleProtocol = document.getElementById(`${ruleId}_protocol`).value;
