@@ -26,5 +26,5 @@ const savePush = () => {
         },
         body: JSON.stringify(RULES)
     })
-    //window.location.reload(true);
+    window.location.reload(true);
 }
