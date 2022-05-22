@@ -9,59 +9,105 @@
 
             <div class="inputs">
                 <div class="inputWrapper">
-                    <label for="name">Rule Name</label>
-                    <input name="name" type="text" id="ruleName" class="input" placeholder="Name...">
+                    <label for="name">Name</label>
+                    <input name="name" type="text" id="rule_name" class="input">
                 </div>
                 <div class="inputWrapper">
-                    <label for="protocol">Choose Protocol</label>
-                    <select name="protocol" id="ruleProtocol" class="input">
-                        <option value="p2">MODBUS</option>
-                        <option value="p1">IP/TCP</option>
+                    <label for="protocol">Protocol</label>
+                    <select name="protocol" id="rule_protocol" class="input" onchange="triggerAddProtocolField(this.value)">
+                        <option value="MODBUS">MODBUS</option>
+                        <option value="IP/TCP">IP/TCP</option>
+                        <option value="SLMP">SLMP</option>
                     </select>
                 </div>
-                <!--<div class="inputWrapper">
-                    <label for="profile">Rule Profile</label>
-                    <input label="profile" type="number" id="ruleProfile" class="input" placeholder="Profile...">
-                </div> -->
-                <div class="inputWrapper">
-                    <label for="direction">Direction</label>
-                    <select name="direction" id="ruleDirection" class="input">
-                        <option value="d1">IN</option>
-                        <option value="d2">OUT</option>
+                <div id="add_IP/TCP" class="ruleFormField">
+                    <div class="inputWrapper">
+                        <label to="source_address">Source Address</label>
+                        <input label="source_address" type="text" id="rule_source_address" class="input">
+                    </div>
+                    <div class="inputWrapper">
+                        <label to="destination_address">Destination Address</label>
+                        <input label="destination_address" type="text" id="rule_destination_address" class="input">
+                    </div>
+                    <div class="inputWrapper">
+                        <label to="source_port">Source Port</label>
+                        <input label="source_port" type="text" id="rule_source_port" class="input">
+                    </div>
+                    <div class="inputWrapper">
+                        <label to="destination_port">Destination Port</label>
+                        <input label="destination_port" type="text" id="rule_destination_port" class="input" >
+                    </div>
+                </div>
+                <div id="add_MODBUS" class="ruleFormField">
+                    <label for="function">Function</label>
+                    <select name="function" id="rule_function" class="input" onchange="triggerAddFunctionField(this.value)">
+                        <option value="f1">Read Coils</option>
+                        <option value="f1">Read Discrete Input</option>
+                        <option value="f1">Read Holding Registers</option>
+                        <option value="f1">Read Input Registers</option>
+                        <option value="f5">Write Single Coil</option>
+                        <option value="f6">Write Single Registers</option>
+                        <option value="f1">Write Multiple Coils</option>
+                        <option value="f1">Write Multiple Registers</option>
+                        <option value="f23">Read/Write Multiple Registers</option>
                     </select>
+                    <div id="add_f1" class="ruleFormField">
+                        <div class="inputWrapper">
+                            <label to="starting_address">Starting Address</label>
+                            <input label="starting_address" type="text" id="rule_starting_address" class="input">
+                        </div>
+                        <div class="inputWrapper">
+                            <label to="last_address">Last Address</label>
+                            <input label="last_address" type="text" id="rule_last_address" class="input">
+                        </div>
+                    </div>
+                    <div id="add_f5" class="ruleFormField">
+                        <div class="inputWrapper">
+                            <label to="output_address">Output Address</label>
+                            <input label="output_address" type="text" id="rule_output_address" class="input">
+                        </div>
+                        <div class="inputWrapper">
+                            <label to="value">Value</label>
+                            <input label="value" type="text" id="rule_value" class="input">
+                        </div>
+                    </div>
+                    <div id="add_f6" class="ruleFormField">
+                        <div class="inputWrapper">
+                            <label to="output_address">Output Address</label>
+                            <input label="output_address" type="text" id="rule_output_address" class="input" >
+                        </div>
+                        <div class="inputWrapper">
+                            <label to="min_value">Minimum Value</label>
+                            <input label="min_value" type="text" id="rule_min_value" class="input">
+                        </div>
+                        <div class="inputWrapper">
+                            <label to="max_value">Maximum Value</label>
+                            <input label="max_value" type="text" id="rule_max_value" class="input">
+                        </div>
+                    </div>
+                    <div id="add_f23" class="ruleFormField">
+                        <div class="inputWrapper">
+                            <label to="read_starting_address">Read Starting Address</label>
+                            <input label="read_starting_address" type="text" id="rule_read_starting_address" class="input">
+                        </div>
+                        <div class="inputWrapper">
+                            <label to="read_last_address">Read Last Address</label>
+                            <input label="read_last_address" type="text" id="rule_read_last_address" class="input">
+                        </div>
+                        <div class="inputWrapper">
+                            <label to="write_starting_address">Write Starting Address</label>
+                            <input label="write_starting_address" type="text" id="rule_write_starting_address" class="input">
+                        </div>
+                        <div class="inputWrapper">
+                            <label to="write_last_address">Read Last Address</label>
+                            <input label="write_last_address" type="text" id="rule_write_last_address" class="input">
+                        </div>
+                    </div>
                 </div>
-                <!--
-                <div class="inputWrapper">
-                    <label for="parameter">Analysed Parameter</label>
-                    <select name="parameter" id="ruleParameters" class="input">
-                        <option value="p1">First parameter</option>
-                        <option value="p2">Second parameter</option>
-                    </select>
+                <div id="add_SLMP" class="ruleFormField">
+                    
                 </div>
-                
-                <div class="inputWrapper">
-                    <label to="expectedValue">Expected Value</label>
-                    <input label="expectedValue" type="text" id="ruleExpectedValue" class="input" placeholder="Expected Value...">
-                </div>
-                -->
-                <div class="inputWrapper">
-                    <label to="command">Command</label>
-                    <input label="command" type="text" id="ruleCommand" class="input" placeholder="Command...">
-                </div>
-                <div class="inputWrapper">
-                    <label to="startRegister">Start Register</label>
-                    <input label="startRegister" type="text" id="ruleStartRegister" class="input" placeholder="Start Register...">
-                </div>
-                <div class="inputWrapper">
-                    <label to="qantity">Quantity</label>
-                    <input label="quantity" type="number" id="ruleQuantity" class="input" placeholder="Quantity...">
-                </div>
-                <div class="inputWrapper">
-                    <label to="comparison">Comparison</label>
-                    <input label="comparison" type="text" id="ruleComparison" class="input" placeholder="Comparison...">
-                </div>
-            </div>
-            
+            </div>     
             <div class="buttons modalButtons">
                 <button id="confirmAddRule" class="button" type="submit">Add</button>
                 <button id="closeAddRuleModal" class="button" type="button">Cancel</button>

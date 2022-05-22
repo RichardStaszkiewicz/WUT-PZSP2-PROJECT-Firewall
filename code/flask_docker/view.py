@@ -1,3 +1,4 @@
+import json
 from flask import Flask, jsonify, render_template, request
 import os
 
@@ -9,7 +10,6 @@ from logs import get_logs
 app = Flask(__name__)
 
 rules = get_rules()
-
 
 @app.route('/getRules', methods=['GET', 'POST'])
 def update_rules():
@@ -26,7 +26,9 @@ def update_rules():
             return 'ok'
 
         if request.args.get('action') == 'save':
-            pass #code for save 
+            rules_data = request.get_json()
+            with open('code/Conf.json', 'w') as file:
+                json.dump(rules_data, file) 
             return 'ok'
 
         rule_data = request.get_json()

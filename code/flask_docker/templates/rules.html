@@ -5,7 +5,7 @@
 {% block rules %}
     {% for rule in rules %}
         <li id="{{ rule['id'] }}" class="ruleWrapper">
-            <div class="rule" >
+            <section class="rule" >
                 <p id="{{ rule['id'] }}" onClick="triggerRuleForm(this.id)" class="ruleName">{{ rule['name'] }}</p>
                 <span class="checkButton" id="{{ rule['id'] }}" onClick="triggerCheck(this.id)">
                     {% if rule['is_active'] == True %}
@@ -19,7 +19,7 @@
                         </svg>
                     {% endif %}
                 </span>
-            </div>
+            </section>
             {% include 'ruleForm.html' %}
         </li>
     {% endfor %}
