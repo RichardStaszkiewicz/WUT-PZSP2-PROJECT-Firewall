@@ -22,25 +22,55 @@ window.onclick = (event) => {
 const addRuleBtn = document.getElementById('confirmAddRule');
 
 addRuleBtn.onclick = () => {
-    const ruleName = document.getElementById('ruleName').value;
-    const ruleProtocol = document.getElementById('ruleProtocol').value;
-    const ruleCommand = document.getElementById('ruleCommand').value;
-    const ruleDirection = document.getElementById('ruleDirection').value;
-    const ruleStartRegister = document.getElementById('ruleStartRegister').value;
-    const ruleQuantity = document.getElementById('ruleQuantity').value;
-    const ruleComparison = document.getElementById('ruleComparison').value;
+    const ruleName = document.getElementById('rule_name').value;
+    const ruleProtocol = document.getElementById('rule_protocol').value;
 
     const rule = {
         id: Math.random(),
         name: ruleName,
-        direction: ruleDirection,
         protocol: ruleProtocol,
-        command: ruleCommand,
-        start_register: ruleStartRegister,
-        quantity: ruleQuantity,
-        comparison: ruleComparison,
         is_active: true,
     }
+
+    if(ruleProtocol === "IP/TCP") {
+        rule['source address'] = document.getElementById('rule_source_address').value;
+        rule['destination address'] = document.getElementById('rule_destination_address').value;
+        rule['source port'] = document.getElementById('rule_source_port').value;
+        rule['destination port'] = document.getElementById('rule_destination_port').value;
+    }
+
+    if(ruleProtocol === "MODBUS") {
+        rule['function'] = document.getElementById('rule_function').value;
+
+        if(rule.function === "f1") {
+            rule['starting address'] = document.getElementById('rule_starting_address').value;
+            rule['last address'] = document.getElementById('rule_last_address').value;
+        }
+        
+        if(rule.function === "f5") {
+            rule['output address'] = document.getElementById('rule_output_address').value;
+            rule['value'] = document.getElementById('rule_value').value;
+        }
+
+        if(rule.function === "f6") {
+            rule['output address'] = document.getElementById('rule_output_address').value;
+            rule['min value'] = document.getElementById('rule_min_value').value;
+            rule['max value'] = document.getElementById('rule_max_value').value;
+        }
+
+        if(rule.function === "f23") {
+            rule['read starting address'] = document.getElementById('rule_read_starting_address').value;
+            rule['read last address'] = document.getElementById('rule_read_last_address').value;
+            rule['write starting address'] = document.getElementById('rule_write_starting_address').value;
+            rule['write last address'] = document.getElementById('rule_write_last_address').value;
+        }
+    }
+
+    if(ruleProtocol === "SLMP"){
+        console.log('SLMP')
+    }
+
+    console.log(rule);
 
     fetch('/getRules', {
         method: 'POST',
