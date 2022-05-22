@@ -67,14 +67,15 @@ class Fire(object):
         sport = tran_pkt.sport
         dport = tran_pkt.dport
         attributes = {
-            'source address': ip_pkt.src,
-            'destination address': ip_pkt.dst,
+            'source_address': ip_pkt.src,
+            'destination_address': ip_pkt.dst,
             'protocol': protocol,
-            'sport': str(sport),
-            'dport': str(dport)
+            'source_port': str(sport),
+            'destination_port': str(dport)
         }
         
         drop = self.compare_with_rules(attributes)
+        print("packet drop", drop)
         if not drop:
             if dport == MODBUS_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
@@ -86,6 +87,7 @@ class Fire(object):
                 drop = self.analyze_slmp_message(payload)
             elif sport == SLMP_SERVER_PORT:
                 drop = False
+        print("packet drop", drop)
         if drop:
             self.reject_packet(pkt, "\nPacket rejected\n" + ip_pkt.show(dump=True))
         else:
@@ -97,33 +99,32 @@ class Fire(object):
     # @param attributes List of packet attributes to compare with rules
     def compare_with_rules(self, attributes):
         drop = True
-        for rule in self.rules: 
-            match = True
-            missed_attr_count = 0
-            for attr in attributes:
-                if attr in rule:
-                    if rule["is_active"] == "true":
+        for rule in self.rules:
+            if rule["is_active"] == "true": 
+                match = True
+                missed_attr_count = 0
+                for attr in attributes:
+                    if attr in rule:
+                        print("ATTRIBUTE", attributes[attr], rule[attr])
+                        
                         if rule[attr] != 'ANY':
-                            if rule[attr] == "MAX VALUE":
-                                match = int(attributes['quantity']) < int(rule['quantity'])
-                                attributes.pop("quantity")
-                            elif rule[attr] == "EQUAL":
-                                match = int(attributes['quantity']) == int(rule['quantity'])
-                                attributes.pop("quantity")
-                            elif rule[attr] == "MININUM VALUE":
-                                match = int(attributes['quantity']) > int(rule['quantity'])
-                                attributes.pop("quantity")
+                            if attr == "max_value":
+                                print("INSIDE MAX")
+                                match = int(attributes['max_value']) <= int(rule['max_value'])
+                            elif attr == "min_value":
+                                print("INSIDE MIN")
+                                match = int(attributes['min_value']) >= int(rule['min_value'])
                             else:
                                 match = (rule[attr] == attributes[attr])
-                    if not match:
-                        break
-                else:
-                    missed_attr_count += 1
-            if missed_attr_count == len(attributes):
-                match = False
-            if match:
-                drop = False
-                return drop
+                        if not match:
+                            break
+                    else:
+                        missed_attr_count += 1
+                if missed_attr_count == len(attributes):
+                    match = False
+                if match:
+                    drop = False
+                    return drop
         return drop
 
 
@@ -150,8 +151,10 @@ class Fire(object):
             attributes = {
                 'protocol': 'MODBUS',
                 'command': function_codes2names[function_code],
-                'starting address': starting_address,
-                'quantity': quantity
+                # 'starting address': starting_address,
+                # 'quantity': quantity
+                'min_value' : starting_address,
+                'max_value' : quantity
             }
             return self.compare_with_rules(attributes)
         else:
@@ -189,7 +192,7 @@ class Fire(object):
                     'protocol': 'SLMP',
                     'command': function_codes2names[command],
                     'subcommand': subcommand_names[subcommand],
-                    'starting_device' : starting_register,
+                    'min_value' : starting_register,
                     # 'head_dev_no': head_dev_no,
                     'max_value' : max_value
                 }
