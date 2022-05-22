@@ -182,16 +182,19 @@ class Fire(object):
         if len(payload) > 0:
             command = payload[11:13]
             subcommand = payload[13:14]
-            head_dev_no =  int.from_bytes(payload[14:17]) # num of first device
+            head_dev_no = payload[14:17] # 
+            starting_register = int.from_bytes(payload[15:16], 'little') # num of first device
             dev_code = payload[17:19]
-            max_value = int.from_bytes(payload[19:21])
+            max_value = int.from_bytes(payload[19:21], 'little')
             attributes = {
                     'protocol': 'SLMP',
                     'command': function_codes2names[command],
                     'subcommand': subcommand_names[subcommand],
-                    'head_dev_no': head_dev_no,
+                    'starting_device' : starting_register,
+                    # 'head_dev_no': head_dev_no,
                     'max_value' : max_value
                 }
+            print(attributes)
             return self.compare_with_rules(attributes)
         else:
             drop = False
