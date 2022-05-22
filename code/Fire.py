@@ -15,7 +15,6 @@ import logging
 from netfilterqueue import NetfilterQueue
 from scapy.layers.inet import IP, TCP, UDP
 from Logger import Logger
-from Rules import Rule
 import json
 
 MODBUS_SERVER_PORT = 5020
@@ -84,7 +83,6 @@ class Fire(object):
                 drop = False
             elif dport == SLMP_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
-               
                 drop = self.analyze_slmp_message(payload)
             elif sport == SLMP_SERVER_PORT:
                 drop = False
@@ -104,15 +102,19 @@ class Fire(object):
             missed_attr_count = 0
             for attr in attributes:
                 if attr in rule:
-                    if rule[attr] != 'ANY':
-                        if rule[attr] == "MAX":
-                            match = int(attributes['quantity']) < int(rule['quantity'])
-                        elif rule[attr] == "EQUAL":
-                            match = int(attributes['quantity']) == int(rule['quantity'])
-                        elif rule[attr] == "MIN":
-                            match = int(attributes['quantity']) > int(rule['quantity'])
-                        else:
-                            match = (rule[attr] == attributes[attr])
+                    if rule["is_active"] == "true":
+                        if rule[attr] != 'ANY':
+                            if rule[attr] == "MAX VALUE":
+                                match = int(attributes['quantity']) < int(rule['quantity'])
+                                attributes.pop("quantity")
+                            elif rule[attr] == "EQUAL":
+                                match = int(attributes['quantity']) == int(rule['quantity'])
+                                attributes.pop("quantity")
+                            elif rule[attr] == "MININUM VALUE":
+                                match = int(attributes['quantity']) > int(rule['quantity'])
+                                attributes.pop("quantity")
+                            else:
+                                match = (rule[attr] == attributes[attr])
                     if not match:
                         break
                 else:
@@ -179,14 +181,15 @@ class Fire(object):
         if len(payload) > 0:
             command = payload[11:13]
             subcommand = payload[13:14]
-            head_dev_no =  payload[14:17]
+            head_dev_no =  int.from_bytes(payload[14:17]) # num of first device
             dev_code = payload[17:19]
-            no_of_dev_pts = payload[19:21]
-
+            max_value = int.from_bytes(payload[19:21])
             attributes = {
                     'protocol': 'SLMP',
                     'command': function_codes2names[command],
                     'subcommand': subcommand_names[subcommand],
+                    'head_dev_no': head_dev_no,
+                    'max_value' : max_value
                 }
             return self.compare_with_rules(attributes)
         else:
@@ -227,3 +230,8 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print('')
     nfqueue.unbind()
+
+
+
+
+
