@@ -1,6 +1,9 @@
 
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/rules.css') }}">
+    <script>
+        const RULES = {{ rules|tojson }}
+    </script>
 {% endblock %}
 {% block rules %}
     {% for rule in rules %}
