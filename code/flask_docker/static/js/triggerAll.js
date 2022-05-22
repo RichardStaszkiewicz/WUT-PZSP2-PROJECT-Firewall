@@ -19,58 +19,12 @@ const disableAll = () => {
 }
 
 const savePush = () => {
-    const rulesHTML = document.getElementById('rules').getElementsByTagName('li');
-    console.log(rulesHTML)
-
-    const ruules = rulesHTML.map(rule => {
-        console.log(rule)
-        return {
-            id: ''
-        }
-    })
-
-    const rules = [
-        {
-            "id": 101,
-            "name": "Wszystkie multiple read readujące mniej niz 100",
-            "direction": "IN",
-            "protocol": "MODBUS",
-            "command": "Device Read Multiple Registers",
-            "Start Register": "Any",
-            "quantity": 100,
-            "comparison": "MAX",
-            "is_active": true
-        },
-        {
-            "id": 102,
-            "name": "Wszystkie multiple read readujące mniej niz 150",
-            "direction": "IN",
-            "protocol": "MODBUS",
-            "command": "Device Read Multiple Registers",
-            "Start Register": "Any",
-            "quantity": 150,
-            "comparison": "MAX",
-            "is_active": true
-        },
-        {
-            "id": 103,
-            "name": "Wszystkie multiple read readujące mniej niz 170",
-            "direction": "IN",
-            "protocol": "MODBUS",
-            "command": "Device Read Multiple Registers",
-            "Start Register": "Any",
-            "quantity": 170,
-            "comparison": "MAX",
-            "is_active": true
-        }
-    ]
-
     fetch('/getRules?action=save', {
         method: 'POST',
         headers: {
             "Content-Type": 'application/json',
         },
-        body: JSON.stringify(rules)
+        body: JSON.stringify(RULES)
     })
     //window.location.reload(true);
 }
