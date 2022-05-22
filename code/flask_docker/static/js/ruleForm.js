@@ -20,11 +20,13 @@ const hideFields = (fieldsIds) => {
 const showFormField = (fieldId) => {
     console.log(fieldId)
     const field = document.getElementById(`${fieldId}`);
+    console.log(field)
     field.style.display = "flex";
+
+    console.log(field.style.display);
 }
 
 const triggerAddProtocolField = (fieldId) => {
-    console.log(fieldId)
     const protocolsIds = ['add_MODBUS', 'add_IP/TCP', 'add_SLMP']
     hideFields(protocolsIds)
     showFormField(`add_${fieldId}`)
@@ -36,16 +38,16 @@ const triggerAddFunctionField = (fieldId) => {
     showFormField(`add_${fieldId}`)
 }
 
-const triggerProtocolField = (fieldId) => {
-    const protocolsIds = ['MODBUS', 'IP/TCP', 'SLMP'];
+const triggerProtocolField = (fieldId, id) => {
+    const protocolsIds = [`${id}_MODBUS`, `${id}_IP/TCP`, `${id}_SLMP`];
     hideFields(protocolsIds)
-    showFormField(fieldId);
+    showFormField(`${id}_${fieldId}`);
 }
 
-const triggerFunctionField = (fieldId) => {
-    const functionFieldsIds = ['f1', 'f5', 'f6', 'f23'];
+const triggerFunctionField = (fieldId, id) => {
+    const functionFieldsIds = [`${id}_f1`, `${id}_f5`, `${id}_f6`, `${id}_f23`];
     hideFields(functionFieldsIds);
-    showFormField(fieldId)
+    showFormField(`${id}_${fieldId}`)
 }
 
 const saveRuleForm = async (ruleId) => {
