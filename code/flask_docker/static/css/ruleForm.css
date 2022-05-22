@@ -9,3 +9,9 @@
 .ruleFormInputs {
     padding-bottom: 16px;
 }
+
+.ruleFormField {
+    display: none;
+    flex-direction: column;
+    row-gap: 12px;
+}
