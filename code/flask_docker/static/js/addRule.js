@@ -39,7 +39,7 @@ addRuleBtn.onclick = () => {
         rule['destination port'] = document.getElementById('rule_destination_port').value;
     }
 
-    if(ruleProtocol === "MODBUS") {
+    if(ruleProtocol === "MODBUS" || ruleProtocol === "SLMP") {
         rule['function'] = document.getElementById('rule_function').value;
 
         if(rule.function === "f1") {
@@ -66,11 +66,7 @@ addRuleBtn.onclick = () => {
         }
     }
 
-    if(ruleProtocol === "SLMP"){
-        console.log('SLMP')
-    }
-
-    console.log(rule);
+    console.log(RULES)
 
     fetch('/getRules', {
         method: 'POST',
