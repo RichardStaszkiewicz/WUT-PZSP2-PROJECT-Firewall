@@ -29,7 +29,7 @@ addRuleBtn.onclick = () => {
         id: RULES.length + 1,
         name: ruleName,
         protocol: ruleProtocol,
-        is_active: true,
+        is_active: "true",
     }
 
     if(ruleProtocol === "IP/TCP") {
