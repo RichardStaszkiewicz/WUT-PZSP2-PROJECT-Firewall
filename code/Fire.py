@@ -147,14 +147,13 @@ class Fire(object):
             function_code = str(int(payload[7]))
             starting_address = str(int.from_bytes(payload[8:10], 'little'))
             quantity = str(int.from_bytes(payload[11:13], 'little'))
+            last_address = str(int(starting_address) + int(quantity) - 1)
 
             attributes = {
                 'protocol': 'MODBUS',
                 'command': function_codes2names[function_code],
-                # 'starting address': starting_address,
-                # 'quantity': quantity
-                'min_value' : starting_address,
-                'max_value' : quantity
+                'min_value': starting_address,
+                'max_value': last_address
             }
             return self.compare_with_rules(attributes)
         else:
