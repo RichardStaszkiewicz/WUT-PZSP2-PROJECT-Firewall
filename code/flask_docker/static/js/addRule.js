@@ -29,7 +29,7 @@ addRuleBtn.onclick = () => {
         id: RULES.length + 1,
         name: ruleName,
         protocol: ruleProtocol,
-        is_active: "true",
+        is_active: true,
     }
 
     if(ruleProtocol === "IP/TCP") {
@@ -39,7 +39,7 @@ addRuleBtn.onclick = () => {
         rule['destination_port'] = document.getElementById('rule_destination_port').value;
     }
 
-    if(ruleProtocol === "MODBUS" || ruleProtocol === "SLMP") {
+    if(ruleProtocol === "MODBUS") {
         rule['function'] = document.getElementById('rule_function').value;
 
         if(rule.function === "f1") {
@@ -64,6 +64,13 @@ addRuleBtn.onclick = () => {
             rule['write_starting_address'] = document.getElementById('rule_write_starting_address').value;
             rule['write_last_address'] = document.getElementById('rule_write_last_address').value;
         }
+    }
+
+    if(ruleProtocol === "SLMP") {
+        rule['command'] = document.getElementById('rule_command').value;
+        rule["subcommand"] = document.getElementById('rule_subcommand').value;
+        rule['min_value'] = document.getElementById('rule_min_value').value;
+        rule['max_value'] = document.getElementById('rule_max_value').value;
     }
 
     RULES.push(rule);
