@@ -65,7 +65,7 @@ const saveRuleForm = async (ruleId) => {
         rule['source address'] = document.getElementById(`${ruleId}_destination_port`).value;
     }
 
-    if(ruleProtocol === "MODBUS" || ruleProtocol === "SLMP") {
+    if(ruleProtocol === "MODBUS") {
         rule['function'] = document.getElementById(`${ruleId}_function`).value;
 
         if(rule.function === "f1") {
@@ -80,8 +80,8 @@ const saveRuleForm = async (ruleId) => {
 
         if(rule.function === "f6") {
             rule['output address'] = document.getElementById(`${ruleId}_output_address`).value;
-            rule['min value'] = document.getElementById(`${ruleId}_min_value`).value;
-            rule['max value'] = document.getElementById(`${ruleId}_max_value`).value;
+            rule['min_value'] = document.getElementById(`${ruleId}_min_value`).value;
+            rule['max_value'] = document.getElementById(`${ruleId}_max_value`).value;
         }
 
         if(rule.function === "f23") {
@@ -90,6 +90,13 @@ const saveRuleForm = async (ruleId) => {
             rule['write starting address'] = document.getElementById(`${ruleId}_write_starting_address`).value;
             rule['write last address'] = document.getElementById(`${ruleId}_write_last_address`).value;
         }
+    }
+
+    if(ruleProtocol === "SLMP") {
+        rule['command'] = document.getElementById(`${ruleId}_rule_command`).value;
+        rule["subcommand"] = document.getElementById(`${ruleId}_rule_subcommand`).value;
+        rule['min_value'] = document.getElementById(`${ruleId}_min_value`).value;
+        rule['max_value'] = document.getElementById(`${ruleId}_max_value`).value;
     }
 
     fetch('/getRules', {
