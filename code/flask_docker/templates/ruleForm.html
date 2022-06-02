@@ -103,7 +103,25 @@
             </div>
         </div>
         <div id="{{ rule['id'] }}_SLMP" class="ruleFormField">
-            
+            <div class="inputWrapper">
+                <label for="command">Command</label>
+                <select name="command" id="{{ rule['id'] }}_rule_command" class="input" selected="{{ rule['command'] }}">
+                    <option value="Read">Read</option>
+                    <option value="Write">Write</option>
+                </select>
+            </div>
+            <div class="inputWrapper">
+                <label to="subcommand">Subcommand</label>
+                <input label="subcommand" type="text" id="{{ rule['id'] }}_rule_subcommand" class="input" value="{{ rule['subcommand'] }}">
+            </div>
+            <div class="inputWrapper">
+                <label to="max_value">Maximum Value</label>
+                <input label="max_value" type="text" id="{{ rule['id'] }}_max_value" class="input" value="{{ rule['max_value'] }}">
+            </div>
+            <div class="inputWrapper">
+                <label to="min_value">Minimum Value</label>
+                <input label="min_value" type="text" id="{{ rule['id'] }}_min_value" class="input" value="{{ rule['min_value'] }}">
+            </div>
         </div>
         <div class="inputWrapper">
             <label for="isActive">Is Active?</label>

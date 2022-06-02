@@ -17,12 +17,12 @@ def update_rules():
 
         if request.args.get('action') == 'disableAll':
             for rule in rules:
-                rule['is_active'] = "false"
+                rule['is_active'] = False
             return 'ok'
 
         if request.args.get('action') == 'enableAll':
             for rule in rules:
-                rule['is_active'] = "true"
+                rule['is_active'] = True
             return 'ok'
 
         if request.args.get('action') == 'save':
