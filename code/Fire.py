@@ -7,9 +7,6 @@
 # Basing on NetFilter the messages are being filtered
 # on application layer after being judged by a configuration
 # rules.
-from copy import deepcopy
-from dataclasses import replace
-from itertools import count
 import logging
 
 from netfilterqueue import NetfilterQueue
@@ -21,6 +18,9 @@ MODBUS_SERVER_PORT = 5020
 SLMP_SERVER_PORT = 1280
 
 
+def ip_proto(ip_pkt):
+    proto_field = ip_pkt.get_field('proto')
+    return proto_field.i2s[ip_pkt.proto].upper()
 
 ## Documentation of FIRE
 #
@@ -56,14 +56,13 @@ class Fire(object):
         ip_pkt = IP(pkt.get_payload())
         if ip_pkt.haslayer(TCP):
             tran_pkt = ip_pkt[TCP]
-            protocol = 'TCP'
         elif ip_pkt.haslayer(UDP):
             tran_pkt = ip_pkt[UDP]
-            protocol = 'UDP'
         else:
-            self.reject_packet(pkt, '\nPacket rejected\n' + ip_pkt.show(dump=True))
+            self.reject_packet(pkt, '\nPacket rejected: not a TCP nor UDP packet\n')
             return
 
+        protocol = ip_proto(ip_pkt)
         sport = tran_pkt.sport
         dport = tran_pkt.dport
         attributes = {
@@ -75,7 +74,6 @@ class Fire(object):
         }
         
         drop = self.compare_with_rules(attributes)
-        print("packet drop", drop)
         if not drop:
             if dport == MODBUS_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
@@ -87,7 +85,6 @@ class Fire(object):
                 drop = self.analyze_slmp_message(payload)
             elif sport == SLMP_SERVER_PORT:
                 drop = False
-        print("packet drop", drop)
         if drop:
             self.reject_packet(pkt, "\nPacket rejected\n" + ip_pkt.show(dump=True))
         else:
@@ -106,7 +103,7 @@ class Fire(object):
                 for attr in attributes:
                     if attr in rule:
                         print("ATTRIBUTE", attributes[attr], rule[attr])
-                        
+
                         if rule[attr] != 'ANY':
                             if attr == "max_value":
                                 print("INSIDE MAX")
@@ -125,6 +122,7 @@ class Fire(object):
                 if match:
                     drop = False
                     return drop
+        print(attributes, '\n')
         return drop
 
 
@@ -144,17 +142,25 @@ class Fire(object):
             '23': 'Read/Write Multiple registers',
         }
         if len(payload) > 7:
+            protocol = 'MODBUS'
             function_code = str(int(payload[7]))
-            starting_address = str(int.from_bytes(payload[8:10], 'little'))
-            quantity = str(int.from_bytes(payload[11:13], 'little'))
-            last_address = str(int(starting_address) + int(quantity) - 1)
-
-            attributes = {
-                'protocol': 'MODBUS',
-                'command': function_codes2names[function_code],
-                'min_value': starting_address,
-                'max_value': last_address
-            }
+            if function_code in {'1', '2', '3', '4'}:
+                starting_address = str(int.from_bytes(payload[8:10], 'little'))
+                quantity = str(int.from_bytes(payload[11:13], 'little'))
+                last_address = str(int(starting_address) + int(quantity) - 1)
+                attributes = {
+                    'protocol': protocol,
+                    'command': function_codes2names[function_code],
+                    'min_value': starting_address,
+                    'max_value': last_address
+                }
+            elif function_code in {'5', '6'}:
+                output_address = str(int.from_bytes(payload[8:10], 'little'))
+                attributes = {
+                    'protocol': protocol,
+                    'command': function_codes2names[function_code],
+                    'output_address': output_address,
+                }
             return self.compare_with_rules(attributes)
         else:
             return False

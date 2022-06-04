@@ -1,3 +1,12 @@
+## @package FIRE
+## @author PZSP2-22L Firewall Team
+## @date 03.06.2022
+## @copyright All rights reserved
+# Module simulating Modbus client.
+
+# Basic Modbus client to test connection and FIRE filtering
+# with pymodbus library
+
 from pymodbus.datastore import ModbusSlaveContext, ModbusServerContext, ModbusSequentialDataBlock
 from pymodbus.device import ModbusDeviceIdentification
 from pymodbus.server.asynchronous import StartTcpServer, StartUdpServer
@@ -6,26 +15,13 @@ from pymodbus.version import version
 
 
 def run_server():
-    store = ModbusSlaveContext(
-        di=ModbusSequentialDataBlock(0, [10]*101),
-        co=ModbusSequentialDataBlock(0, [10]*101),
-        hr=ModbusSequentialDataBlock(0, [10]*101),
-        ir=ModbusSequentialDataBlock(0, [10]*101))
+    store = ModbusSlaveContext()
 
     context = ModbusServerContext(slaves=store, single=True)
     identity = ModbusDeviceIdentification()
-    identity.VendorName = 'Pymodbus'
-    identity.ProductCode = 'PM'
-    identity.VendorUrl = 'http://github.com/riptideio/pymodbus/'
-    identity.ProductName = 'Pymodbus Server'
-    identity.ModelName = 'Pymodbus Server'
     identity.MajorMinorRevision = version.short()
 
     StartTcpServer(context, identity=identity, address=("", 5020))
 
-
 if __name__ == "__main__":
-    print("Zawartość holding registers serwera MODBUS:")
-    for i in range(1, 101):
-        print(f"Adres rejestru: {i}, wartość rejestru: 10")
     run_server()

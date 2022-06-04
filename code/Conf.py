@@ -38,7 +38,7 @@ class Conf:
         self._list_of_rules = []
         self._id_next = 0
 
-        with open('Conf.json', 'r') as file:
+        with open('rules.json', 'r') as file:
             data = file.read().replace('\n', '')
 
         all_rules = list(json.loads(data, object_hook=lambda d: namedtuple('X', d.keys())(*d.values())))

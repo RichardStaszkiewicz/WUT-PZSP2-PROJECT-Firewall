@@ -50,37 +50,35 @@
         {
             "id": 5,
             "is_active": "true",
-            "name": "Accept MODBUS TCP from 127.0.0.1 to 127.0.0.2",
+            "name": "Accept MODBUS TCP from 127.0.0.1 to 127.0.0.1",
             "profile": 0,
             "direction": "IN",
             "protocol": "TCP",
             "source address": "127.0.0.1",
-            "destination address": "127.0.0.2",
+            "destination address": "127.0.0.1",
             "sport": "ANY",
             "dport": "5020"
         },
         {
             "id": 6,
             "is_active": "true",
-            "name": "Accept MODBUS TCP from 127.0.0.2 to 127.0.0.1",
+            "name": "Accept MODBUS TCP from 127.0.0.1to 127.0.0.1",
             "profile": 0,
             "direction": "IN",
             "protocol": "TCP",
-            "source address": "127.0.0.2",
+            "source address": "127.0.0.1",
             "destination address": "127.0.0.1",
             "sport": "5020",
             "dport": "ANY"
         },
         {
-            "id": 11,
+            "id": 100,
             "is_active": "true",
-            "name": "Allow all writes on register 9",
+            "name": "Pozwól na pisanie do wszystkich dowolnego holding register",
             "direction": "IN",
             "protocol": "MODBUS",
             "command": "Write Single Register",
-            "starting address": "ANY",
-            "quantity": "ANY",
-            "register": "9"
+            "output_address": "ANY"
         },
         {
             "id": 101,
