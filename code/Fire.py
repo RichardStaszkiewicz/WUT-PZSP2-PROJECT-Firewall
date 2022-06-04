@@ -171,6 +171,15 @@ class Fire(object):
     # @param payload Data from tcp/udp packet
     def analyze_slmp_message(self, payload):
 
+#    write 55 20 ( wpisz do 54 rejestru wartość 20)                                                                             
+#                                            WRITE               MIN_VALUE              MAX VALUE        
+# \x00\x00\xff\xff\x03\x00\x0e\x00\x04\x00\  [x01\x14]  \x00\x00\  [0x37]  \x00\x00\xa8\    [x01]     \x00\x14\x00'
+
+#    read 0 20 (20 rejestrów zaczynając od 20)    
+#                                                READ             MIN VALUE               MAX VALUE 
+# x00\x00\xff\xff\x03\x00\x0c\x00\x04\x00\   [x01\x04] \x00\x00    [\x00]   \x00\x00\xa8\   [x14]      \x00'
+
+
         function_codes2names = { 
             b'\x01\x04' : 'Read',
             b'\x01\x14' : 'Write',
@@ -180,7 +189,7 @@ class Fire(object):
             # '1406' : 'Device Write (Batch)' #block'
         }
         subcommand_names = {
-            b'\x00' : "Read from bit dev in 16 point units"
+            b'\x00\x00' : "Read from bit dev in 16 point units"
             # 1 : "Read from bit dev in 1 point units",
             # 3 : "Read from bit dev in 1 point units",
             # 2 : "Read from word devices in 1 word units"
@@ -189,26 +198,50 @@ class Fire(object):
      
         if len(payload) > 0:
             command = payload[11:13]
-            subcommand = payload[13:14]
-            head_dev_no = payload[14:17] # 
-            starting_register = int.from_bytes(payload[15:16], 'little') # num of first device
-            dev_code = payload[17:19]
-            max_value = int.from_bytes(payload[19:21], 'little')
-            attributes = {
-                    'protocol': 'SLMP',
-                    'command': function_codes2names[command],
-                    'subcommand': subcommand_names[subcommand],
-                    'min_value' : starting_register,
-                    # 'head_dev_no': head_dev_no,
-                    'max_value' : max_value
-                }
-            print(attributes)
+            subcommand = payload[13:15]
+            head_dev_no = payload[15:18] # 
+            dev_code = payload[18:19]
+            no_of_dev_pts = payload[19:21]
+
+            
+            max_value = int.from_bytes(payload[19:20], 'little')
+            starting_register = int.from_bytes(payload[15:16], 'little') # ponieważ roboczo plc_write/ plc_read zmienia tylko jeden bajt
+
+
+            if function_codes2names[command] == "Write":
+                attributes = {
+                        'protocol': 'SLMP',
+                        'command': function_codes2names[command],
+                        'subcommand': subcommand_names[subcommand],
+                        'min_value' : starting_register,
+                        'max_value' : starting_register
+                    }
+            elif function_codes2names[command] == "Read":
+                attributes = {
+                        'protocol': 'SLMP',
+                        'command': function_codes2names[command],
+                        'subcommand': subcommand_names[subcommand],
+                        'min_value' : starting_register,
+                        'max_value' : max_value
+                    }
+
+            print(payload,"\n",attributes)
             return self.compare_with_rules(attributes)
         else:
             drop = False
             return drop
         
     
+
+
+
+
+
+
+
+
+
+
 
     ## Method forwarding the accepted message packeges onward to a defended subnet
     # @param self The object pointer
