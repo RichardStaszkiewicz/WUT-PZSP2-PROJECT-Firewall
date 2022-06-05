@@ -27,11 +27,15 @@ def update_rules():
 
         if request.args.get('action') == 'save':
             rules_data = request.get_json()
-            with open('Conf.json', 'w') as file:
-                json.dump(rules_data, file) 
+            with open("rules.json", 'w') as file:
+                data = json.load(file)
+                data["rules"] = rules_data
+                json.dump(data, file) 
+
+            os.system("../RunFifoScript.sh")
             return 'ok'
 
-        rule_data = request.get_json()
+        rule_data = request.get_json()["rules"]
         for i in range(len(rules)):
             if rules[i]['id'] == rule_data['id']:
                 rules[i] = rule_data
