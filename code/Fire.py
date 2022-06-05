@@ -15,6 +15,7 @@ from Logger import Logger
 from threading import Thread
 import subprocess
 import json
+import time
 
 MODBUS_SERVER_PORT = 5020
 SLMP_SERVER_PORT = 1280
@@ -26,10 +27,14 @@ def ip_proto(ip_pkt):
     return proto_field.i2s[ip_pkt.proto].upper()
 
 def fifo_thread():
+    global updateFlag
     while(True):
         with open(FIFO_PATH) as fifo:
             fifo.read() 
         updateFlag = 1
+
+def create_thread():
+    subprocess.call("./RunFifoScript.sh")
 
 
 ## Documentation of FIRE
@@ -44,7 +49,8 @@ class Fire(object):
     def __init__(self,rules_file) -> None:
         self.logger = Logger("../logs/events.log")
         self.rules_file = rules_file
-        subprocess.call("./RunFifoScript.sh")
+        Thread(target=create_thread).start()
+        time.sleep(5)
         Thread(target=fifo_thread).start()
 
 
@@ -65,6 +71,7 @@ class Fire(object):
     # @param self The object pointer
     # @param pkt Packet recieved from netfilter queue
     def analyze_tcp_ip(self, pkt):
+        global updateFlag
         if updateFlag == 1:
             self.update_rules()
             updateFlag = 0
