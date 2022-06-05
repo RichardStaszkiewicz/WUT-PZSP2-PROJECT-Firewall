@@ -1,5 +1,7 @@
 #!/bin/bash
-gcc makeFifo.c -o makeFifo
-./makeFifo
-chmod 777 dataFlow
+FILE=/dataFlow
+if [ ! -p dataFlow ]; then
+    mkfifo dataFlow
+    chmod 777 dataFlow
+fi
 echo "" > dataFlow
