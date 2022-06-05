@@ -2,57 +2,93 @@
     "rules": [
         {
             "id": 1,
+            "is_active":"true",
             "name": "Accept All",
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
             "Command": "Device Read (Batch)",
-            "expected_value": "x"
+            "Head Device": "Any",
+            "Number of devices": "Any",
+            "Comparison": "MAX"
         },
         {
             "id": 2,
-            "name": "Accept All",
+            "is_active": "true",
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
             "Command": "Device Write (Batch)",
-            "expected_value": "x"
+            "Head Device": "Any",
+            "Number of devices": "Any",
+            "Comparison": "MAX"
         },
         {
             "id": 3,
-            "name": "Accept All",
+            "is_active": "true",
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
             "Command": "Device Read Random",
-            "expected_value": "x"
+            "Word access points": 1,
+            "Double word access points": 1,
+            "Device number": "Any",
+            "Device code": "Any"
         },
         {
             "id": 4,
-            "name": "Accept All",
+            "is_active": "true",
             "profile": 0,
             "direction": "IN",
             "protocol": "SLMP",
             "Command": "Device Write Random",
-            "expected_value": "x"
+            "Bit access points": "x",
+            "Device code": "Any",
+            "Device number": "Any",
+            "Action": "SET"
         },
         {
-            "id": 11,
-            "name": "Allow all writes on register 9",
+            "id": 5,
+            "is_active": "true",
+            "name": "Accept MODBUS TCP from 127.0.0.1 to 127.0.0.1",
+            "profile": 0,
+            "direction": "IN",
+            "protocol": "TCP",
+            "source address": "127.0.0.1",
+            "destination address": "127.0.0.1",
+            "sport": "ANY",
+            "dport": "5020"
+        },
+        {
+            "id": 6,
+            "is_active": "true",
+            "name": "Accept MODBUS TCP from 127.0.0.1to 127.0.0.1",
+            "profile": 0,
+            "direction": "IN",
+            "protocol": "TCP",
+            "source address": "127.0.0.1",
+            "destination address": "127.0.0.1",
+            "sport": "5020",
+            "dport": "ANY"
+        },
+        {
+            "id": 100,
+            "is_active": "true",
+            "name": "Pozwól na pisanie do wszystkich dowolnego holding register",
             "direction": "IN",
             "protocol": "MODBUS",
-            "Command": "Write Register",
-            "Register": "9"
+            "command": "Write Single Register",
+            "output_address": "ANY"
         },
         {
             "id": 101,
+            "is_active": "true",
             "name": "Wszystkie multiple read readujące mniej niż 100",
             "direction": "IN",
             "protocol": "MODBUS",
-            "Command": "Device Read Mutiple Registers",
-            "Start Register": "Any",
-            "Quantity": 100,
-            "Comparison": "MAX"
+            "command": "Read Holding Registers",
+            "min_value": "ANY",
+            "max_value": "99"
         }
     ]
 }

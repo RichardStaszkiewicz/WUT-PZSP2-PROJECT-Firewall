@@ -14,7 +14,7 @@ from Rules import Rule
 import json
 from collections import namedtuple
 
-## MyEncoder is a class needed to pasre all the data into the json file
+## MyEncoder is a class needed to parse all the data into the json file
 
 class MyEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -35,7 +35,7 @@ class Conf:
         self._list_of_rules = []
         self._id_next = 0
 
-        with open('Conf_tmp.json', 'r') as file:
+        with open('rules.json', 'r') as file:
             data = file.read().replace('\n', '')
 
         all_rules = list(json.loads(data, object_hook=lambda d: namedtuple('X', d.keys())(*d.values())))
@@ -63,7 +63,7 @@ class Conf:
     # @param Json data in json format
 
     def write_config_file(self, Json) -> None:
-        with open('Conf_tmp.json', 'w') as file:
+        with open('Conf.json', 'w') as file:
             file.write(Json)
 
     ## Method adding one rule into the config with an unique id

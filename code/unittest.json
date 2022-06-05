@@ -1,0 +1,1 @@
+{"rules": [{"id": 101, "name": "Wszystkie multiple read readuj\u0105ce mniej ni\u017c 100", "direction": "IN", "protocol": "MODBUS", "Command": "Device Read Mutiple Registers", "Start Register": "Any", "Quantity": 100, "Comparison": "MAX"}]}
