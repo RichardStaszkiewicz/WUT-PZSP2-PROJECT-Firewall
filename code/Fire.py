@@ -26,6 +26,7 @@ def ip_proto(ip_pkt):
     proto_field = ip_pkt.get_field('proto')
     return proto_field.i2s[ip_pkt.proto].upper()
 
+## Thread responsible for incoming data reciving
 def fifo_thread():
     global updateFlag
     while(True):
@@ -33,6 +34,7 @@ def fifo_thread():
             fifo.read() 
         updateFlag = 1
 
+## Thread responsible for initial data gathering
 def create_thread():
     subprocess.call("./RunFifoScript.sh")
 
@@ -46,7 +48,8 @@ class Fire(object):
 
     ## Constructor
     # @param self The object pointer
-    def __init__(self,rules_file) -> None:
+
+    def __init__(self, rules_file) -> None:
         self.logger = Logger("../logs/events.log")
         self.rules_file = rules_file
         Thread(target=create_thread).start()
