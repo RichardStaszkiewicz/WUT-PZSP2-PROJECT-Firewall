@@ -27,7 +27,7 @@ def update_rules():
 
         if request.args.get('action') == 'save':
             rules_data = request.get_json()
-            with open('code/Conf.json', 'w') as file:
+            with open('Conf.json', 'w') as file:
                 json.dump(rules_data, file) 
             return 'ok'
 
