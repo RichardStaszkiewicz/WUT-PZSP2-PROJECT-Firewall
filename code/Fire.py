@@ -12,15 +12,25 @@ import logging
 from netfilterqueue import NetfilterQueue
 from scapy.layers.inet import IP, TCP, UDP
 from Logger import Logger
+from threading import Thread
+import subprocess
 import json
 
 MODBUS_SERVER_PORT = 5020
 SLMP_SERVER_PORT = 1280
-
+FIFO_PATH = "./dataFlow"
+updateFlag = 0
 
 def ip_proto(ip_pkt):
     proto_field = ip_pkt.get_field('proto')
     return proto_field.i2s[ip_pkt.proto].upper()
+
+def fifo_thread():
+    while(True):
+        with open(FIFO_PATH) as fifo:
+            fifo.read() 
+        updateFlag = 1
+
 
 ## Documentation of FIRE
 #
@@ -34,7 +44,9 @@ class Fire(object):
     def __init__(self,rules_file) -> None:
         self.logger = Logger("../logs/events.log")
         self.rules_file = rules_file
-        self.update_rules()
+        subprocess.call("./RunFifoScript.sh")
+        Thread(target=fifo_thread).start()
+
 
     ## Method reading rules from config file
     # @param self The object pointer
@@ -53,6 +65,9 @@ class Fire(object):
     # @param self The object pointer
     # @param pkt Packet recieved from netfilter queue
     def analyze_tcp_ip(self, pkt):
+        if updateFlag == 1:
+            self.update_rules()
+            updateFlag = 0
         ip_pkt = IP(pkt.get_payload())
         if ip_pkt.haslayer(TCP):
             tran_pkt = ip_pkt[TCP]
