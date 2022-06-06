@@ -1,6 +1,7 @@
 import json
 from flask import Flask, jsonify, render_template, request
 import os
+import subprocess
 
 # mocks
 from rules import get_rules
@@ -27,20 +28,22 @@ def update_rules():
 
         if request.args.get('action') == 'save':
             rules_data = request.get_json()
+
             with open("rules.json", 'w') as file:
-                data = json.load(file)
+                data = {}
                 data["rules"] = rules_data
                 json.dump(data, file) 
 
-            os.system("../RunFifoScript.sh")
+            subprocess.call("./RunFifoScript.sh")
             return 'ok'
 
-        rule_data = request.get_json()["rules"]
+        rule_data = request.get_json()
+
         for i in range(len(rules)):
             if rules[i]['id'] == rule_data['id']:
                 rules[i] = rule_data
                 return 'ok'
-
+        
         rules.append(rule_data)
         return 'ok'
 

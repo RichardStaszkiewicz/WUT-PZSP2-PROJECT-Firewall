@@ -2,7 +2,7 @@
 FROM python:3.8-alpine
 
 # copy the requirements file into the image
-COPY ./requirements.txt /app/requirements.txt
+COPY ./flask_docker/requirements.txt /app/requirements.txt
 
 # switch working directory
 WORKDIR /app
@@ -16,4 +16,4 @@ COPY . /app
 # configure the container to run in an executed manner
 ENTRYPOINT [ "python" ]
 
-CMD ["view.py" ]
+CMD ["-u", "flask_docker/view.py" ]
