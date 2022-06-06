@@ -58,7 +58,7 @@ class TestFire(unittest.TestCase):
                     "protocol": "SLMP",
                     "Command": "Read",
                     "Head Device": "ANY",
-                    
+
                 }
             ]
         }
@@ -66,13 +66,13 @@ class TestFire(unittest.TestCase):
 
 
     def test_single_rule(self):
-        
-        with open('unittest.json', 'w') as outfile:
+
+        with open('../data/unittest.json', 'w') as outfile:
             json.dump(self.sample_rule, outfile)
 
-        with open('unittest.json', 'r') as infile:
+        with open('../data/unittest.json', 'r') as infile:
             expected = json.load(infile)
-        fire = Fire.Fire("unittest.json")
+        fire = Fire.Fire("../data/unittest.json")
 
         print(fire.get_rules())
         self.assertEqual(fire.get_rules()[0], expected["rules"][0])
@@ -80,10 +80,10 @@ class TestFire(unittest.TestCase):
 
     def test_analyze_modbus_message_accept(self):
         print("MODBUS ACCEPT")
-        with open('unittest.json', 'w') as outfile:
+        with open('../data/unittest.json', 'w') as outfile:
             json.dump(self.sample_modbus_rules, outfile)
 
-        fire = Fire.Fire("unittest.json")
+        fire = Fire.Fire("../data/unittest.json")
 
         transaction_id = [0, 1]
         protocol_identifier = [0, 0]
@@ -100,10 +100,10 @@ class TestFire(unittest.TestCase):
         self.assertFalse(fire.analyze_modbus_message(payload))
 
     def test_analyze_modbus_message_reject(self):
-        with open('unittest.json', 'w') as outfile:
+        with open('../data/unittest.json', 'w') as outfile:
             json.dump(self.sample_modbus_rules, outfile)
 
-        fire = Fire.Fire("unittest.json")
+        fire = Fire.Fire("../data/unittest.json")
 
         transaction_id = [0, 1]
         protocol_identifier = [0, 0]
@@ -121,10 +121,10 @@ class TestFire(unittest.TestCase):
 
 
     def test_analyze_modbus_packet_with_no_message_accept(self):
-        with open('unittest.json', 'w') as outfile:
+        with open('../data/unittest.json', 'w') as outfile:
             json.dump(self.sample_modbus_rules, outfile)
 
-        fire = Fire.Fire("unittest.json")
+        fire = Fire.Fire("../data/unittest.json")
 
         message_frame = []
 
@@ -150,7 +150,7 @@ class TestFire(unittest.TestCase):
             ]
         }
 
-        with open('unittest.json', 'w') as outfile:
+        with open('../data/unittest.json', 'w') as outfile:
             json.dump(tcp_rule, outfile)
 
         attributes = {
@@ -160,7 +160,7 @@ class TestFire(unittest.TestCase):
             "sport": "1234",  # ANY
             "dport": "5020"
         }
-        fire = Fire.Fire("unittest.json")
+        fire = Fire.Fire("../data/unittest.json")
         self.assertFalse(fire.compare_with_rules(attributes))
 
 
@@ -181,7 +181,7 @@ class TestFire(unittest.TestCase):
             ]
         }
 
-        with open('unittest.json', 'w') as outfile:
+        with open('../data/unittest.json', 'w') as outfile:
             json.dump(tcp_rule, outfile)
 
         attributes = {
@@ -191,7 +191,7 @@ class TestFire(unittest.TestCase):
             "sport": "1234",  # ANY
             "dport": "5020"
         }
-        fire = Fire.Fire("unittest.json")
+        fire = Fire.Fire("../data/unittest.json")
         self.assertTrue(fire.compare_with_rules(attributes))
 
 
@@ -212,7 +212,7 @@ class TestFire(unittest.TestCase):
             ]
         }
 
-        with open('unittest.json', 'w') as outfile:
+        with open('../data/unittest.json', 'w') as outfile:
             json.dump(tcp_rule, outfile)
 
         attributes = {
@@ -222,7 +222,7 @@ class TestFire(unittest.TestCase):
             "sport": "1234",  # ANY
             "dport": "5555"   # ANY
         }
-        fire = Fire.Fire("unittest.json")
+        fire = Fire.Fire("../data/unittest.json")
         self.assertFalse(fire.compare_with_rules(attributes))
 
 
@@ -243,7 +243,7 @@ class TestFire(unittest.TestCase):
             ]
         }
 
-        with open('unittest.json', 'w') as outfile:
+        with open('../data/unittest.json', 'w') as outfile:
             json.dump(tcp_rule, outfile)
 
         attributes = {
@@ -253,7 +253,7 @@ class TestFire(unittest.TestCase):
             "sport": "1234",  # ANY
             "dport": "5020"
         }
-        fire = Fire.Fire("unittest.json")
+        fire = Fire.Fire("../data/unittest.json")
         self.assertTrue(fire.compare_with_rules(attributes))
 
 
@@ -272,7 +272,7 @@ class TestFire(unittest.TestCase):
             ]
         }
 
-        with open('unittest.json', 'w') as outfile:
+        with open('../data/unittest.json', 'w') as outfile:
             json.dump(modbus_rule, outfile)
 
         attributes = {
@@ -282,7 +282,7 @@ class TestFire(unittest.TestCase):
             "quantity": "50"
         }
 
-        fire = Fire.Fire("unittest.json")
+        fire = Fire.Fire("../data/unittest.json")
         self.assertFalse(fire.compare_with_rules(attributes))
 
 
@@ -301,7 +301,7 @@ class TestFire(unittest.TestCase):
             ]
         }
 
-        with open('unittest.json', 'w') as outfile:
+        with open('../data/unittest.json', 'w') as outfile:
             json.dump(modbus_rule, outfile)
 
         attributes = {
@@ -311,7 +311,7 @@ class TestFire(unittest.TestCase):
             "quantity": "50"
         }
 
-        fire = Fire.Fire("unittest.json")
+        fire = Fire.Fire("../data/unittest.json")
         self.assertTrue(fire.compare_with_rules(attributes))
 
         def test_compare_modbus_with_rules_reject_2(self):
@@ -329,7 +329,7 @@ class TestFire(unittest.TestCase):
                 ]
             }
 
-            with open('unittest.json', 'w') as outfile:
+            with open('../data/unittest.json', 'w') as outfile:
                 json.dump(modbus_rule, outfile)
 
             attributes = {
@@ -339,7 +339,7 @@ class TestFire(unittest.TestCase):
                 "quantity": "50"
             }
 
-            fire = Fire.Fire("unittest.json")
+            fire = Fire.Fire("../data/unittest.json")
             self.assertTrue(fire.compare_with_rules(attributes))
 
 
