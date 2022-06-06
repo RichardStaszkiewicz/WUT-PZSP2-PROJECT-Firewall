@@ -19,7 +19,8 @@ import time
 
 MODBUS_SERVER_PORT = 5020
 SLMP_SERVER_PORT = 1280
-FIFO_PATH = "./dataFlow"
+FIFO_PATH = "dataFlow"
+RULES_PATH = "data/rules.json"
 updateFlag = 0
 
 def ip_proto(ip_pkt):
@@ -36,7 +37,7 @@ def fifo_thread():
 
 ## Thread responsible for initial data gathering
 def create_thread():
-    subprocess.call("./RunFifoScript.sh")
+    subprocess.call("code/RunFifoScript.sh")
 
 
 ## Documentation of FIRE
@@ -49,9 +50,8 @@ class Fire(object):
     ## Constructor
     # @param self The object pointer
 
-    def __init__(self, rules_file) -> None:
-        self.logger = Logger("../logs/events.log")
-        self.rules_file = rules_file
+    def __init__(self) -> None:
+        self.logger = Logger("logs/events.log")
         Thread(target=create_thread).start()
         time.sleep(5)
         Thread(target=fifo_thread).start()
@@ -61,7 +61,7 @@ class Fire(object):
     # @param self The object pointer
     #
     def update_rules(self) -> None:
-        f = open(self.rules_file)
+        f = open(RULES_PATH)
         data = json.load(f)
         self.rules = data["rules"]
         f.close()
@@ -91,9 +91,9 @@ class Fire(object):
         sport = tran_pkt.sport
         dport = tran_pkt.dport
         attributes = {
+            'protocol': protocol,
             'source_address': ip_pkt.src,
             'destination_address': ip_pkt.dst,
-            'protocol': protocol,
             'source_port': str(sport),
             'destination_port': str(dport)
         }
@@ -126,24 +126,18 @@ class Fire(object):
                 match = True
                 missed_attr_count = 0
                 for attr in attributes:
-                    if attr in rule:
-                        print("ATTRIBUTE", attributes[attr], rule[attr])
-
-                        if rule[attr] != 'ANY':
-                            if attr == "max_value":
-                                print("INSIDE MAX")
-                                match = int(attributes['max_value']) <= int(rule['max_value'])
-                            elif attr == "min_value":
-                                print("INSIDE MIN")
-                                match = int(attributes['min_value']) >= int(rule['min_value'])
-                            else:
-                                match = (rule[attr] == attributes[attr])
-                        if not match:
-                            break
-                    else:
-                        missed_attr_count += 1
-                if missed_attr_count == len(attributes):
-                    match = False
+                    print("ATTRIBUTE", attributes[attr], rule[attr])
+                    if rule[attr] != 'ANY':
+                        if attr == "end_register":
+                            print("INSIDE MAX")
+                            match = int(attributes['end_register']) <= int(rule['end_register'])
+                        elif attr == "start_register":
+                            print("INSIDE MIN")
+                            match = int(attributes['start_register']) >= int(rule['start_register'])
+                        else:
+                            match = (rule[attr] == attributes[attr])
+                    if not match:
+                        break
                 if match:
                     drop = False
                     return drop
@@ -194,16 +188,6 @@ class Fire(object):
     # @param self The object pointer
     # @param payload Data from tcp/udp packet
     def analyze_slmp_message(self, payload):
-
-#    write 55 20 ( wpisz do 54 rejestru wartość 20)                                                                             
-#                                            WRITE               MIN_VALUE              MAX VALUE        
-# \x00\x00\xff\xff\x03\x00\x0e\x00\x04\x00\  [x01\x14]  \x00\x00\  [0x37]  \x00\x00\xa8\    [x01]     \x00\x14\x00'
-
-#    read 0 20 (20 rejestrów zaczynając od 20)    
-#                                                READ             MIN VALUE               MAX VALUE 
-# x00\x00\xff\xff\x03\x00\x0c\x00\x04\x00\   [x01\x04] \x00\x00    [\x00]   \x00\x00\xa8\   [x14]      \x00'
-
-
         function_codes2names = { 
             b'\x01\x04' : 'Read',
             b'\x01\x14' : 'Write',
@@ -228,27 +212,21 @@ class Fire(object):
             no_of_dev_pts = payload[19:21]
 
             
-            max_value = int.from_bytes(payload[19:20], 'little')
-            starting_register = int.from_bytes(payload[15:16], 'little') # ponieważ roboczo plc_write/ plc_read zmienia tylko jeden bajt
+            quantity = int.from_bytes(payload[19:20], 'little')
+            start_register = int.from_bytes(payload[15:16], 'little') # ponieważ roboczo plc_write/ plc_read zmienia tylko jeden bajt
 
 
-            if function_codes2names[command] == "Write":
-                attributes = {
+            attributes = {
                         'protocol': 'SLMP',
                         'command': function_codes2names[command],
                         'subcommand': subcommand_names[subcommand],
-                        'min_value' : starting_register,
-                        'max_value' : starting_register
+                        'start_register' : start_register,       
+                        'end_register' : start_register             
                     }
-            elif function_codes2names[command] == "Read":
-                attributes = {
-                        'protocol': 'SLMP',
-                        'command': function_codes2names[command],
-                        'subcommand': subcommand_names[subcommand],
-                        'min_value' : starting_register,
-                        'max_value' : max_value
-                    }
+            if  function_codes2names[command] == "Read":
+                attributes.update({'end_register' : start_register + quantity})
 
+        
             print(payload,"\n",attributes)
             return self.compare_with_rules(attributes)
         else:
@@ -256,17 +234,6 @@ class Fire(object):
             return drop
         
     
-
-
-
-
-
-
-
-
-
-
-
     ## Method forwarding the accepted message packeges onward to a defended subnet
     # @param self The object pointer
     # @param message The network message fulfiling the firewall requirenments to be send onward
@@ -282,7 +249,7 @@ class Fire(object):
         pkt.drop()
 
 
-fire = Fire("rules.json")
+fire = Fire()
 
 if __name__ == "__main__":
 
@@ -299,8 +266,3 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print('')
     nfqueue.unbind()
-
-
-
-
-
