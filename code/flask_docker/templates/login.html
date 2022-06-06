@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addRuleModal.css') }}">
+  </head>
+  <body>
+    <div class="loginWrapper">
+      <h1>Please login</h1>
+      <form method="post" class="loginForm">
+        <div class="inputWrapper">
+            <label to="username">Username</label>
+            <input label="username" type="text" placeholder="Username" class="input" name="username" value="{{
+              request.form.username }}">
+        </div> 
+        <div class="inputWrapper">
+            <label to="password">Password</label>
+        <input label="password" type="password" placeholder="Password" class="input" name="password" value="{{
+          request.form.password }}">
+        </div>     
+        <button class="loginButton button" type="submit">Login</button>
+      </form>
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+    </div>
+  </body>
+</html>

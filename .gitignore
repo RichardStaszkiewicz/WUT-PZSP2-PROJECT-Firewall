@@ -4,3 +4,5 @@
 *.py[cod]
 *$py.class
 *Conf.json
+/code/dataFlow
+/*events.log
