@@ -1,1 +1,48 @@
-{"rules": [{"destination_address": "127.0.0.1", "destination_port": "1280", "id": 1, "is_active": "true", "name": "Accept incoming TCP with SLMP payload", "protocol": "TCP", "source_address": "127.0.0.1", "source_port": "ANY"}, {"destination_address": "127.0.0.1", "destination_port": "ANY", "id": 2, "is_active": "true", "name": "Accept outgoing TCP with SLMP payload", "protocol": "TCP", "source_address": "127.0.0.1", "source_port": "1280"}, {"command": "Read", "id": 3, "is_active": "true", "max_value": "10", "min_value": "0", "name": "Accept outgoing TCP with SLMP payload", "protocol": "SLMP", "subcommand": "Read from bit dev in 16 point units"}, {"command": "Write", "id": 4, "is_active": "true", "max_value": "10", "min_value": "0", "name": "Accept outgoing TCP with SLMP payload", "protocol": "SLMP", "subcommand": "Read from bit dev in 16 point units"}, {"destination_address": "12", "destination_port": "2", "id": 5, "is_active": "true", "name": "rule", "protocol": "IP/TCP", "source_address": "23121", "source_port": "23"}]}
+{
+    "rules": [
+        {
+            "id": 1,
+            "name": "Accept incoming TCP with SLMP payload",
+            "is_active": "true",
+            "source_address": "127.0.0.1",
+            "destination_address":"127.0.0.1",
+            "protocol": "TCP",
+            "source_port": "ANY",
+            "destination_port": "1280"
+
+        },
+        {
+            "id": 2,
+            "name": "Accept outgoing TCP with SLMP payload",
+            "is_active": "true",
+            "source_address": "127.0.0.1",
+            "destination_address":"127.0.0.1",
+            "protocol": "TCP",
+            "source_port": "1280",
+            "destination_port": "ANY"
+
+
+        },
+        {
+            "id": 3,
+            "name": "Accept outgoing TCP with SLMP payload",
+            "is_active": "true",
+            "protocol": "SLMP",
+            "command": "Read",
+            "subcommand" : "Read from bit dev in 16 point units",
+            "min_value": "0",
+            "max_value" : "10"
+        },
+        {
+            "id": 3,
+            "name": "Accept outgoing TCP with SLMP payload",
+            "is_active": "true",
+            "protocol": "SLMP",
+            "command": "Write",
+            "subcommand" : "Read from bit dev in 16 point units",
+            "min_value": "0",
+            "max_value" : "10"
+        }
+
+    ]
+}
