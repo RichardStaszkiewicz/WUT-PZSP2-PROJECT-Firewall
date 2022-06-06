@@ -38,7 +38,7 @@ def update_rules():
         if request.args.get('action') == 'save':
             rules_data = request.get_json()
 
-            with open("rules.json", 'w') as file:
+            with open("../../data/rules.json", 'w') as file:
                 data = {}
                 data["rules"] = rules_data
                 json.dump(data, file) 
@@ -81,4 +81,4 @@ def login():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    app.run(debug=True, host='0.0.0.0', port=port, ssl_context='adhoc')
