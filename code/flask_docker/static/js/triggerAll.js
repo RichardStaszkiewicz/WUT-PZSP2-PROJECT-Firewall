@@ -28,3 +28,13 @@ const savePush = () => {
     })
     window.location.reload(true);
 }
+
+const fetchLogs = () => {
+    fetch('/getRules?action=fetchLogs', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json',
+        },
+    })
+    window.location.reload(true);
+}
