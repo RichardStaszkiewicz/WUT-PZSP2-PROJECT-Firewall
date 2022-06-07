@@ -10,7 +10,11 @@
 import logging
 
 from netfilterqueue import NetfilterQueue
-from scapy.layers.inet import IP, TCP, UDP
+from scapy.layers.inet import IP, TCP, UDP, ICMP
+from scapy.sendrecv import send, sr1
+# import pdb
+# pdb.set_trace()
+
 from Logger import Logger
 from threading import Thread
 import subprocess
@@ -122,25 +126,25 @@ class Fire(object):
     def compare_with_rules(self, attributes):
         drop = True
         for rule in self.rules:
-            if rule["is_active"] == "true": 
-                match = True
-                missed_attr_count = 0
-                for attr in attributes:
-                    print("ATTRIBUTE", attributes[attr], rule[attr])
-                    if rule[attr] != 'ANY':
-                        if attr == "end_register":
-                            print("INSIDE MAX")
-                            match = int(attributes['end_register']) <= int(rule['end_register'])
-                        elif attr == "start_register":
-                            print("INSIDE MIN")
-                            match = int(attributes['start_register']) >= int(rule['start_register'])
-                        else:
-                            match = (rule[attr] == attributes[attr])
-                    if not match:
-                        break
-                if match:
-                    drop = False
-                    return drop
+            if rule["is_active"] == "true":
+                if set(attributes.keys()).issubset(rule.keys()):
+                    match = True
+                    for attr in attributes:
+                        print("ATTRIBUTE", attributes[attr], rule[attr])
+                        if rule[attr] != 'ANY':
+                            if attr == "end_register":
+                                print("INSIDE MAX")
+                                match = int(attributes['end_register']) <= int(rule['end_register'])
+                            elif attr == "start_register":
+                                print("INSIDE MIN")
+                                match = int(attributes['start_register']) >= int(rule['start_register'])
+                            else:
+                                match = (rule[attr] == attributes[attr])
+                        if not match:
+                            break
+                    if match:
+                        drop = False
+                        return drop
         print(attributes, '\n')
         return drop
 
@@ -158,28 +162,23 @@ class Fire(object):
             '6': 'Write Single Register',
             '15': 'Write Multiple Coils',
             '16': 'Write Multiple Registers',
-            '23': 'Read/Write Multiple registers',
         }
         if len(payload) > 7:
             protocol = 'MODBUS'
             function_code = str(int(payload[7]))
-            if function_code in {'1', '2', '3', '4'}:
-                starting_address = str(int.from_bytes(payload[8:10], 'little'))
-                quantity = str(int.from_bytes(payload[11:13], 'little'))
-                last_address = str(int(starting_address) + int(quantity) - 1)
-                attributes = {
-                    'protocol': protocol,
-                    'command': function_codes2names[function_code],
-                    'min_value': starting_address,
-                    'max_value': last_address
-                }
-            elif function_code in {'5', '6'}:
-                output_address = str(int.from_bytes(payload[8:10], 'little'))
-                attributes = {
-                    'protocol': protocol,
-                    'command': function_codes2names[function_code],
-                    'output_address': output_address,
-                }
+            start_register = str(int.from_bytes(payload[8:10], 'big'))
+            if function_code in {'1', '2', '3', '4', '15', '16'}:
+                quantity = str(int.from_bytes(payload[10:12], 'big'))
+                end_register = str(int(start_register) + int(quantity) - 1)
+            if function_code in {'5', '6'}:
+                end_register = start_register
+            attributes = {
+                'protocol': protocol,
+                'command': function_codes2names[function_code],
+                'start_register': start_register,
+                'end_register': end_register
+            }
+            print(attributes)
             return self.compare_with_rules(attributes)
         else:
             return False
@@ -207,7 +206,7 @@ class Fire(object):
         if len(payload) > 0:
             command = payload[11:13]
             subcommand = payload[13:15]
-            head_dev_no = payload[15:18] # 
+            head_dev_no = payload[15:18]
             dev_code = payload[18:19]
             no_of_dev_pts = payload[19:21]
 
@@ -217,12 +216,12 @@ class Fire(object):
 
 
             attributes = {
-                        'protocol': 'SLMP',
-                        'command': function_codes2names[command],
-                        'subcommand': subcommand_names[subcommand],
-                        'start_register' : start_register,       
-                        'end_register' : start_register             
-                    }
+                'protocol': 'SLMP',
+                'command': function_codes2names[command],
+                'subcommand': subcommand_names[subcommand],
+                'start_register': start_register,
+                'end_register': start_register
+            }
             if  function_codes2names[command] == "Read":
                 attributes.update({'end_register' : start_register + quantity})
 
@@ -247,6 +246,16 @@ class Fire(object):
     def reject_packet(self, pkt, message):
         self.logger.log(message, logging.WARNING)
         pkt.drop()
+        ip_pkt = IP(pkt.get_payload())
+        response_pkt = IP(dst=ip_pkt.src) / ICMP(type=3, code=13)
+        send(response_pkt)
+
+        if ip_pkt.haslayer(TCP):
+            tcp_pkt = ip_pkt[TCP]
+            # fin = IP(dst=ip_pkt.src) / TCP(sport=tcp_pkt.dport, dport=tcp_pkt.sport, flags="FA")
+            # fin_ack = sr1(fin)
+            ack = IP(dst=ip_pkt.src) / TCP(sport=tcp_pkt.dport, dport=tcp_pkt.sport, flags="R", seq=0, ack=1)
+            send(ack)
 
 
 fire = Fire()

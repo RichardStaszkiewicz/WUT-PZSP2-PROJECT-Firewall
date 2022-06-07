@@ -13,14 +13,13 @@ from pymodbus.factory import ClientDecoder
 decoder = ClientDecoder()
 client = ModbusClient('127.0.0.1', port=5020, framer=ModbusSocketFramer)
 
-starting_register = 0
-quantity = 100
+starting_register = 200
+quantity = 10
 try:
-    for i in range(100):
-        client.write_register(i, 15)
+    client.write_registers(starting_register, quantity * [15])
     rr = client.read_holding_registers(starting_register, quantity)
-    for i in range(starting_register, quantity):
-        print(f"Adres rejestru: {i}, wartość rejestru {rr.registers[i]}")
+    for i in range(starting_register, starting_register + quantity):
+        print(f"Adres rejestru: {i}, wartość rejestru {rr.registers[i - starting_register]}")
 except Exception:
     print("Brak dostępu do podanych rejestrów")
 
