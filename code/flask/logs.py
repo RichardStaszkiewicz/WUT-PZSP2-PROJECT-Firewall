@@ -1,6 +1,10 @@
 def get_logs():
+    response = " "
     with open("./logs/events.log", 'r') as log_file:
-        log_string = log_file.read()
-    response = log_string.split("DEBUG")
-
+        line = "a"
+        while(line):
+            line = log_file.readline()
+            line.rstrip()
+            response += line
+    response.replace('\n', '<br />')
     return response

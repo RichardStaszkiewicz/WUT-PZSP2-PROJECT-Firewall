@@ -25,7 +25,7 @@ from scapy.sendrecv import send
 MODBUS_SERVER_PORT = 5020
 SLMP_SERVER_PORT = 1280
 FIFO_PATH = "dataFlow"
-RULES_PATH = "data/rules.json"
+RULES_PATH = "./data/rules.json"
 updateFlag = 0
 
 def ip_proto(ip_pkt):
@@ -42,7 +42,7 @@ def fifo_thread():
 
 ## Thread responsible for initial data gathering
 def create_thread():
-    subprocess.call("code/RunFifoScript.sh")
+    subprocess.call("./code/RunFifoScript.sh")
 
 
 ## Documentation of FIRE
