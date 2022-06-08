@@ -80,8 +80,8 @@ const saveRuleForm = async (ruleId) => {
 
         if(rule.function === "f6") {
             rule['output address'] = document.getElementById(`${ruleId}_output_address`).value;
-            rule['min_value'] = document.getElementById(`${ruleId}_min_value`).value;
-            rule['max_value'] = document.getElementById(`${ruleId}_max_value`).value;
+            rule['start_register'] = document.getElementById(`${ruleId}_start_register`).value;
+            rule['end_register'] = document.getElementById(`${ruleId}_end_register`).value;
         }
 
         if(rule.function === "f23") {
@@ -95,8 +95,8 @@ const saveRuleForm = async (ruleId) => {
     if(ruleProtocol === "SLMP") {
         rule['command'] = document.getElementById(`${ruleId}_rule_command`).value;
         rule["subcommand"] = document.getElementById(`${ruleId}_rule_subcommand`).value;
-        rule['min_value'] = document.getElementById(`${ruleId}_min_value`).value;
-        rule['max_value'] = document.getElementById(`${ruleId}_max_value`).value;
+        rule['start_register'] = document.getElementById(`${ruleId}_start_register`).value;
+        rule['end_register'] = document.getElementById(`${ruleId}_end_register`).value;
     }
 
     fetch('/getRules', {
