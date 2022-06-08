@@ -57,6 +57,7 @@ class Fire(object):
 
     def __init__(self, rules_file) -> None:
         self.rules_file = rules_file
+        self.update_rules()
         self.logger = Logger("logs/events.log")
         Thread(target=create_thread).start()
         time.sleep(5)
