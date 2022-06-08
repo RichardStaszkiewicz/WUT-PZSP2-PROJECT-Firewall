@@ -38,12 +38,12 @@ def update_rules():
         if request.args.get('action') == 'save':
             rules_data = request.get_json()
 
-            with open("../../data/rules.json", 'w') as file:
+            with open("./data/rules.json", 'w') as file:
                 data = {}
                 data["rules"] = rules_data
                 json.dump(data, file) 
 
-            subprocess.call("./RunFifoScript.sh")
+            subprocess.call("./code/RunFifoScript.sh")
             return 'ok'
 
         rule_data = request.get_json()

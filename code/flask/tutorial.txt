@@ -4,18 +4,11 @@ https://blog.logrocket.com/build-deploy-flask-app-using-docker/
 
 WYMAGANIA:
 1. Python >= 3.8
-2. Docker (automatyczna instalacja ze skryptu)
 
 1. Uruchom komendę:
         sh setup_frontend.sh
-uruchomi się plik przeznaczony dla dockera, ale zawiera tez podstawowe pakiety jak Flask czy sam docker
+uruchomi się plik instalujacy podstawowe pakiety
 2.Export ustawien flaska jest domyslnie w setup_frontend.sh, jesli wyjdzie error, to ponizej w "KOMENDY z palca"
-3.Uruchom skrypt run_docker.sh. Kontener się zbuduje i uruchomi
-4.Wyłączanie kontenera:
-        docker container ls
-        docker container stop [CONTAINER_ID]
-5.Ponowne uruchomienie:
-        docker container start [CONTAINER_ID]
 
 
 KOMENDY z palca:
@@ -28,7 +21,6 @@ flask run
 
 ODPOWIEDZIALNOŚĆ PLIKÓW:
 setup_frontend.sh - instalacja podstawowych pakietów
-run_docker.sh -uruchomienia api na dockerze z linux-ALPINE na porcie 5000
 view.py - apka serwująca (API)
 index.html - układ strony / 
 requirements - zainstalowane pakiety potrzebne do uruchomienia
