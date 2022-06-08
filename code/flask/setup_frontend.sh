@@ -15,5 +15,4 @@ export FLASK_ENV=development
 echo "WERSJE ZAINSTALOWANE:"
 echo ""
 echo `flask --version`
-echo `docker --version`
 echo ""
