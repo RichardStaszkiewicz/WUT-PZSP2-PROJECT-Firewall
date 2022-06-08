@@ -1,8 +1,14 @@
 #!/usr/bin/python2
-
+import errno
+import fcntl
+import os
+import select
 from struct import *
 import socket
+from time import sleep, time
+
 import SLMP
+# import pdb; pdb.set_trace()
 
 PLC_SERVER_IP = '127.0.0.1'
 PLC_SERVER_PORT = 1280
@@ -84,7 +90,7 @@ def analyze_received_data(data):
     if command_no == 0x0401:
 	print "Device Read"
 	return analyze_read_command(data[15:])
-	 
+
 
     if command_no == 0x0403:
 	print "Random read"
@@ -99,31 +105,43 @@ def analyze_received_data(data):
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((PLC_SERVER_IP, PLC_SERVER_PORT))
 s.listen(1)
+timeout = 10
+
+# fcntl.fcntl(s, fcntl.F_SETFL, os.O_NONBLOCK)
+
 
 while 1:
     conn, addr = s.accept()
-
+    conn.setblocking(0)
     print "New connection"
 
+    connection_time = time()
     while 1:
-	data = conn.recv(BUFFER_SIZE)
-	if not data: 
-	    break
-	
-	print "PLC server received %d bytes" % len(data)
-	result = analyze_received_data(data)
-	
-	response = SLMP.prepare_response_message(result);
-	print "Response"
-	print binary_array2string(response)
-	
-	print len(response)
+        try:
+            data = conn.recv(BUFFER_SIZE)
+            if not data:
+                conn.close()
+                break
+            else:
+                print "PLC server received %d bytes" % len(data)
+                result = analyze_received_data(data)
 
-	if len(response) > 0:
-	    conn.send(response)
-	
+                response = SLMP.prepare_response_message(result);
+                print "Response"
+                print binary_array2string(response)
 
-    conn.close()
+                print len(response)
+
+                if len(response) > 0:
+                    conn.send(response)
+                conn.close()
+                break
+        except socket.error:
+            curr_time = time()
+            if curr_time - connection_time > 10:
+                conn.close()
+                break
+
 
 #s.connect((PLC_IP, PLC_PORT))
 #s.send(header)
