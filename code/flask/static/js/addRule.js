@@ -55,8 +55,8 @@ addRuleBtn.onclick = () => {
 
         if(rule.function === "f6") {
             rule['output_address'] = document.getElementById('rule_output_address').value;
-            rule['min_value'] = document.getElementById('rule_min_value').value;
-            rule['max_value'] = document.getElementById('rule_max_value').value;
+            rule['start_register'] = document.getElementById('rule_start_register').value;
+            rule['end_register'] = document.getElementById('rule_end_register').value;
         }
 
         if(rule.function === "f23") {
@@ -70,8 +70,8 @@ addRuleBtn.onclick = () => {
     if(ruleProtocol === "SLMP") {
         rule['command'] = document.getElementById('rule_command').value;
         rule["subcommand"] = document.getElementById('rule_subcommand').value;
-        rule['min_value'] = document.getElementById('rule_min_value').value;
-        rule['max_value'] = document.getElementById('rule_max_value').value;
+        rule['start_register'] = document.getElementById('rule_start_register').value;
+        rule['end_register'] = document.getElementById('rule_end_register').value;
     }
 
     RULES.push(rule);
