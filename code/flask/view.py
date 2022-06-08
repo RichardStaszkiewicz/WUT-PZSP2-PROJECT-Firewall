@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 RULES = get_rules()
 LOGS = get_logs()
-IS_LOGIN = False
+IS_LOGIN = True
 USERNAME = 'admin'
 PASSWORD = 'admin'
 
@@ -23,12 +23,12 @@ def update_rules():
 
         if request.args.get('action') == 'disableAll':
             for rule in rules:
-                rule['is_active'] = False
+                rule['is_active'] = 'false'
             return 'ok'
 
         if request.args.get('action') == 'enableAll':
             for rule in rules:
-                rule['is_active'] = True
+                rule['is_active'] = 'true'
             return 'ok'
 
         if request.args.get('action') == "fetchLogs":
@@ -37,12 +37,13 @@ def update_rules():
 
         if request.args.get('action') == 'save':
             rules_data = request.get_json()
+            data = {}
+            data["rules"] = rules_data
 
             with open("./data/rules.json", 'w') as file:
-                data = {}
-                data["rules"] = rules_data
-                json.dump(data, file) 
+                json.dump(data, file, indent=2)
 
+            #TODO sleep
             subprocess.call("./code/RunFifoScript.sh")
             return 'ok'
 

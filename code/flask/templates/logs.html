@@ -1,10 +1,6 @@
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/rules.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/logs.css') }}">
 {% endblock %}
 {% block logs %}
-    {% for log in logs %}
-        <li class="log">
-            {{ log }}
-        </li>
-    {% endfor %}
+    {{logs}}
 {% endblock %}

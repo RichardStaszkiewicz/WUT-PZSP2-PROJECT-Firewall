@@ -49,7 +49,7 @@ const triggerFunctionField = (fieldId, id) => {
 const saveRuleForm = async (ruleId) => {
     const ruleName = document.getElementById(`${ruleId}_name`).value;
     const ruleProtocol = document.getElementById(`${ruleId}_protocol`).value;
-    const ruleIsActive = document.getElementById(`${ruleId}_isActive`).value == 'True';
+    const ruleIsActive = document.getElementById(`${ruleId}_isActive`).value == 'true';
 
     const rule = {
         id: parseInt(ruleId),

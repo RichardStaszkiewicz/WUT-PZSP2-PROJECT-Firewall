@@ -24,12 +24,13 @@ const addRuleBtn = document.getElementById('confirmAddRule');
 addRuleBtn.onclick = () => {
     const ruleName = document.getElementById('rule_name').value;
     const ruleProtocol = document.getElementById('rule_protocol').value;
+    const is_active = document.getElementById('is_active').value;
 
     const rule = {
         id: RULES.length + 1,
         name: ruleName,
+        is_active: is_active,
         protocol: ruleProtocol,
-        is_active: "true",
     }
 
     if(ruleProtocol === "IP/TCP") {
