@@ -2,6 +2,7 @@ import json
 from flask import Flask, jsonify, render_template, request, redirect, url_for
 import os
 import subprocess
+from time import sleep
 
 from rules import get_rules
 from logs import get_logs
@@ -11,7 +12,7 @@ app = Flask(__name__)
 
 RULES = get_rules()
 LOGS = get_logs()
-IS_LOGIN = True
+IS_LOGIN = False
 USERNAME = 'admin'
 PASSWORD = 'admin'
 
@@ -43,7 +44,7 @@ def update_rules():
             with open("./data/rules.json", 'w') as file:
                 json.dump(data, file, indent=2)
 
-            #TODO sleep
+            sleep(2)
             subprocess.call("./code/RunFifoScript.sh")
             return 'ok'
 
