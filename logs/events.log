@@ -1,2742 +1,304 @@
-DEBUG: 2022-06-08 22:54:11,348 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 44937
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x8d38
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36292
-     dport     = pictrography
-     seq       = 268393156
-     ack       = 1130690734
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xdbb1
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733886859, 733728872))]
-
-DEBUG: 2022-06-08 22:54:11,373 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 40
-  id        = 0
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x3cce
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36292
-     seq       = 1130690734
-     ack       = 0
-     dataofs   = 5
-     reserved  = 0
-     flags     = R
-     window    = 0
-     chksum    = 0xe306
-     urgptr    = 0
-     options   = ''
-
-DEBUG: 2022-06-08 22:54:14,944 
+DEBUG: 2022-06-09 11:57:45,862 
 Packet accepted
 ###[ IP ]### 
   version   = 4
   ihl       = 5
   tos       = 0x0
   len       = 60
-  id        = 55755
+  id        = 55956
   flags     = DF
   frag      = 0
-  ttl       = 64
+  ttl       = 63
   proto     = tcp
-  chksum    = 0x62ee
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
+  chksum    = 0xdcd2
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
   \options   \
 ###[ TCP ]### 
-     sport     = 36294
-     dport     = pictrography
-     seq       = 2105428844
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866293
      ack       = 0
      dataofs   = 10
      reserved  = 0
      flags     = S
-     window    = 65495
-     chksum    = 0x80f6
+     window    = 64240
+     chksum    = 0x5025
      urgptr    = 0
-     options   = [('MSS', 65495), ('SAckOK', b''), ('Timestamp', (733890460, 0)), ('NOP', None), ('WScale', 7)]
+     options   = [('MSS', 1460), ('SAckOK', b''), ('Timestamp', (906455183, 0)), ('NOP', None), ('WScale', 7)]
 
-DEBUG: 2022-06-08 22:54:14,946 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 60
-  id        = 0
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x3cba
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36294
-     seq       = 4231893776
-     ack       = 2105428845
-     dataofs   = 10
-     reserved  = 0
-     flags     = SA
-     window    = 65483
-     chksum    = 0x7e45
-     urgptr    = 0
-     options   = [('MSS', 65495), ('SAckOK', b''), ('Timestamp', (733890463, 733890460)), ('NOP', None), ('WScale', 7)]
-
-DEBUG: 2022-06-08 22:54:14,949 
+DEBUG: 2022-06-09 11:57:45,939 
 Packet accepted
 ###[ IP ]### 
   version   = 4
   ihl       = 5
   tos       = 0x0
   len       = 52
-  id        = 55756
+  id        = 55957
   flags     = DF
   frag      = 0
-  ttl       = 64
+  ttl       = 63
   proto     = tcp
-  chksum    = 0x62f5
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
+  chksum    = 0xdcd9
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
   \options   \
 ###[ TCP ]### 
-     sport     = 36294
-     dport     = pictrography
-     seq       = 2105428845
-     ack       = 4231893777
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
      dataofs   = 8
      reserved  = 0
      flags     = A
-     window    = 512
-     chksum    = 0xa4fc
+     window    = 502
+     chksum    = 0x72c0
      urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733890465, 733890463))]
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906455262, 2739930289))]
 
-DEBUG: 2022-06-08 22:54:14,952 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 73
-  id        = 55757
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x62df
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36294
-     dport     = pictrography
-     seq       = 2105428845
-     ack       = 4231893777
-     dataofs   = 8
-     reserved  = 0
-     flags     = PA
-     window    = 512
-     chksum    = 0xa8c0
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733890465, 733890463))]
-###[ Raw ]### 
-        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x00\x00\x00\\xa8\n\x00'
-
-DEBUG: 2022-06-08 22:54:14,954 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 48954
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x7d87
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36294
-     seq       = 4231893777
-     ack       = 2105428866
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xa4e0
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733890470, 733890465))]
-
-DEBUG: 2022-06-08 22:54:14,955 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 83
-  id        = 48955
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x7d67
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36294
-     seq       = 4231893777
-     ack       = 2105428866
-     dataofs   = 8
-     reserved  = 0
-     flags     = PA
-     window    = 512
-     chksum    = 0xd49f
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733890470, 733890465))]
-###[ Raw ]### 
-        load      = '\\xd0\x00\x00\\xff\\xff\x03\x00\x16\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-
-DEBUG: 2022-06-08 22:54:14,956 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 48956
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x7d85
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36294
-     seq       = 4231893808
-     ack       = 2105428866
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xa4c0
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733890470, 733890465))]
-
-DEBUG: 2022-06-08 22:54:14,958 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 55758
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x62f3
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36294
-     dport     = pictrography
-     seq       = 2105428866
-     ack       = 4231893808
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xa4b9
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733890473, 733890470))]
-
-DEBUG: 2022-06-08 22:54:14,959 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 55759
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x62f2
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36294
-     dport     = pictrography
-     seq       = 2105428866
-     ack       = 4231893808
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xa4b8
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733890473, 733890470))]
-
-DEBUG: 2022-06-08 22:54:14,961 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 55760
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x62f1
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36294
-     dport     = pictrography
-     seq       = 2105428867
-     ack       = 4231893809
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xa4b5
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733890475, 733890470))]
-
-DEBUG: 2022-06-08 22:54:14,963 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 48957
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x7d84
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36294
-     seq       = 4231893809
-     ack       = 2105428867
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xa4af
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733890478, 733890473))]
-
-DEBUG: 2022-06-08 22:54:16,030 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 60
-  id        = 61202
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x4da7
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36296
-     dport     = pictrography
-     seq       = 3839473916
-     ack       = 0
-     dataofs   = 10
-     reserved  = 0
-     flags     = S
-     window    = 65495
-     chksum    = 0xa7ca
-     urgptr    = 0
-     options   = [('MSS', 65495), ('SAckOK', b''), ('Timestamp', (733891546, 0)), ('NOP', None), ('WScale', 7)]
-
-DEBUG: 2022-06-08 22:54:16,033 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 60
-  id        = 0
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x3cba
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36296
-     seq       = 2547186349
-     ack       = 3839473917
-     dataofs   = 10
-     reserved  = 0
-     flags     = SA
-     window    = 65483
-     chksum    = 0x9da9
-     urgptr    = 0
-     options   = [('MSS', 65495), ('SAckOK', b''), ('Timestamp', (733891549, 733891546)), ('NOP', None), ('WScale', 7)]
-
-DEBUG: 2022-06-08 22:54:16,036 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 61203
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x4dae
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36296
-     dport     = pictrography
-     seq       = 3839473917
-     ack       = 2547186350
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xc45f
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733891552, 733891549))]
-
-DEBUG: 2022-06-08 22:54:16,039 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 73
-  id        = 61204
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x4d98
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36296
-     dport     = pictrography
-     seq       = 3839473917
-     ack       = 2547186350
-     dataofs   = 8
-     reserved  = 0
-     flags     = PA
-     window    = 512
-     chksum    = 0xc823
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733891552, 733891549))]
-###[ Raw ]### 
-        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x00\x00\x00\\xa8\n\x00'
-
-DEBUG: 2022-06-08 22:54:16,043 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 16278
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xfd2b
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36296
-     seq       = 2547186350
-     ack       = 3839473938
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xc441
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733891558, 733891552))]
-
-DEBUG: 2022-06-08 22:54:16,048 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 83
-  id        = 16279
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xfd0b
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36296
-     seq       = 2547186350
-     ack       = 3839473938
-     dataofs   = 8
-     reserved  = 0
-     flags     = PA
-     window    = 512
-     chksum    = 0xf3ff
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733891559, 733891552))]
-###[ Raw ]### 
-        load      = '\\xd0\x00\x00\\xff\\xff\x03\x00\x16\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
-
-DEBUG: 2022-06-08 22:54:16,050 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 16280
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xfd29
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36296
-     seq       = 2547186381
-     ack       = 3839473938
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xc420
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733891559, 733891552))]
-
-DEBUG: 2022-06-08 22:54:16,053 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 61205
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x4dac
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36296
-     dport     = pictrography
-     seq       = 3839473938
-     ack       = 2547186381
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xc413
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733891566, 733891559))]
-
-DEBUG: 2022-06-08 22:54:16,056 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 61206
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x4dab
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36296
-     dport     = pictrography
-     seq       = 3839473938
-     ack       = 2547186381
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xc411
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733891567, 733891559))]
-
-DEBUG: 2022-06-08 22:54:16,058 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 61207
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x4daa
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36296
-     dport     = pictrography
-     seq       = 3839473939
-     ack       = 2547186382
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xc40e
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733891569, 733891559))]
-
-DEBUG: 2022-06-08 22:54:16,062 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 16281
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xfd28
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36296
-     seq       = 2547186382
-     ack       = 3839473939
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xc401
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733891574, 733891567))]
-
-DEBUG: 2022-06-08 22:54:18,858 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 60
-  id        = 29940
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7c5
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003881
-     ack       = 0
-     dataofs   = 10
-     reserved  = 0
-     flags     = S
-     window    = 65495
-     chksum    = 0xe03d
-     urgptr    = 0
-     options   = [('MSS', 65495), ('SAckOK', b''), ('Timestamp', (733894373, 0)), ('NOP', None), ('WScale', 7)]
-
-DEBUG: 2022-06-08 22:54:18,859 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 60
-  id        = 0
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x3cba
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003646
-     ack       = 3912003882
-     dataofs   = 10
-     reserved  = 0
-     flags     = SA
-     window    = 65483
-     chksum    = 0xcb27
-     urgptr    = 0
-     options   = [('MSS', 65495), ('SAckOK', b''), ('Timestamp', (733894377, 733894373)), ('NOP', None), ('WScale', 7)]
-
-DEBUG: 2022-06-08 22:54:18,860 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29941
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7cc
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003882
-     ack       = 2662003647
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xf1de
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733894378, 733894377))]
-
-WARNING: 2022-06-08 22:54:18,863 
+WARNING: 2022-06-09 11:57:45,945 
 Packet rejected
 ###[ IP ]### 
   version   = 4
   ihl       = 5
   tos       = 0x0
   len       = 73
-  id        = 29942
+  id        = 55958
   flags     = DF
   frag      = 0
-  ttl       = 64
+  ttl       = 63
   proto     = tcp
-  chksum    = 0xc7b6
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
+  chksum    = 0xdcc3
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
   \options   \
 ###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003882
-     ack       = 2662003647
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
      dataofs   = 8
      reserved  = 0
      flags     = PA
-     window    = 512
-     chksum    = 0xf52c
+     window    = 502
+     chksum    = 0x7673
      urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733894378, 733894377))]
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906455263, 2739930289))]
 ###[ Raw ]### 
-        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8{\x00'
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
 
-DEBUG: 2022-06-08 22:54:18,930 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 34491
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xb606
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003903
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xf1be
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733894388, 733894378))]
-
-DEBUG: 2022-06-08 22:54:18,932 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 72
-  id        = 34492
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xb5f1
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003903
-     dataofs   = 8
-     reserved  = 0
-     flags     = PA
-     window    = 512
-     chksum    = 0xcd90
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733894388, 733894378))]
-###[ Raw ]### 
-        load      = '\\xd0\x00\x00\\xff\\xff\x03\x00\x0b\x00\\xffO\x00\\xff\\xff\x03\x00\x01\x04\x00\x00'
-
-DEBUG: 2022-06-08 22:54:18,934 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29943
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7ca
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003903
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xf162
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733894450, 733894388))]
-
-DEBUG: 2022-06-08 22:54:18,937 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29944
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7c9
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003903
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xf161
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733894450, 733894388))]
-
-DEBUG: 2022-06-08 22:54:19,163 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29945
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7c8
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003903
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xf07c
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733894679, 733894388))]
-
-DEBUG: 2022-06-08 22:54:19,402 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29946
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7c7
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003903
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xef8c
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733894919, 733894388))]
-
-DEBUG: 2022-06-08 22:54:19,856 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29947
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7c6
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003903
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xedc7
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733895372, 733894388))]
-
-DEBUG: 2022-06-08 22:54:20,736 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29948
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7c5
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003903
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xea57
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733896252, 733894388))]
-
-DEBUG: 2022-06-08 22:54:22,469 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29949
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7c4
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003903
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xe391
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733897986, 733894388))]
-
-DEBUG: 2022-06-08 22:54:26,102 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29950
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7c3
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003903
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xd563
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733901616, 733894388))]
-
-DEBUG: 2022-06-08 22:54:28,865 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11580
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf86
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xcacb
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733904379, 733894378))]
-
-DEBUG: 2022-06-08 22:54:28,870 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 64
-  id        = 29951
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b6
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 11
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x6fa4
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733904386, 733894388)), ('NOP', None), ('NOP', None), ('SAck', (2662003647, 2662003648))]
-
-DEBUG: 2022-06-08 22:54:28,874 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11581
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf85
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003648
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xcac0
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733904390, 733894378))]
-
-DEBUG: 2022-06-08 22:54:28,879 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29952
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7c1
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xca88
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733904395, 733894388))]
-
-DEBUG: 2022-06-08 22:54:29,078 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11582
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf84
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xc9f6
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733904592, 733894378))]
-
-DEBUG: 2022-06-08 22:54:29,084 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 64
-  id        = 29953
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b4
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 11
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x6ed0
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733904598, 733894388)), ('NOP', None), ('NOP', None), ('SAck', (2662003647, 2662003648))]
-
-DEBUG: 2022-06-08 22:54:29,287 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11583
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf83
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xc924
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733904802, 733894378))]
-
-DEBUG: 2022-06-08 22:54:29,290 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 64
-  id        = 29954
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b3
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 11
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x6e00
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733904806, 733894388)), ('NOP', None), ('NOP', None), ('SAck', (2662003647, 2662003648))]
-
-DEBUG: 2022-06-08 22:54:29,726 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11584
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf82
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xc76f
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733905239, 733894378))]
-
-DEBUG: 2022-06-08 22:54:29,736 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 64
-  id        = 29955
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b2
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 11
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x6c46
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733905248, 733894388)), ('NOP', None), ('NOP', None), ('SAck', (2662003647, 2662003648))]
-
-DEBUG: 2022-06-08 22:54:29,742 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11585
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf81
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003648
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xc75e
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733905256, 733894378))]
-
-DEBUG: 2022-06-08 22:54:29,750 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29956
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7bd
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xc724
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733905263, 733894388))]
-
-DEBUG: 2022-06-08 22:54:30,581 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11586
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf80
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xc41a
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733906092, 733894378))]
-
-DEBUG: 2022-06-08 22:54:30,590 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 64
-  id        = 29957
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b0
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 11
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x68f1
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733906101, 733894388)), ('NOP', None), ('NOP', None), ('SAck', (2662003647, 2662003648))]
-
-DEBUG: 2022-06-08 22:54:30,603 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11587
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf7f
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003648
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xc404
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733906114, 733894378))]
-
-DEBUG: 2022-06-08 22:54:30,610 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29958
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7bb
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xc3c8
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733906123, 733894388))]
-
-DEBUG: 2022-06-08 22:54:32,256 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11588
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf7e
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xbd8a
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733907772, 733894378))]
-
-DEBUG: 2022-06-08 22:54:32,257 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 64
-  id        = 29959
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7ae
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 11
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x6268
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733907774, 733894388)), ('NOP', None), ('NOP', None), ('SAck', (2662003647, 2662003648))]
-
-DEBUG: 2022-06-08 22:54:32,259 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11589
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf7d
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003648
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xbd87
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733907775, 733894378))]
-
-DEBUG: 2022-06-08 22:54:32,263 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29960
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b9
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xbd51
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733907778, 733894388))]
-
-DEBUG: 2022-06-08 22:54:33,137 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29961
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b8
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003903
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xb9e7
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733908652, 733894388))]
-
-DEBUG: 2022-06-08 22:54:33,139 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11590
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf7c
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003648
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xba17
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733908655, 733894378))]
-
-DEBUG: 2022-06-08 22:54:33,144 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29962
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b7
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xb9e1
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733908658, 733894388))]
-
-DEBUG: 2022-06-08 22:54:35,697 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11591
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf7b
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xb01a
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733911212, 733894378))]
-
-DEBUG: 2022-06-08 22:54:35,701 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 64
-  id        = 29963
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7aa
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 11
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x54f6
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733911216, 733894388)), ('NOP', None), ('NOP', None), ('SAck', (2662003647, 2662003648))]
-
-DEBUG: 2022-06-08 22:54:35,703 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11592
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf7a
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003648
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xb012
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733911220, 733894378))]
-
-DEBUG: 2022-06-08 22:54:35,705 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29964
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b5
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xafdd
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733911222, 733894388))]
-
-DEBUG: 2022-06-08 22:54:42,538 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11593
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf79
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0x956f
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733918039, 733894378))]
-
-DEBUG: 2022-06-08 22:54:42,555 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 64
-  id        = 29965
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7a8
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 11
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x3a35
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733918065, 733894388)), ('NOP', None), ('NOP', None), ('SAck', (2662003647, 2662003648))]
-
-DEBUG: 2022-06-08 22:54:42,566 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11594
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf78
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003648
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x9547
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733918079, 733894378))]
-
-DEBUG: 2022-06-08 22:54:42,570 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29966
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b3
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x950e
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733918085, 733894388))]
-
-DEBUG: 2022-06-08 22:54:47,431 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29967
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b2
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003903
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0x8211
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733922946, 733894388))]
-
-DEBUG: 2022-06-08 22:54:47,435 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11595
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf77
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003648
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x8240
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733922950, 733894378))]
-
-DEBUG: 2022-06-08 22:54:47,437 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29968
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7b1
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x8209
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733922954, 733894388))]
-
-DEBUG: 2022-06-08 22:54:55,965 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11596
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf76
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0x60ef
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733931479, 733894378))]
-
-DEBUG: 2022-06-08 22:54:55,972 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 64
-  id        = 29969
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7a4
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 11
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x5c9
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733931485, 733894388)), ('NOP', None), ('NOP', None), ('SAck', (2662003647, 2662003648))]
-
-DEBUG: 2022-06-08 22:54:55,977 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11597
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf75
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003648
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x60e2
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733931492, 733894378))]
-
-DEBUG: 2022-06-08 22:54:55,981 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29970
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7af
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x60ab
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733931496, 733894388))]
-
-DEBUG: 2022-06-08 22:55:08,736 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 60
-  id        = 36298
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xaeef
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36300
-     dport     = pictrography
-     seq       = 1138740509
-     ack       = 0
-     dataofs   = 10
-     reserved  = 0
-     flags     = S
-     window    = 65495
-     chksum    = 0x66bc
-     urgptr    = 0
-     options   = [('MSS', 65495), ('SAckOK', b''), ('Timestamp', (733944253, 0)), ('NOP', None), ('WScale', 7)]
-
-DEBUG: 2022-06-08 22:55:08,737 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 60
-  id        = 0
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x3cba
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36300
-     seq       = 2356352397
-     ack       = 1138740510
-     dataofs   = 10
-     reserved  = 0
-     flags     = SA
-     window    = 65483
-     chksum    = 0x7f39
-     urgptr    = 0
-     options   = [('MSS', 65495), ('SAckOK', b''), ('Timestamp', (733944254, 733944253)), ('NOP', None), ('WScale', 7)]
-
-DEBUG: 2022-06-08 22:55:08,738 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 36299
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xaef6
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36300
-     dport     = pictrography
-     seq       = 1138740510
-     ack       = 2356352398
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xa5f2
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733944256, 733944254))]
-
-DEBUG: 2022-06-08 22:55:08,740 
-Packet accepted
+WARNING: 2022-06-09 11:57:46,241 
+Packet rejected
 ###[ IP ]### 
   version   = 4
   ihl       = 5
   tos       = 0x0
   len       = 73
-  id        = 36300
+  id        = 55959
   flags     = DF
   frag      = 0
-  ttl       = 64
+  ttl       = 63
   proto     = tcp
-  chksum    = 0xaee0
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
+  chksum    = 0xdcc2
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
   \options   \
 ###[ TCP ]### 
-     sport     = 36300
-     dport     = pictrography
-     seq       = 1138740510
-     ack       = 2356352398
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
      dataofs   = 8
      reserved  = 0
      flags     = PA
-     window    = 512
-     chksum    = 0xa9b6
+     window    = 502
+     chksum    = 0x7545
      urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733944256, 733944254))]
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906455565, 2739930289))]
 ###[ Raw ]### 
-        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x00\x00\x00\\xa8\n\x00'
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
 
-DEBUG: 2022-06-08 22:55:08,741 
-Packet accepted
+WARNING: 2022-06-09 11:57:46,529 
+Packet rejected
 ###[ IP ]### 
   version   = 4
   ihl       = 5
   tos       = 0x0
-  len       = 52
-  id        = 1092
+  len       = 73
+  id        = 55960
   flags     = DF
   frag      = 0
-  ttl       = 64
+  ttl       = 63
   proto     = tcp
-  chksum    = 0x387e
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
+  chksum    = 0xdcc1
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
   \options   \
 ###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36300
-     seq       = 2356352398
-     ack       = 1138740531
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xa5d9
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733944258, 733944256))]
-
-DEBUG: 2022-06-08 22:55:08,742 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 83
-  id        = 1093
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x385e
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36300
-     seq       = 2356352398
-     ack       = 1138740531
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
      dataofs   = 8
      reserved  = 0
      flags     = PA
-     window    = 512
-     chksum    = 0xd598
+     window    = 502
+     chksum    = 0x7425
      urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733944258, 733944256))]
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906455853, 2739930289))]
 ###[ Raw ]### 
-        load      = '\\xd0\x00\x00\\xff\\xff\x03\x00\x16\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
 
-DEBUG: 2022-06-08 22:55:08,743 
+WARNING: 2022-06-09 11:57:47,105 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 73
+  id        = 55961
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcc0
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 502
+     chksum    = 0x71e5
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906456429, 2739930289))]
+###[ Raw ]### 
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
+
+WARNING: 2022-06-09 11:57:48,257 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 73
+  id        = 55962
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcbf
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 502
+     chksum    = 0x6d65
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906457581, 2739930289))]
+###[ Raw ]### 
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
+
+WARNING: 2022-06-09 11:57:50,533 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 73
+  id        = 55963
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcbe
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 502
+     chksum    = 0x6485
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906459853, 2739930289))]
+###[ Raw ]### 
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
+
+WARNING: 2022-06-09 11:57:55,141 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 73
+  id        = 55964
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcbd
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 502
+     chksum    = 0x5285
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906464461, 2739930289))]
+###[ Raw ]### 
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
+
+DEBUG: 2022-06-09 11:57:56,079 
 Packet accepted
 ###[ IP ]### 
   version   = 4
   ihl       = 5
   tos       = 0x0
   len       = 52
-  id        = 1094
+  id        = 55965
   flags     = DF
   frag      = 0
-  ttl       = 64
+  ttl       = 63
   proto     = tcp
-  chksum    = 0x387c
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
+  chksum    = 0xdcd1
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
   \options   \
 ###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36300
-     seq       = 2356352429
-     ack       = 1138740531
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866315
+     ack       = 2347159781
      dataofs   = 8
      reserved  = 0
      flags     = FA
-     window    = 512
-     chksum    = 0xa5b9
+     window    = 502
+     chksum    = 0x23fa
      urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733944258, 733944256))]
-
-DEBUG: 2022-06-08 22:55:08,744 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 36301
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xaef4
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36300
-     dport     = pictrography
-     seq       = 1138740531
-     ack       = 2356352429
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xa5b6
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733944260, 733944258))]
-
-DEBUG: 2022-06-08 22:55:08,745 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 36302
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xaef3
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36300
-     dport     = pictrography
-     seq       = 1138740531
-     ack       = 2356352429
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xa5b5
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733944260, 733944258))]
-
-DEBUG: 2022-06-08 22:55:08,747 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 36303
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xaef2
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36300
-     dport     = pictrography
-     seq       = 1138740532
-     ack       = 2356352430
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xa5b3
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733944261, 733944258))]
-
-DEBUG: 2022-06-08 22:55:08,748 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 1095
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0x387b
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36300
-     seq       = 2356352430
-     ack       = 1138740532
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xa5af
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733944263, 733944260))]
-
-DEBUG: 2022-06-08 22:55:16,448 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29971
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7ae
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003903
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0x10b8
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733951963, 733894388))]
-
-DEBUG: 2022-06-08 22:55:16,455 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11598
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf74
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003648
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x10e5
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733951969, 733894378))]
-
-DEBUG: 2022-06-08 22:55:16,464 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29972
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7ad
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x10ac
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733951975, 733894388))]
-
-DEBUG: 2022-06-08 22:55:23,271 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11599
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf73
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003647
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = FA
-     window    = 512
-     chksum    = 0xf643
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733958786, 733894378))]
-
-DEBUG: 2022-06-08 22:55:23,275 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 64
-  id        = 29973
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7a0
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 11
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0x9b1e
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733958791, 733894388)), ('NOP', None), ('NOP', None), ('SAck', (2662003647, 2662003648))]
-
-DEBUG: 2022-06-08 22:55:23,278 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 11600
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xf72
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = pictrography
-     dport     = 36298
-     seq       = 2662003648
-     ack       = 3912003882
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xf63b
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733958794, 733894378))]
-
-DEBUG: 2022-06-08 22:55:23,283 
-Packet accepted
-###[ IP ]### 
-  version   = 4
-  ihl       = 5
-  tos       = 0x0
-  len       = 52
-  id        = 29974
-  flags     = DF
-  frag      = 0
-  ttl       = 64
-  proto     = tcp
-  chksum    = 0xc7ab
-  src       = 127.0.0.1
-  dst       = 127.0.0.1
-  \options   \
-###[ TCP ]### 
-     sport     = 36298
-     dport     = pictrography
-     seq       = 3912003904
-     ack       = 2662003667
-     dataofs   = 8
-     reserved  = 0
-     flags     = A
-     window    = 512
-     chksum    = 0xf604
-     urgptr    = 0
-     options   = [('NOP', None), ('NOP', None), ('Timestamp', (733958798, 733894388))]
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906465400, 2739940294))]
 
