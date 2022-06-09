@@ -121,8 +121,8 @@ class Fire(object):
             elif dport == SLMP_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
                 drop = self.analyze_slmp_message(payload)
-                # if drop:
-                #     self.send_slmp_error(pkt)
+                if drop:
+                    self.send_slmp_error(pkt)
             elif sport == SLMP_SERVER_PORT:
                 drop = False
         if drop:
@@ -285,7 +285,8 @@ class Fire(object):
 
         tran_pkt = ip_pkt[TCP]
         received_payload = bytes(tran_pkt.payload)
-        receive_time = tran_pkt.options[2][1][0]
+        tsval = tran_pkt.options[2][1][0]
+        tsecr = tran_pkt.options[2][1][1]
 
         error_response_hex = 'D0 00 00 FF FF 03 00 0B 00 FF 4F 00 FF FF 03 00 01 04 00 00'
         payload_with_error = bytes.fromhex(error_response_hex)
@@ -302,13 +303,14 @@ class Fire(object):
         ack.src = src_mac #  possibly uncomment in target
         ack.dst = dst_mac #  possibly uncomment in target
 
+        ack[IP].src = ip_pkt.dst
         ack[IP].dst = ip_pkt.src
         ack[IP][TCP].dport = tran_pkt.sport
         ack[IP][TCP].seq = tran_pkt.ack
         ack[IP][TCP].ack = tran_pkt.seq + len(received_payload)
-        ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (int(receive_time) + 10, int(receive_time)))]
+        ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (tsecr + 30, tsval))]
 
-        sendp(ack, iface="Eth0") # iface Eth0 on target
+        sendp(ack, iface="eth0") # iface Eth0 on target
 
         del psh_ack.len
         del psh_ack.chksum
@@ -316,15 +318,16 @@ class Fire(object):
         psh_ack.src = src_mac#  possibly uncomment in target
         psh_ack.dst = dst_mac # getmacbyip(ip_pkt.src) possibly uncomment in target
 
+        psh_ack[IP].src = ip_pkt.dst
         psh_ack[IP].dst = ip_pkt.src
         psh_ack[IP][TCP].dport = tran_pkt.sport
         psh_ack[IP][TCP].seq = tran_pkt.ack
         psh_ack[IP][TCP].ack = tran_pkt.seq + len(received_payload)
-        psh_ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (receive_time + 10, receive_time))]
+        psh_ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (tsecr + 30, tsval))]
         psh_ack[IP][TCP].remove_payload()
         psh_ack[IP][TCP] /= Raw(payload_with_error)
 
-        sendp(psh_ack, iface="Eth0") # iface Eth0 on target
+        sendp(psh_ack, iface="eth0") # iface Eth0 on target
 
 
 fire = Fire(RULES_PATH)
