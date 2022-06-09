@@ -5,7 +5,7 @@
       "destination_port": "ANY",
       "id": 1001,
       "is_active": "true",
-      "name": "Accept TCP traffic from 192.168.2.2 to 192.168.1.2",
+      "name": "Allow all TCP traffic from 192.168.2.2 to 192.168.1.2",
       "protocol": "TCP",
       "source_address": "192.168.2.2",
       "source_port": "ANY"
@@ -15,7 +15,7 @@
       "destination_port": "ANY",
       "id": 1002,
       "is_active": "true",
-      "name": "Accept TCP traffic from 192.168.1.2 to 192.168.2.2",
+      "name": "Allow all TCP traffic from 192.168.1.2 to 192.168.2.2",
       "protocol": "TCP",
       "source_address": "192.168.1.2",
       "source_port": "ANY"
@@ -24,7 +24,7 @@
       "command": "Write Multiple Registers",
       "id": 1003,
       "is_active": "true",
-      "name": "Accept MODBUS TCP writes from 0 to 200 on single registers",
+      "name": "Accept MODBUS TCP writes from 0 to 1000 on single registers",
       "protocol": "MODBUS",
       "start_register": "0",
       "end_register": "1000"
@@ -33,7 +33,7 @@
       "command": "Read Holding Registers",
       "id": 1004,
       "is_active": "true",
-      "name": "Accept MODBUS TCP reads from 0 to 200 on single registers",
+      "name": "Accept MODBUS TCP reads from 205 to 220 on single registers",
       "protocol": "MODBUS",
       "start_register": "205",
       "end_register": "220"
@@ -43,7 +43,7 @@
       "subcommand": "Read from bit dev in 16 point units",
       "id": 2001,
       "is_active": "true",
-      "name": "Allow reading from 0 to 1000",
+      "name": "Allow SLMP reads from 0 to 20 registers",
       "protocol": "SLMP",
       "start_register": "0",
       "end_register": "20"
