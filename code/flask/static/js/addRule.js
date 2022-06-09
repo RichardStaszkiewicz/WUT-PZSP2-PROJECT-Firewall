@@ -37,11 +37,11 @@ addRuleBtn.onclick = () => {
         protocol: ruleProtocol,
     }
 
-    if(ruleProtocol === "IP/TCP") {
-        rule['source_address'] = document.getElementById('IP/TCP_rule_source_address').value;
-        rule['destination_address'] = document.getElementById('IP/TCP_rule_destination_address').value;
-        rule['source_port'] = document.getElementById('IP/TCP_rule_source_port').value;
-        rule['destination_port'] = document.getElementById('IP/TCP_rule_destination_port').value;
+    if(ruleProtocol === "TCP") {
+        rule['source_address'] = document.getElementById('TCP_rule_source_address').value;
+        rule['destination_address'] = document.getElementById('TCP_rule_destination_address').value;
+        rule['source_port'] = document.getElementById('TCP_rule_source_port').value;
+        rule['destination_port'] = document.getElementById('TCP_rule_destination_port').value;
     }
 
     if(ruleProtocol === "MODBUS") {

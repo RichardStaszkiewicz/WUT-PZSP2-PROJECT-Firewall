@@ -27,7 +27,7 @@ const showFormField = (fieldId) => {
 }
 
 const triggerAddProtocolField = (fieldId) => {
-    const protocolsIds = ['add_MODBUS', 'add_IP/TCP', 'add_SLMP']
+    const protocolsIds = ['add_MODBUS', 'add_TCP', 'add_SLMP']
     hideFields(protocolsIds)
     showFormField(`add_${fieldId}`)
 }
@@ -39,7 +39,7 @@ const triggerAddFunctionField = (fieldId) => {
 }
 
 const triggerProtocolField = (fieldId, id) => {
-    const protocolsIds = [`${id}_MODBUS`, `${id}_IP/TCP`, `${id}_SLMP`];
+    const protocolsIds = [`${id}_MODBUS`, `${id}_TCP`, `${id}_SLMP`];
     hideFields(protocolsIds)
     showFormField(`${id}_${fieldId}`);
 }
@@ -69,37 +69,37 @@ const saveRuleForm = async (ruleId) => {
         is_active: ruleIsActive,
     }
 
-    if(ruleProtocol == "IP/TCP") {
-        rule['source address'] = document.getElementById(`${ruleId}IP/TCP_source_address`).value;
-        rule['destination address'] = document.getElementById(`${ruleId}IP/TCP_destination_address`).value;
-        rule['source port'] = document.getElementById(`${ruleId}IP/TCP_source_port`).value;
-        rule['source address'] = document.getElementById(`${ruleId}IP/TCP_destination_port`).value;
+    if(ruleProtocol == "TCP") {
+        rule['source_address'] = document.getElementById(`${ruleId}TCP_source_address`).value;
+        rule['destination_address'] = document.getElementById(`${ruleId}TCP_destination_address`).value;
+        rule['source_port'] = document.getElementById(`${ruleId}TCP_source_port`).value;
+        rule['destination_port'] = document.getElementById(`${ruleId}TCP_destination_port`).value;
     }
 
     if(ruleProtocol == "MODBUS") {
         rule['function'] = document.getElementById(`${ruleId}_function`).value;
 
         if(rule.function == "f1") {
-            rule['starting address'] = document.getElementById(`${ruleId}f1_starting_address`).value;
-            rule['last address'] = document.getElementById(`${ruleId}f1_last_address`).value;
+            rule['start_address'] = document.getElementById(`${ruleId}f1_starting_address`).value;
+            rule['end_address'] = document.getElementById(`${ruleId}f1_last_address`).value;
         }
         
         if(rule.function == "f5") {
-            rule['output address'] = document.getElementById(`${ruleId}f5_output_address`).value;
+            rule['output_address'] = document.getElementById(`${ruleId}f5_output_address`).value;
             rule['value'] = document.getElementById(`${ruleId}f5_value`).value;
         }
 
         if(rule.function == "f6") {
-            rule['output address'] = document.getElementById(`${ruleId}f6_output_address`).value;
+            rule['output_address'] = document.getElementById(`${ruleId}f6_output_address`).value;
             rule['start_register'] = document.getElementById(`${ruleId}f6_start_register`).value;
             rule['end_register'] = document.getElementById(`${ruleId}f6_end_register`).value;
         }
 
         if(rule.function == "f23") {
-            rule['read starting address'] = document.getElementById(`${ruleId}f23_read_starting_address`).value;
-            rule['read last address'] = document.getElementById(`${ruleId}f23_read_last_address`).value;
-            rule['write starting address'] = document.getElementById(`${ruleId}f23_write_starting_address`).value;
-            rule['write last address'] = document.getElementById(`${ruleId}f23_write_last_address`).value;
+            rule['read_starting_address'] = document.getElementById(`${ruleId}f23_read_starting_address`).value;
+            rule['read_last_address'] = document.getElementById(`${ruleId}f23_read_last_address`).value;
+            rule['write_starting_address'] = document.getElementById(`${ruleId}f23_write_starting_address`).value;
+            rule['write_last_address'] = document.getElementById(`${ruleId}f23_write_last_address`).value;
         }
     }
 

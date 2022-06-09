@@ -152,7 +152,7 @@ class Fire(object):
                             else:
                                 match = (rule[attr] == attributes[attr])
                         if not match:
-                            print("ATTRIBUTE", attributes[attr], rule[attr])
+                            print("ATTRIBUTE",attr, attributes[attr], rule[attr], rule)
                             break
                     if match:
                         drop = False

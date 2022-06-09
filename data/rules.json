@@ -1,52 +1,62 @@
 {
   "rules": [
     {
-      "destination_address": "192.168.1.2",
-      "destination_port": "ANY",
+      "destination_address": "dest address",
+      "destination_port": "dest port",
       "id": 1001,
       "is_active": "true",
       "name": "Allow all TCP traffic from 192.168.2.2 to 192.168.1.2",
       "protocol": "TCP",
-      "source_address": "192.168.2.2",
-      "source_port": "ANY"
+      "source_address": "dest port",
+      "source_port": "src port"
     },
     {
-      "destination_address": "192.168.2.2",
+      "destination_address": "ANY",
       "destination_port": "ANY",
       "id": 1002,
       "is_active": "true",
       "name": "Allow all TCP traffic from 192.168.1.2 to 192.168.2.2",
       "protocol": "TCP",
-      "source_address": "192.168.1.2",
+      "source_address": "ANY",
       "source_port": "ANY"
     },
     {
       "command": "Write Multiple Registers",
+      "end_register": "1000",
       "id": 1003,
       "is_active": "true",
       "name": "Accept MODBUS TCP writes from 0 to 1000 on single registers",
       "protocol": "MODBUS",
-      "start_register": "0",
-      "end_register": "1000"
+      "start_register": "0"
     },
     {
       "command": "Read Holding Registers",
+      "end_register": "220",
       "id": 1004,
       "is_active": "true",
       "name": "Accept MODBUS TCP reads from 205 to 220 on single registers",
       "protocol": "MODBUS",
-      "start_register": "205",
-      "end_register": "220"
+      "start_register": "205"
     },
     {
       "command": "Read",
-      "subcommand": "Read from bit dev in 16 point units",
+      "end_register": "20",
       "id": 2001,
       "is_active": "true",
       "name": "Allow SLMP reads from 0 to 20 registers",
       "protocol": "SLMP",
       "start_register": "0",
-      "end_register": "20"
+      "subcommand": "Read from bit dev in 16 point units"
+    },
+    {
+      "command": "Write",
+      "end_register": "20",
+      "id": 6,
+      "is_active": "true",
+      "name": "Test rule 01",
+      "protocol": "SLMP",
+      "start_register": "10",
+      "subcommand": "ANY"
     }
   ]
 }
