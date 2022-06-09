@@ -1,0 +1,304 @@
+DEBUG: 2022-06-09 11:57:45,862 
+Packet accepted
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 60
+  id        = 55956
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcd2
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866293
+     ack       = 0
+     dataofs   = 10
+     reserved  = 0
+     flags     = S
+     window    = 64240
+     chksum    = 0x5025
+     urgptr    = 0
+     options   = [('MSS', 1460), ('SAckOK', b''), ('Timestamp', (906455183, 0)), ('NOP', None), ('WScale', 7)]
+
+DEBUG: 2022-06-09 11:57:45,939 
+Packet accepted
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 52
+  id        = 55957
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcd9
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = A
+     window    = 502
+     chksum    = 0x72c0
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906455262, 2739930289))]
+
+WARNING: 2022-06-09 11:57:45,945 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 73
+  id        = 55958
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcc3
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 502
+     chksum    = 0x7673
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906455263, 2739930289))]
+###[ Raw ]### 
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
+
+WARNING: 2022-06-09 11:57:46,241 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 73
+  id        = 55959
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcc2
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 502
+     chksum    = 0x7545
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906455565, 2739930289))]
+###[ Raw ]### 
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
+
+WARNING: 2022-06-09 11:57:46,529 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 73
+  id        = 55960
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcc1
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 502
+     chksum    = 0x7425
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906455853, 2739930289))]
+###[ Raw ]### 
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
+
+WARNING: 2022-06-09 11:57:47,105 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 73
+  id        = 55961
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcc0
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 502
+     chksum    = 0x71e5
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906456429, 2739930289))]
+###[ Raw ]### 
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
+
+WARNING: 2022-06-09 11:57:48,257 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 73
+  id        = 55962
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcbf
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 502
+     chksum    = 0x6d65
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906457581, 2739930289))]
+###[ Raw ]### 
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
+
+WARNING: 2022-06-09 11:57:50,533 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 73
+  id        = 55963
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcbe
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 502
+     chksum    = 0x6485
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906459853, 2739930289))]
+###[ Raw ]### 
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
+
+WARNING: 2022-06-09 11:57:55,141 
+Packet rejected
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 73
+  id        = 55964
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcbd
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866294
+     ack       = 2347159780
+     dataofs   = 8
+     reserved  = 0
+     flags     = PA
+     window    = 502
+     chksum    = 0x5285
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906464461, 2739930289))]
+###[ Raw ]### 
+        load      = 'P\x00\x00\\xff\\xff\x03\x00\x0c\x00\x04\x00\x01\x04\x00\x00\x05\x00\x00\\xa8\x15\x00'
+
+DEBUG: 2022-06-09 11:57:56,079 
+Packet accepted
+###[ IP ]### 
+  version   = 4
+  ihl       = 5
+  tos       = 0x0
+  len       = 52
+  id        = 55965
+  flags     = DF
+  frag      = 0
+  ttl       = 63
+  proto     = tcp
+  chksum    = 0xdcd1
+  src       = 192.168.2.2
+  dst       = 192.168.1.2
+  \options   \
+###[ TCP ]### 
+     sport     = 54468
+     dport     = 1280
+     seq       = 918866315
+     ack       = 2347159781
+     dataofs   = 8
+     reserved  = 0
+     flags     = FA
+     window    = 502
+     chksum    = 0x23fa
+     urgptr    = 0
+     options   = [('NOP', None), ('NOP', None), ('Timestamp', (906465400, 2739940294))]
+

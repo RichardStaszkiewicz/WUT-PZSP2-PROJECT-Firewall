@@ -121,8 +121,8 @@ class Fire(object):
             elif dport == SLMP_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
                 drop = self.analyze_slmp_message(payload)
-                if drop:
-                    self.send_slmp_error(pkt)
+                # if drop:
+                #     self.send_slmp_error(pkt)
             elif sport == SLMP_SERVER_PORT:
                 drop = False
         if drop:
@@ -141,7 +141,7 @@ class Fire(object):
                 if set(attributes.keys()).issubset(rule.keys()):
                     match = True
                     for attr in attributes:
-                        print("ATTRIBUTE", attributes[attr], rule[attr])
+                        #print("ATTRIBUTE", attributes[attr], rule[attr])
                         if rule[attr] != 'ANY':
                             if attr == "end_register":
                                 print("INSIDE MAX")
@@ -152,6 +152,7 @@ class Fire(object):
                             else:
                                 match = (rule[attr] == attributes[attr])
                         if not match:
+                            print("ATTRIBUTE", attributes[attr], rule[attr])
                             break
                     if match:
                         drop = False
@@ -196,6 +197,7 @@ class Fire(object):
     # @param self The object pointer
     # @param payload Data from tcp/udp packet
     def analyze_slmp_message(self, payload):
+        print('analysinng SLMP')
         function_codes2names = { 
             b'\x01\x04' : 'Read',
             b'\x01\x14' : 'Write',
@@ -278,6 +280,8 @@ class Fire(object):
 
         ack = rdpcap('materials/PCAP/sample_slmp_server_ack.pcap')[0]
         psh_ack = rdpcap('materials/PCAP/sample_slmp_server_psh_ack.pcap')[0]
+        src_mac = "e4:5f:01:2b:66:9a"
+        dst_mac = "8c:73:6e:84:0b:00"
 
         tran_pkt = ip_pkt[TCP]
         received_payload = bytes(tran_pkt.payload)
@@ -295,8 +299,8 @@ class Fire(object):
 
         del ack[IP].chksum
         del ack[IP][TCP].chksum
-        # ack.src = getmacbyip(ip_pkt.dst) possibly uncomment in target
-        # ack.dst = getmacbyip(ip_pkt.src) possibly uncomment in target
+        ack.src = src_mac #  possibly uncomment in target
+        ack.dst = dst_mac #  possibly uncomment in target
 
         ack[IP].dst = ip_pkt.src
         ack[IP][TCP].dport = tran_pkt.sport
@@ -304,13 +308,13 @@ class Fire(object):
         ack[IP][TCP].ack = tran_pkt.seq + len(received_payload)
         ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (int(receive_time) + 10, int(receive_time)))]
 
-        sendp(ack, iface="lo") # iface Eth0 on target
+        sendp(ack, iface="Eth0") # iface Eth0 on target
 
         del psh_ack.len
         del psh_ack.chksum
         del psh_ack[TCP].chksum
-        # psh_ack.src = getmacbyip(ip_pkt.dst) possibly uncomment in target
-        # psh_ack.dst = getmacbyip(ip_pkt.src) possibly uncomment in target
+        psh_ack.src = src_mac#  possibly uncomment in target
+        psh_ack.dst = dst_mac # getmacbyip(ip_pkt.src) possibly uncomment in target
 
         psh_ack[IP].dst = ip_pkt.src
         psh_ack[IP][TCP].dport = tran_pkt.sport
@@ -320,7 +324,7 @@ class Fire(object):
         psh_ack[IP][TCP].remove_payload()
         psh_ack[IP][TCP] /= Raw(payload_with_error)
 
-        sendp(psh_ack, iface="lo") # iface Eth0 on target
+        sendp(psh_ack, iface="Eth0") # iface Eth0 on target
 
 
 fire = Fire(RULES_PATH)

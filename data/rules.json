@@ -1,72 +1,52 @@
 {
   "rules": [
     {
-      "destination_address": "127.0.0.1",
-      "destination_port": "1280",
-      "id": 1,
+      "destination_address": "192.168.1.2",
+      "destination_port": "ANY",
+      "id": 1001,
       "is_active": "true",
-      "name": "Accept incoming TCP with SLMP payload",
+      "name": "Accept TCP traffic from 192.168.2.2 to 192.168.1.2",
       "protocol": "TCP",
-      "source_address": "127.0.0.1",
+      "source_address": "192.168.2.2",
       "source_port": "ANY"
     },
     {
-      "destination_address": "127.0.0.1",
+      "destination_address": "192.168.2.2",
       "destination_port": "ANY",
-      "id": 2,
+      "id": 1002,
       "is_active": "true",
-      "name": "Accept outgoing TCP with SLMP payload",
+      "name": "Accept TCP traffic from 192.168.1.2 to 192.168.2.2",
       "protocol": "TCP",
-      "source_address": "127.0.0.1",
-      "source_port": "1280"
-    },
-    {
-      "command": "Read",
-      "end_register": "10",
-      "id": 3,
-      "is_active": "false",
-      "name": "Accept outgoing TCP with SLMP payload",
-      "protocol": "SLMP",
-      "start_register": "0",
-      "subcommand": "Read from bit dev in 16 point units"
+      "source_address": "192.168.1.2",
+      "source_port": "ANY"
     },
     {
       "command": "Write Multiple Registers",
-      "end_register": "200",
-      "id": 4,
+      "id": 1003,
       "is_active": "true",
       "name": "Accept MODBUS TCP writes from 0 to 200 on single registers",
       "protocol": "MODBUS",
-      "start_register": "25"
+      "start_register": "0",
+      "end_register": "1000"
     },
     {
       "command": "Read Holding Registers",
-      "end_register": "200",
-      "id": 5,
+      "id": 1004,
       "is_active": "true",
-      "name": "Accept MODBUS TCP reads from 0 to 200 on holding registers",
+      "name": "Accept MODBUS TCP reads from 0 to 200 on single registers",
       "protocol": "MODBUS",
-      "start_register": "0"
+      "start_register": "205",
+      "end_register": "220"
     },
     {
-      "destination_address": "127.0.0.1",
-      "destination_port": "5020",
-      "id": 6,
+      "command": "Read",
+      "subcommand": "Read from bit dev in 16 point units",
+      "id": 2001,
       "is_active": "true",
-      "name": "Accept incoming TCP with SLMP payload",
-      "protocol": "TCP",
-      "source_address": "127.0.0.1",
-      "source_port": "ANY"
-    },
-    {
-      "destination_address": "127.0.0.1",
-      "destination_port": "ANY",
-      "id": 7,
-      "is_active": "true",
-      "name": "Accept outgoing TCP with SLMP payload",
-      "protocol": "TCP",
-      "source_address": "127.0.0.1",
-      "source_port": "5020"
+      "name": "Allow reading from 0 to 1000",
+      "protocol": "SLMP",
+      "start_register": "0",
+      "end_register": "20"
     }
   ]
 }
