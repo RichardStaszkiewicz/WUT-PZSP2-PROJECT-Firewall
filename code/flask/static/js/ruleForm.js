@@ -27,7 +27,7 @@ const showFormField = (fieldId) => {
 }
 
 const triggerAddProtocolField = (fieldId) => {
-    const protocolsIds = ['add_MODBUS', 'add_IP/TCP', 'add_SLMP']
+    const protocolsIds = ['add_MODBUS', 'add_TCP', 'add_SLMP']
     hideFields(protocolsIds)
     showFormField(`add_${fieldId}`)
 }
@@ -39,7 +39,7 @@ const triggerAddFunctionField = (fieldId) => {
 }
 
 const triggerProtocolField = (fieldId, id) => {
-    const protocolsIds = [`${id}_MODBUS`, `${id}_IP/TCP`, `${id}_SLMP`];
+    const protocolsIds = [`${id}_MODBUS`, `${id}_TCP`, `${id}_SLMP`];
     hideFields(protocolsIds)
     showFormField(`${id}_${fieldId}`);
 }
@@ -69,11 +69,11 @@ const saveRuleForm = async (ruleId) => {
         is_active: ruleIsActive,
     }
 
-    if(ruleProtocol == "IP/TCP") {
-        rule['source_address'] = document.getElementById(`${ruleId}IP/TCP_source_address`).value;
-        rule['destination_address'] = document.getElementById(`${ruleId}IP/TCP_destination_address`).value;
-        rule['source_port'] = document.getElementById(`${ruleId}IP/TCP_source_port`).value;
-        rule['source_address'] = document.getElementById(`${ruleId}IP/TCP_destination_port`).value;
+    if(ruleProtocol == "TCP") {
+        rule['source_address'] = document.getElementById(`${ruleId}TCP_source_address`).value;
+        rule['destination_address'] = document.getElementById(`${ruleId}TCP_destination_address`).value;
+        rule['source_port'] = document.getElementById(`${ruleId}TCP_source_port`).value;
+        rule['source_address'] = document.getElementById(`${ruleId}TCP_source_address`).value;
     }
 
     if(ruleProtocol == "MODBUS") {
