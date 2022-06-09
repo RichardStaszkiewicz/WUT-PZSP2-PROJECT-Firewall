@@ -18,7 +18,9 @@ from Logger import Logger
 from netfilterqueue import NetfilterQueue
 from scapy.layers.inet import IP, TCP, UDP, ICMP
 from scapy.sendrecv import send
-from scapy.packet import Raw
+from scapy.layers.l2 import Ether, ARP, getmacbyip, STP
+from scapy.packet import Raw, Packet
+
 # import pdb
 # pdb.set_trace()
 from scapy.utils import rdpcap
@@ -96,7 +98,7 @@ class Fire(object):
         elif ip_pkt.haslayer(UDP):
             tran_pkt = ip_pkt[UDP]
         else:
-            self.reject_packet(pkt, '\nPacket rejected: not a TCP nor UDP packet\n')
+            self.reject_packet(pkt, "Not TCP nor UDP package")
             return
 
         protocol = ip_proto(ip_pkt)
@@ -120,6 +122,8 @@ class Fire(object):
             elif dport == SLMP_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
                 drop = self.analyze_slmp_message(payload)
+                if drop:
+                    self.send_slmp_error(pkt)
             elif sport == SLMP_SERVER_PORT:
                 drop = False
         if drop:
@@ -251,20 +255,31 @@ class Fire(object):
     # @param message The network message fulfiling the firewall requirenments to be send onward
     def reject_packet(self, pkt, message):
         self.logger.log(message, logging.WARNING)
-        ip_pkt = IP(pkt.get_payload())
-        # response_pkt = IP(dst=ip_pkt.src) / ICMP(type=3, code=13)
-        # send(response_pkt)
-        tran_pkt = ip_pkt[TCP]
-        payload = bytes(tran_pkt.payload)
-        print(len(payload))
+        pkt.drop()
 
-        ack = IP(src=ip_pkt.dst, dst=ip_pkt.src) / TCP(sport=tran_pkt.dport, dport=tran_pkt.sport, flags='A', seq=1, ack=22)
-        ack = rdpcap('materials/PCAP/sample_slmp_server_ack.pcap')[0][IP]
-        # send(ack)
-        # # rst = IP(src=ip_pkt.dst, dst=ip_pkt.src) / TCP(sport=tran_pkt.dport, dport=tran_pkt.sport, flags='R')
-        # # sr1(rst)
-        # syn = IP(src=ip_pkt.dst, dst=ip_pkt.src) / TCP(sport=tran_pkt.dport, dport=tran_pkt.sport, flags='S')
-        # syn_ack = sr1(syn)
+        ## Method sending error message to slmp client
+        # @param self The object pointer
+    def send_slmp_error(self, pkt):
+        ip_pkt = IP(pkt.get_payload())
+        
+        # arp_request = ARP(op="who-has", psrc=ip_pkt.dst, pdst=ip_pkt.src)
+        # ans = srp(arp_request, timeout=5, iface='lo')[0]
+        # clients = []
+        #
+        # for sent, received in ans:
+        #     # for each response, append ip and mac address to `clients` list
+        #     clients.append({'ip': received.psrc, 'mac': received.hwsrc})
+        ack = rdpcap('materials/PCAP/sample_slmp_server_ack.pcap')[0]
+        psh_ack = rdpcap('materials/PCAP/sample_slmp_server_psh_ack.pcap')[0]
+
+        tran_pkt = ip_pkt[TCP]
+        received_payload = bytes(tran_pkt.payload)
+        receive_time = tran_pkt.options[2][1][0]
+
+        error_response_hex = 'D0 00 00 FF FF 03 00 0B 00 FF 4F 00 FF FF 03 00 01 04 00 00'
+        payload_with_error = bytes.fromhex(error_response_hex)
+
+        
         empty_pkt_to_server = ip_pkt
         empty_pkt_to_server[TCP].remove_payload()
         del empty_pkt_to_server.len
@@ -272,86 +287,42 @@ class Fire(object):
         del empty_pkt_to_server[TCP].chksum
         send(empty_pkt_to_server)
 
-
-        error_response_hex = 'D0 00 00 FF FF 03 00 0B 00 FF 4F 00 FF FF 03 00 01 04 00 00'
-        payload_with_error = bytes.fromhex(error_response_hex)
-
-        ack = rdpcap('materials/PCAP/sample_slmp_server_ack.pcap')[0]
-        psh_ack = rdpcap('materials/PCAP/sample_slmp_server_psh_ack.pcap')[0]
-
-        tran_time = tran_pkt.options[2][1][0]
+        
         del ack[IP].chksum
         del ack[IP][TCP].chksum
+        # ack.src = getmacbyip(ip_pkt.dst)
+        # ack.dst = getmacbyip(ip_pkt.src)
+
         ack[IP].dst = ip_pkt.src
         ack[IP][TCP].dport = tran_pkt.sport
         ack[IP][TCP].seq = tran_pkt.ack
-        ack[IP][TCP].ack = tran_pkt.seq + len(payload)
-        ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (int(tran_time) + 10, int(tran_time)))]
+        ack[IP][TCP].ack = tran_pkt.seq + len(received_payload)
+        ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (int(receive_time) + 10, int(receive_time)))]
 
-        sendp(ack, iface="lo")
 
-        del psh_ack[IP].len
-        del psh_ack[IP].chksum
-        del psh_ack[IP][TCP].chksum
+        sendp(ack, iface="lo") # iface Eth0 on target
+
+        del psh_ack.len
+        del psh_ack.chksum
+        del psh_ack[TCP].chksum
+        # psh_ack.src = getmacbyip(ip_pkt.dst)
+        # psh_ack.dst = getmacbyip(ip_pkt.src)
+
         psh_ack[IP].dst = ip_pkt.src
         psh_ack[IP][TCP].dport = tran_pkt.sport
         psh_ack[IP][TCP].seq = tran_pkt.ack
-        psh_ack[IP][TCP].ack = tran_pkt.seq + len(payload)
-        psh_ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (tran_time + 10, tran_time))]
+        psh_ack[IP][TCP].ack = tran_pkt.seq + len(received_payload)
+        psh_ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (receive_time + 10, receive_time))]
         psh_ack[IP][TCP].remove_payload()
         psh_ack[IP][TCP] /= Raw(payload_with_error)
-        sendp(psh_ack, iface="lo")
-        # time.sleep(1)
-        # client_rst = IP(dst=ip_pkt.src, src=ip_pkt.dst) / TCP(sport=tran_pkt.dport, dport=tran_pkt.sport, flags='R')
-        # sever_rst = IP(dst=ip_pkt.dst, src=ip_pkt.src) / TCP(sport=tran_pkt.sport, dport=tran_pkt.dport, flags='R')
-        # send(client_rst, iface="lo")
-        # send(sever_rst, iface="lo")
-
-
-        # fin_ack_time = tran_pkt.options[2][1][0]
-
-        # fin_ack_too = fin_ack
-        # fin_ack_too[IP][TCP].sport, fin_ack_too[IP][TCP].dport = fin_ack_too[IP][TCP].dport, fin_ack_too[IP][TCP].sport
-        # fin_ack_too[IP][TCP].seq, fin_ack_too[IP][TCP].ack = fin_ack_too[IP][TCP].ack + 1, fin_ack_too[IP][TCP].seq + 1
-        # fin_ack_too[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (fin_ack_too + 10, fin_ack_time))]
-        # sendp(fin_ack_too, iface="lo")
-
-        #
-        # del fin_ack_too[IP].len
-        # del fin_ack_too[IP].chksum
-        # del fin_ack_too[IP][TCP].chksum
-
-        # ack[IP][TCP].seq = fin.ack
-        # ack[IP][TCP].ack = fin.seq + len(payload)
-        # ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (int(tran_time) + 10, int(tran_time)))]
-
-        # payload = bytes(tran_pkt.payload)
-        # error_response_hex = 'D0 00 00 FF FF 03 00 0B 00 FF 4F 00 FF FF 03 00 01 04 00 00'
-        # payload_with_error = bytes.fromhex(error_response_hex)
-        # host = ip_pkt.src
-        # port = tran_pkt.sport  # The same port as used by the server
-        # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # s.bind(('', tran_pkt.dport))
-        # s.connect((host, port))
-        # s.sendall(payload_with_error)
-        # s.close()
-        # response_pkt = IP(src=ip_pkt.dst, dst=ip_pkt.src) / TCP(sport=tran_pkt.dport, dport=tran_pkt.sport, flags='PA') / Raw(payload_with_error)
-        # sr1(response_pkt)
-
-
-# D0 00 00 FF FF 03 00 0B 00 FF 4F 00 FF FF 03 00 01 04 00 00 error response
-
+        sendp(psh_ack, iface="lo") # iface Eth0 on target
 
 fire = Fire(RULES_PATH)
 
 if __name__ == "__main__":
 
-#     # IP Tables configuration: (should work imo)
-#     # iptables -I INPUT -d 192.168.0.0/24 -j NFQUEUE --queue-num 1
-
     nfqueue = NetfilterQueue()
     nfqueue.bind(1, fire.analyze_tcp_ip)
-
 
     try:
         nfqueue.run()
