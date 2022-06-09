@@ -21,19 +21,19 @@
         <div id="{{ rule['id'] }}_IP/TCP" class="ruleFormField">
             <div class="inputWrapper">
                 <label to="source_address">Source Address</label>
-                <input label="source_address" type="text" id="{{ rule['id'] }}_source_address" class="input" value="{{ rule['source_address'] }}">
+                <input label="source_address" type="text" id="{{ rule['id'] }}IP/TCP_source_address" class="input" value="{{ rule['source_address'] }}">
             </div>
             <div class="inputWrapper">
                 <label to="destination_address">Destination Address</label>
-                <input label="destination_address" type="text" id="{{ rule['id'] }}_destination_address" class="input" value="{{ rule['destination_address'] }}">
+                <input label="destination_address" type="text" id="{{ rule['id'] }}IP/TCP_destination_address" class="input" value="{{ rule['destination_address'] }}">
             </div>
             <div class="inputWrapper">
                 <label to="source_port">Source Port</label>
-                <input label="source_port" type="text" id="{{ rule['id'] }}_source_port" class="input" value="{{ rule['source_port'] }}">
+                <input label="source_port" type="text" id="{{ rule['id'] }}IP/TCP_source_port" class="input" value="{{ rule['source_port'] }}">
             </div>
             <div class="inputWrapper">
                 <label to="destination_port">Destination Port</label>
-                <input label="destination_port" type="text" id="{{ rule['id'] }}_destination_port" class="input" value="{{ rule['destination_port'] }}">
+                <input label="destination_port" type="text" id="{{ rule['id'] }}IP/TCP_destination_port" class="input" value="{{ rule['destination_port'] }}">
             </div>
         </div>
         <div id="{{ rule['id'] }}_MODBUS" class="ruleFormField">
@@ -52,82 +52,82 @@
             <div id="{{ rule['id'] }}_f1" class="ruleFormField">
                 <div class="inputWrapper">
                     <label to="starting_address">Starting Address</label>
-                    <input label="starting_address" type="text" id="{{ rule['id'] }}_starting_address" class="input" value="{{ rule['starting_address'] }}">
+                    <input label="starting_address" type="text" id="{{ rule['id'] }}f1_starting_address" class="input" value="{{ rule['starting_address'] }}">
                 </div>
                 <div class="inputWrapper">
                     <label to="last_address">Last Address</label>
-                    <input label="last_address" type="text" id="{{ rule['id'] }}_last_address" class="input" value="{{ rule['last_address'] }}">
+                    <input label="last_address" type="text" id="{{ rule['id'] }}f1_last_address" class="input" value="{{ rule['last_address'] }}">
                 </div>
             </div>
             <div id="{{ rule['id'] }}_f5" class="ruleFormField">
                 <div class="inputWrapper">
                     <label to="output_address">Output Address</label>
-                    <input label="output_address" type="text" id="{{ rule['id'] }}_output_address" class="input" value="{{ rule['output_address'] }}">
+                    <input label="output_address" type="text" id="{{ rule['id'] }}f5_output_address" class="input" value="{{ rule['output_address'] }}">
                 </div>
                 <div class="inputWrapper">
                     <label to="value">Value</label>
-                    <input label="value" type="text" id="{{ rule['id'] }}_value" class="input" value="{{ rule['value'] }}">
+                    <input label="value" type="text" id="{{ rule['id'] }}f5_value" class="input" value="{{ rule['value'] }}">
                 </div>
             </div>
             <div id="{{ rule['id'] }}_f6" class="ruleFormField">
                 <div class="inputWrapper">
                     <label to="output_address">Output Address</label>
-                    <input label="output_address" type="text" id="{{ rule['id'] }}_output_address" class="input" value="{{ rule['output_address'] }}">
+                    <input label="output_address" type="text" id="{{ rule['id'] }}f6_output_address" class="input" value="{{ rule['output_address'] }}">
                 </div>
                 <div class="inputWrapper">
                     <label to="start_register">Start Register</label>
-                    <input label="start_register" type="text" id="{{ rule['id'] }}_start_register" class="input" value="{{ rule['start_register'] }}">
+                    <input label="start_register" type="text" id="{{ rule['id'] }}f6_start_register" class="input" value="{{ rule['start_register'] }}">
                 </div>
                 <div class="inputWrapper">
                     <label to="end_register">End Register</label>
-                    <input label="end_register" type="text" id="{{ rule['id'] }}_end_register" class="input" value="{{ rule['end_register'] }}">
+                    <input label="end_register" type="text" id="{{ rule['id'] }}f6_end_register" class="input" value="{{ rule['end_register'] }}">
                 </div>
             </div>
             <div id="{{ rule['id'] }}_f23" class="ruleFormField">
                 <div class="inputWrapper">
                     <label to="read_starting_address">Read Starting Address</label>
-                    <input label="read_starting_address" type="text" id="{{ rule['id'] }}_read_starting_address" class="input" value="{{ rule['read_starting_address'] }}">
+                    <input label="read_starting_address" type="text" id="{{ rule['id'] }}f23_read_starting_address" class="input" value="{{ rule['read_starting_address'] }}">
                 </div>
                 <div class="inputWrapper">
                     <label to="read_last_address">Read Last Address</label>
-                    <input label="read_last_address" type="text" id="{{ rule['id'] }}_read_last_address" class="input" value="{{ rule['read_last_address'] }}">
+                    <input label="read_last_address" type="text" id="{{ rule['id'] }}f23_read_last_address" class="input" value="{{ rule['read_last_address'] }}">
                 </div>
                 <div class="inputWrapper">
                     <label to="write_starting_address">Write Starting Address</label>
-                    <input label="write_starting_address" type="text" id="{{ rule['id'] }}_write_starting_address" class="input" value="{{ rule['write_starting_address'] }}">
+                    <input label="write_starting_address" type="text" id="{{ rule['id'] }}f23_write_starting_address" class="input" value="{{ rule['write_starting_address'] }}">
                 </div>
                 <div class="inputWrapper">
                     <label to="write_last_address">Read Last Address</label>
-                    <input label="write_last_address" type="text" id="{{ rule['id'] }}_write_last_address" class="input" value="{{ rule['write_last_address'] }}">
+                    <input label="write_last_address" type="text" id="{{ rule['id'] }}f23_write_last_address" class="input" value="{{ rule['write_last_address'] }}">
                 </div>
             </div>
         </div>
         <div id="{{ rule['id'] }}_SLMP" class="ruleFormField">
             <div class="inputWrapper">
                 <label for="command">Command</label>
-                <select name="command" id="{{ rule['id'] }}_rule_command" class="input" selected="{{ rule['command'] }}">
+                <select name="command" id="{{ rule['id'] }}SLMP_rule_command" class="input" selected="{{ rule['command'] }}">
                     <option value="Read">Read</option>
                     <option value="Write">Write</option>
                 </select>
             </div>
             <div class="inputWrapper">
                 <label to="subcommand">Subcommand</label>
-                <input label="subcommand" type="text" id="{{ rule['id'] }}_rule_subcommand" class="input" value="{{ rule['subcommand'] }}">
+                <input label="subcommand" type="text" id="{{ rule['id'] }}SLMP_rule_subcommand" class="input" value="{{ rule['subcommand'] }}">
             </div>
             <div class="inputWrapper">
                 <label to="end_register">End Register</label>
-                <input label="end_register" type="text" id="{{ rule['id'] }}_end_register" class="input" value="{{ rule['end_register'] }}">
+                <input label="end_register" type="text" id="{{ rule['id'] }}SLMP_rule_end_register" class="input" value="{{ rule['end_register'] }}">
             </div>
             <div class="inputWrapper">
                 <label to="start_register">Start Register</label>
-                <input label="start_register" type="text" id="{{ rule['id'] }}_start_register" class="input" value="{{ rule['start_register'] }}">
+                <input label="start_register" type="text" id="{{ rule['id'] }}SLMP_rule_start_register" class="input" value="{{ rule['start_register'] }}">
             </div>
         </div>
         <div class="inputWrapper">
             <label for="isActive">Is Active?</label>
             <select name="isActive" id="{{ rule['id'] }}_isActive" class="input" selected="{{ rule['is_active'] }}">
-                <option value="True">True</option>
-                <option value="False">False</option>
+                <option value="true">True</option>
+                <option value="false">False</option>
             </select>
         </div>
     </div>

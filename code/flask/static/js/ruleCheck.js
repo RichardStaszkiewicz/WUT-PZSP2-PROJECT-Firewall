@@ -1,3 +1,7 @@
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 const getRules = async () => {
     return fetch('/getRules').then((response) => {
         return response.json();
@@ -25,10 +29,6 @@ const updateRule = (rule) => {
         body: JSON.stringify(rule),
     });
 };
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 const triggerCheck = async (eventItemId) => {
     const rules = await getRules();
