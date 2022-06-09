@@ -77,6 +77,7 @@ class Fire(object):
         f = open(self.rules_file)
         data = json.load(f)
         self.rules = data["rules"]
+        print("update rules", self.rules)
         f.close()
     
 
@@ -152,7 +153,7 @@ class Fire(object):
                             else:
                                 match = (rule[attr] == attributes[attr])
                         if not match:
-                            print("ATTRIBUTE",attr, attributes[attr], rule[attr], rule)
+                            print("ATTRIBUTE",attributes[attr], rule[attr])
                             break
                     if match:
                         drop = False
@@ -234,7 +235,7 @@ class Fire(object):
                 'end_register': start_register
             }
             if  function_codes2names[command] == "Read":
-                attributes.update({'end_register' : start_register + quantity})
+                attributes.update({'end_register' : start_register + quantity - 1})
 
         
             print(payload,"\n",attributes)

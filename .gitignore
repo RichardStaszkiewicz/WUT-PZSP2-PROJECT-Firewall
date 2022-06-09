@@ -5,5 +5,5 @@
 *$py.class
 *Conf.json
 /code/dataFlow
-/*events.log
+/logs/*events.log
 .idea
