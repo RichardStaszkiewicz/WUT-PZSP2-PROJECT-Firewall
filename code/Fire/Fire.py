@@ -15,14 +15,13 @@ from threading import Thread
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'Logger'))
 from Logger import Logger
+
 from netfilterqueue import NetfilterQueue
 from scapy.layers.inet import IP, TCP, UDP, ICMP
-from scapy.sendrecv import send
+from scapy.sendrecv import send, sendp
 from scapy.layers.l2 import Ether, ARP, getmacbyip, STP
 from scapy.packet import Raw, Packet
 
-# import pdb
-# pdb.set_trace()
 from scapy.utils import rdpcap
 
 MODBUS_SERVER_PORT = 5020
@@ -257,11 +256,18 @@ class Fire(object):
         self.logger.log(message, logging.WARNING)
         pkt.drop()
 
-        ## Method sending error message to slmp client
-        # @param self The object pointer
+
+    ## Method sending error message to slmp client
+    # @param self The object pointer
     def send_slmp_error(self, pkt):
         ip_pkt = IP(pkt.get_payload())
-        
+
+        # Not tested on target
+        # There are two possible scenarios:
+        #   1. It will be neccessary to resolve MAC addresses of client and server
+        #      (maybe by ARP request like below or by getmacbyip)
+        #   2. Converting packets to 3rd layer will and os routing will be enough
+
         # arp_request = ARP(op="who-has", psrc=ip_pkt.dst, pdst=ip_pkt.src)
         # ans = srp(arp_request, timeout=5, iface='lo')[0]
         # clients = []
@@ -269,6 +275,7 @@ class Fire(object):
         # for sent, received in ans:
         #     # for each response, append ip and mac address to `clients` list
         #     clients.append({'ip': received.psrc, 'mac': received.hwsrc})
+
         ack = rdpcap('materials/PCAP/sample_slmp_server_ack.pcap')[0]
         psh_ack = rdpcap('materials/PCAP/sample_slmp_server_psh_ack.pcap')[0]
 
@@ -279,7 +286,6 @@ class Fire(object):
         error_response_hex = 'D0 00 00 FF FF 03 00 0B 00 FF 4F 00 FF FF 03 00 01 04 00 00'
         payload_with_error = bytes.fromhex(error_response_hex)
 
-        
         empty_pkt_to_server = ip_pkt
         empty_pkt_to_server[TCP].remove_payload()
         del empty_pkt_to_server.len
@@ -287,11 +293,10 @@ class Fire(object):
         del empty_pkt_to_server[TCP].chksum
         send(empty_pkt_to_server)
 
-        
         del ack[IP].chksum
         del ack[IP][TCP].chksum
-        # ack.src = getmacbyip(ip_pkt.dst)
-        # ack.dst = getmacbyip(ip_pkt.src)
+        # ack.src = getmacbyip(ip_pkt.dst) possibly uncomment in target
+        # ack.dst = getmacbyip(ip_pkt.src) possibly uncomment in target
 
         ack[IP].dst = ip_pkt.src
         ack[IP][TCP].dport = tran_pkt.sport
@@ -299,14 +304,13 @@ class Fire(object):
         ack[IP][TCP].ack = tran_pkt.seq + len(received_payload)
         ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (int(receive_time) + 10, int(receive_time)))]
 
-
         sendp(ack, iface="lo") # iface Eth0 on target
 
         del psh_ack.len
         del psh_ack.chksum
         del psh_ack[TCP].chksum
-        # psh_ack.src = getmacbyip(ip_pkt.dst)
-        # psh_ack.dst = getmacbyip(ip_pkt.src)
+        # psh_ack.src = getmacbyip(ip_pkt.dst) possibly uncomment in target
+        # psh_ack.dst = getmacbyip(ip_pkt.src) possibly uncomment in target
 
         psh_ack[IP].dst = ip_pkt.src
         psh_ack[IP][TCP].dport = tran_pkt.sport
@@ -315,7 +319,9 @@ class Fire(object):
         psh_ack[IP][TCP].options = [('NOP', None), ('NOP', None), ('Timestamp', (receive_time + 10, receive_time))]
         psh_ack[IP][TCP].remove_payload()
         psh_ack[IP][TCP] /= Raw(payload_with_error)
+
         sendp(psh_ack, iface="lo") # iface Eth0 on target
+
 
 fire = Fire(RULES_PATH)
 
