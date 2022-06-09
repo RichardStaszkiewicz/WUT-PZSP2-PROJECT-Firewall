@@ -23,12 +23,12 @@ def update_rules():
     if request.method == 'POST':
 
         if request.args.get('action') == 'disableAll':
-            for rule in rules:
+            for rule in RULES:
                 rule['is_active'] = 'false'
             return 'ok'
 
         if request.args.get('action') == 'enableAll':
-            for rule in rules:
+            for rule in RULES:
                 rule['is_active'] = 'true'
             return 'ok'
 
@@ -44,18 +44,16 @@ def update_rules():
             with open("./data/rules.json", 'w') as file:
                 json.dump(data, file, indent=2)
 
-            sleep(2)
+            sleep(1)
             subprocess.call("./code/RunFifoScript.sh")
             return 'ok'
 
-        rule_data = request.get_json()
-
+        modified_rule = request.get_json()
         for i in range(len(RULES)):
-            if RULES[i]['id'] == rule_data['id']:
-                RULES[i] = rule_data
+            if RULES[i]['id'] == modified_rule['id']:
+                RULES[i] = modified_rule
                 return 'ok'
-        
-        RULES.append(rule_data)
+        RULES.append(modified_rule)
         return 'ok'
 
     if request.method == 'GET':
@@ -83,4 +81,4 @@ def login():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(debug=True, host='0.0.0.0', port=port, ssl_context='adhoc')
+    app.run(debug=False, host='0.0.0.0', port=port, ssl_context='adhoc')
