@@ -10,11 +10,11 @@
 from pymodbus.client.sync import ModbusTcpClient as ModbusClient
 from pymodbus.framer.socket_framer import ModbusSocketFramer
 from pymodbus.factory import ClientDecoder
+import sys
 decoder = ClientDecoder()
 client = ModbusClient('127.0.0.1', port=5020, framer=ModbusSocketFramer)
-
-starting_register = 200
-quantity = 10
+starting_register = sys.argv[1] 
+quantity = sys.argv[2]
 try:
     client.write_registers(starting_register, quantity * [15])
     rr = client.read_holding_registers(starting_register, quantity)
