@@ -14,26 +14,26 @@
             <label for="protocol">Protocol</label>
             <select name="protocol" id="{{ rule['id'] }}_protocol" class="input" selected="{{ rule['protocol'] }}" onchange="triggerProtocolField(this.value, `{{ rule['id'] }}`)">
                 <option value="MODBUS">MODBUS</option>
-                <option value="IP/TCP">IP/TCP</option>
+                <option value="TCP">TCP</option>
                 <option value="SLMP">SLMP</option>
             </select>
         </div>
-        <div id="{{ rule['id'] }}_IP/TCP" class="ruleFormField">
+        <div id="{{ rule['id'] }}_TCP" class="ruleFormField">
             <div class="inputWrapper">
                 <label to="source_address">Source Address</label>
-                <input label="source_address" type="text" id="{{ rule['id'] }}IP/TCP_source_address" class="input" value="{{ rule['source_address'] }}">
+                <input label="source_address" type="text" id="{{ rule['id'] }}TCP_source_address" class="input" value="{{ rule['source_address'] }}">
             </div>
             <div class="inputWrapper">
                 <label to="destination_address">Destination Address</label>
-                <input label="destination_address" type="text" id="{{ rule['id'] }}IP/TCP_destination_address" class="input" value="{{ rule['destination_address'] }}">
+                <input label="destination_address" type="text" id="{{ rule['id'] }}TCP_destination_address" class="input" value="{{ rule['destination_address'] }}">
             </div>
             <div class="inputWrapper">
                 <label to="source_port">Source Port</label>
-                <input label="source_port" type="text" id="{{ rule['id'] }}IP/TCP_source_port" class="input" value="{{ rule['source_port'] }}">
+                <input label="source_port" type="text" id="{{ rule['id'] }}TCP_source_port" class="input" value="{{ rule['source_port'] }}">
             </div>
             <div class="inputWrapper">
                 <label to="destination_port">Destination Port</label>
-                <input label="destination_port" type="text" id="{{ rule['id'] }}IP/TCP_destination_port" class="input" value="{{ rule['destination_port'] }}">
+                <input label="destination_port" type="text" id="{{ rule['id'] }}TCP_destination_port" class="input" value="{{ rule['destination_port'] }}">
             </div>
         </div>
         <div id="{{ rule['id'] }}_MODBUS" class="ruleFormField">
