@@ -53,6 +53,12 @@
     border: 1px solid var(--grey-c)
 }
 
+.input:invalid, .input:invalid:required {
+    background-color: rgb(255, 221, 221);
+    border: 1px solid red;
+}
+
+
 .modalButtons {
     justify-content: flex-start;
     border: 3px;

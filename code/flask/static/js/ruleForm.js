@@ -73,15 +73,15 @@ const saveRuleForm = async (ruleId) => {
         rule['source_address'] = document.getElementById(`${ruleId}TCP_source_address`).value;
         rule['destination_address'] = document.getElementById(`${ruleId}TCP_destination_address`).value;
         rule['source_port'] = document.getElementById(`${ruleId}TCP_source_port`).value;
-        rule['source_address'] = document.getElementById(`${ruleId}TCP_source_address`).value;
+        rule['destination_port'] = document.getElementById(`${ruleId}TCP_destination_port`).value;
     }
 
     if(ruleProtocol == "MODBUS") {
         rule['function'] = document.getElementById(`${ruleId}_function`).value;
 
         if(rule.function == "f1") {
-            rule['starting_address'] = document.getElementById(`${ruleId}f1_starting_address`).value;
-            rule['last_address'] = document.getElementById(`${ruleId}f1_last_address`).value;
+            rule['start_address'] = document.getElementById(`${ruleId}f1_starting_address`).value;
+            rule['end_address'] = document.getElementById(`${ruleId}f1_last_address`).value;
         }
         
         if(rule.function == "f5") {
@@ -98,7 +98,7 @@ const saveRuleForm = async (ruleId) => {
         if(rule.function == "f23") {
             rule['read_starting_address'] = document.getElementById(`${ruleId}f23_read_starting_address`).value;
             rule['read_last_address'] = document.getElementById(`${ruleId}f23_read_last_address`).value;
-            rule['write_starting address'] = document.getElementById(`${ruleId}f23_write_starting_address`).value;
+            rule['write_starting_address'] = document.getElementById(`${ruleId}f23_write_starting_address`).value;
             rule['write_last_address'] = document.getElementById(`${ruleId}f23_write_last_address`).value;
         }
     }
