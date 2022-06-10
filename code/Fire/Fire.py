@@ -40,6 +40,7 @@ def fifo_thread():
     while(True):
         with open(FIFO_PATH) as fifo:
             fifo.read()
+        print("Information: Detected change of rules")
         updateFlag = 1
 
 ## Thread responsible for initial data gathering
