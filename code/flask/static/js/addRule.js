@@ -45,29 +45,24 @@ addRuleBtn.onclick = () => {
     }
 
     if(ruleProtocol === "MODBUS") {
-        rule['function'] = document.getElementById('rule_function').value;
+        ruleCommand = document.getElementById('MODBUS_rule_command');
+        const ruleCommandId = ruleCommand.options[ruleCommand.selectedIndex].id;
+        rule['command'] = ruleCommand.value;
 
-        if(rule.function === "f1") {
-            rule['starting_address'] = document.getElementById('f1_rule_starting_address').value;
-            rule['last_address'] = document.getElementById('f1_rule_last_address').value;
+        if(ruleCommandId === "f1") {
+            rule['start_register'] = document.getElementById('f1_rule_start_register').value;
+            rule['end_register'] = document.getElementById('f1_rule_end_register').value;
         }
         
-        if(rule.function === "f5") {
+        if(ruleCommandId === "f5") {
             rule['output_address'] = document.getElementById('f5_rule_output_address').value;
             rule['value'] = document.getElementById('f5_rule_value').value;
         }
 
-        if(rule.function === "f6") {
+        if(ruleCommandId === "f6") {
             rule['output_address'] = document.getElementById('f6_rule_output_address').value;
             rule['start_register'] = document.getElementById('f6_rule_start_register').value;
             rule['end_register'] = document.getElementById('f6_rule_end_register').value;
-        }
-
-        if(rule.function === "f23") {
-            rule['read_starting_address'] = document.getElementById('f23_rule_read_starting_address').value;
-            rule['read_last_address'] = document.getElementById('f23_rule_read_last_address').value;
-            rule['write_starting_address'] = document.getElementById('f23_rule_write_starting_address').value;
-            rule['write_last_address'] = document.getElementById('f23_rule_write_last_address').value;
         }
     }
 

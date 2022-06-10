@@ -39,26 +39,26 @@
                     </div>
                 </div>
                 <div id="add_MODBUS" class="ruleFormField">
-                    <label for="function">Function</label>
-                    <select name="function" id="rule_function" class="input" onchange="triggerAddFunctionField(this.value)">
-                        <option value="f1">Read Coils</option>
-                        <option value="f1">Read Discrete Input</option>
-                        <option value="f1">Read Holding Registers</option>
-                        <option value="f1">Read Input Registers</option>
-                        <option value="f5">Write Single Coil</option>
-                        <option value="f6">Write Single Registers</option>
-                        <option value="f1">Write Multiple Coils</option>
-                        <option value="f1">Write Multiple Registers</option>
-                        <option value="f23">Read/Write Multiple Registers</option>
+                    <label for="command">Command</label>
+                    <select name="command" id="MODBUS_rule_command" class="input" onchange="triggerAddFunctionField(this.value)">
+                        <option id="f1" value="Read Coils">Read Coils</option>
+                        <option id="f1" value="Read Discrete Input">Read Discrete Input</option>
+                        <option id="f1" value="Read Holding Registers">Read Holding Registers</option>
+                        <option id="f1" value="Read Input Registers">Read Input Registers</option>
+                        <option id="f5" value="Write Single Coil">Write Single Coil</option>
+                        <option id="f6" value="Write Single Registers">Write Single Registers</option>
+                        <option id="f1" value="Write Multiple Coils">Write Multiple Coils</option>
+                        <option id="f1" value="Write Multiple Registers">Write Multiple Registers</option>
+                        <option id="f1" value="Read/Write Multiple Registers">Read/Write Multiple Registers</option>
                     </select>
                     <div id="add_f1" class="ruleFormField">
                         <div class="inputWrapper">
-                            <label to="starting_address">Starting Address</label>
-                            <input label="starting_address" type="text" id="f1_rule_starting_address" class="input">
+                            <label to="start_register">Start Register</label>
+                            <input label="start_register" type="text" id="f1_rule_start_register" class="input">
                         </div>
                         <div class="inputWrapper">
-                            <label to="last_address">Last Address</label>
-                            <input label="last_address" type="text" id="f1_rule_last_address" class="input">
+                            <label to="end_register">End Register</label>
+                            <input label="end_register" type="text" id="f1_rule_end_register" class="input">
                         </div>
                     </div>
                     <div id="add_f5" class="ruleFormField">
@@ -77,30 +77,12 @@
                             <input label="output_address" type="text" id="f6_rule_output_address" class="input" >
                         </div>
                         <div class="inputWrapper">
-                            <label to="start_register">Minimum Value</label>
+                            <label to="start_register">Start Register</label>
                             <input label="start_register" type="text" id="f6_rule_start_register" class="input">
                         </div>
                         <div class="inputWrapper">
                             <label to="end_register">End Register</label>
                             <input label="end_register" type="text" id="f6_rule_end_register" class="input">
-                        </div>
-                    </div>
-                    <div id="add_f23" class="ruleFormField">
-                        <div class="inputWrapper">
-                            <label to="read_starting_address">Read Starting Address</label>
-                            <input label="read_starting_address" type="text" id="f23_rule_read_starting_address" class="input">
-                        </div>
-                        <div class="inputWrapper">
-                            <label to="read_last_address">Read Last Address</label>
-                            <input label="read_last_address" type="text" id="f23_rule_read_last_address" class="input">
-                        </div>
-                        <div class="inputWrapper">
-                            <label to="write_starting_address">Write Starting Address</label>
-                            <input label="write_starting_address" type="text" id="f23_rule_write_starting_address" class="input">
-                        </div>
-                        <div class="inputWrapper">
-                            <label to="write_last_address">Read Last Address</label>
-                            <input label="write_last_address" type="text" id="f23_rule_write_last_address" class="input">
                         </div>
                     </div>
                 </div>
@@ -117,12 +99,12 @@
                         <input label="subcommand" type="text" id="SLMP_rule_subcommand" class="input">
                     </div>
                     <div class="inputWrapper">
-                        <label to="end_register">End Register</label>
-                        <input label="end_register" type="text" id="SLMP_rule_end_register" class="input">
-                    </div>
-                    <div class="inputWrapper">
                         <label to="start_register">Start Register</label>
                         <input label="start_register" type="text" id="SLMP_rule_start_register" class="input">
+                    </div>
+                    <div class="inputWrapper">
+                        <label to="end_register">End Register</label>
+                        <input label="end_register" type="text" id="SLMP_rule_end_register" class="input">
                     </div>
                 </div>
             </div>     

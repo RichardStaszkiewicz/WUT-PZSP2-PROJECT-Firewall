@@ -37,26 +37,26 @@
             </div>
         </div>
         <div id="{{ rule['id'] }}_MODBUS" class="ruleFormField">
-            <label for="function">Function</label>
-            <select name="function" id="{{ rule['id'] }}_function" class="input" selected="{{ rule['function'] }}" onchange="triggerFunctionField(this.value, `{{ rule['id'] }}`)">
-                <option value="f1">Read Coils</option>
-                <option value="f1">Read Discrete Input</option>
-                <option value="f1">Read Holding Registers</option>
-                <option value="f1">Read Input Registers</option>
-                <option value="f5">Write Single Coil</option>
-                <option value="f6">Write Single Registers</option>
-                <option value="f1">Write Multiple Coils</option>
-                <option value="f1">Write Multiple Registers</option>
-                <option value="f23">Read/Write Multiple Registers</option>
+            <label for="command">Command</label>
+            <select name="command" id="{{ rule['id'] }}_MODBUS_rule_command" class="input" onchange="triggerFunctionField(`{{ rule['id'] }}`)">
+                <option id="f1" value="Read Coils">Read Coils</option>
+                <option id="f1" value="Read Discrete Input">Read Discrete Input</option>
+                <option id="f1" value="Read Holding Registers">Read Holding Registers</option>
+                <option id="f1" value="Read Input Registers">Read Input Registers</option>
+                <option id="f5" value="Write Single Coil">Write Single Coil</option>
+                <option id="f6" value="Write Single Registers">Write Single Registers</option>
+                <option id="f1" value="Write Multiple Coils">Write Multiple Coils</option>
+                <option id="f1" value="Write Multiple Registers">Write Multiple Registers</option>
+                <option id="f1" value="Read/Write Multiple Registers">Read/Write Multiple Registers</option>
             </select>
             <div id="{{ rule['id'] }}_f1" class="ruleFormField">
                 <div class="inputWrapper">
-                    <label to="starting_address">Starting Address</label>
-                    <input label="starting_address" type="text" id="{{ rule['id'] }}f1_starting_address" class="input" value="{{ rule['starting_address'] }}">
+                    <label to="start_register">Start Register</label>
+                    <input label="start_register" type="text" id="{{ rule['id'] }}f1_start_register" class="input" value="{{ rule['start_register'] }}">
                 </div>
                 <div class="inputWrapper">
-                    <label to="last_address">Last Address</label>
-                    <input label="last_address" type="text" id="{{ rule['id'] }}f1_last_address" class="input" value="{{ rule['last_address'] }}">
+                    <label to="end_register">End Register</label>
+                    <input label="end_register" type="text" id="{{ rule['id'] }}f1_end_register" class="input" value="{{ rule['end_register'] }}">
                 </div>
             </div>
             <div id="{{ rule['id'] }}_f5" class="ruleFormField">
@@ -83,29 +83,11 @@
                     <input label="end_register" type="text" id="{{ rule['id'] }}f6_end_register" class="input" value="{{ rule['end_register'] }}">
                 </div>
             </div>
-            <div id="{{ rule['id'] }}_f23" class="ruleFormField">
-                <div class="inputWrapper">
-                    <label to="read_starting_address">Read Starting Address</label>
-                    <input label="read_starting_address" type="text" id="{{ rule['id'] }}f23_read_starting_address" class="input" value="{{ rule['read_starting_address'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="read_last_address">Read Last Address</label>
-                    <input label="read_last_address" type="text" id="{{ rule['id'] }}f23_read_last_address" class="input" value="{{ rule['read_last_address'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="write_starting_address">Write Starting Address</label>
-                    <input label="write_starting_address" type="text" id="{{ rule['id'] }}f23_write_starting_address" class="input" value="{{ rule['write_starting_address'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="write_last_address">Read Last Address</label>
-                    <input label="write_last_address" type="text" id="{{ rule['id'] }}f23_write_last_address" class="input" value="{{ rule['write_last_address'] }}">
-                </div>
-            </div>
         </div>
         <div id="{{ rule['id'] }}_SLMP" class="ruleFormField">
             <div class="inputWrapper">
                 <label for="command">Command</label>
-                <select name="command" id="{{ rule['id'] }}SLMP_rule_command" class="input" selected="{{ rule['command'] }}">
+                <select name="command" id="{{ rule['id'] }}_SLMP_rule_command" class="input" selected="{{ rule['command'] }}">
                     <option value="Read">Read</option>
                     <option value="Write">Write</option>
                 </select>

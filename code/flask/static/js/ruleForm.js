@@ -32,8 +32,11 @@ const triggerAddProtocolField = (fieldId) => {
     showFormField(`add_${fieldId}`)
 }
 
-const triggerAddFunctionField = (fieldId) => {
-    const functionFieldsIds = ['add_f1', 'add_f5', 'add_f6', 'add_f23']
+const triggerAddFunctionField = () => {
+    const selectedField = document.getElementById(`MODBUS_rule_command`);
+    const fieldId = selectedField.options[selectedField.selectedIndex].id;
+    console.log(fieldId)
+    const functionFieldsIds = ['add_f1', 'add_f5', 'add_f6']
     hideFields(functionFieldsIds)
     showFormField(`add_${fieldId}`)
 }
@@ -44,8 +47,10 @@ const triggerProtocolField = (fieldId, id) => {
     showFormField(`${id}_${fieldId}`);
 }
 
-const triggerFunctionField = (fieldId, id) => {
-    const functionFieldsIds = [`${id}_f1`, `${id}_f5`, `${id}_f6`, `${id}_f23`];
+const triggerFunctionField = (id) => {
+    const selectedField = document.getElementById(`${id}_MODBUS_rule_command`);
+    const fieldId = selectedField.options[selectedField.selectedIndex].id;
+    const functionFieldsIds = [`${id}_f1`, `${id}_f5`, `${id}_f6`];
     hideFields(functionFieldsIds);
     showFormField(`${id}_${fieldId}`)
 }
@@ -53,7 +58,7 @@ const triggerFunctionField = (fieldId, id) => {
 const saveRuleForm = async (ruleId) => {
     const ruleName = document.getElementById(`${ruleId}_name`).value;
     const ruleProtocol = document.getElementById(`${ruleId}_protocol`).value;
-    ruleIsActive = '';
+    var ruleIsActive;
     
     if(document.getElementById(`${ruleId}_isActive`).value == 'true'){
         ruleIsActive = 'true';
@@ -77,34 +82,28 @@ const saveRuleForm = async (ruleId) => {
     }
 
     if(ruleProtocol == "MODBUS") {
-        rule['function'] = document.getElementById(`${ruleId}_function`).value;
+        ruleCommand = document.getElementById(`${ruleId}_MODBUS_rule_command`);
+        rule['command'] = ruleCommand.value;
 
-        if(rule.function == "f1") {
+        if(ruleCommand.id === "f1") {
             rule['start_address'] = document.getElementById(`${ruleId}f1_starting_address`).value;
             rule['end_address'] = document.getElementById(`${ruleId}f1_last_address`).value;
         }
         
-        if(rule.function == "f5") {
+        if(ruleCommand.id == "f5") {
             rule['output_address'] = document.getElementById(`${ruleId}f5_output_address`).value;
             rule['value'] = document.getElementById(`${ruleId}f5_value`).value;
         }
 
-        if(rule.function == "f6") {
+        if(ruleCommand.id == "f6") {
             rule['output_address'] = document.getElementById(`${ruleId}f6_output_address`).value;
             rule['start_register'] = document.getElementById(`${ruleId}f6_start_register`).value;
             rule['end_register'] = document.getElementById(`${ruleId}f6_end_register`).value;
         }
-
-        if(rule.function == "f23") {
-            rule['read_starting_address'] = document.getElementById(`${ruleId}f23_read_starting_address`).value;
-            rule['read_last_address'] = document.getElementById(`${ruleId}f23_read_last_address`).value;
-            rule['write_starting_address'] = document.getElementById(`${ruleId}f23_write_starting_address`).value;
-            rule['write_last_address'] = document.getElementById(`${ruleId}f23_write_last_address`).value;
-        }
     }
 
     if(ruleProtocol == "SLMP") {
-        rule['command'] = document.getElementById(`${ruleId}SLMP_rule_command`).value;
+        rule['command'] = document.getElementById(`${ruleId}_SLMP_rule_command`).value;
         rule['subcommand'] = document.getElementById(`${ruleId}SLMP_rule_subcommand`).value;
         rule['start_register'] = document.getElementById(`${ruleId}SLMP_rule_start_register`).value;
         rule['end_register'] = document.getElementById(`${ruleId}SLMP_rule_end_register`).value;
