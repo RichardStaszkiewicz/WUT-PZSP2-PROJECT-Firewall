@@ -35,7 +35,6 @@ const triggerAddProtocolField = (fieldId) => {
 const triggerAddFunctionField = () => {
     const selectedField = document.getElementById(`MODBUS_rule_command`);
     const fieldId = selectedField.options[selectedField.selectedIndex].id;
-    console.log(fieldId)
     const functionFieldsIds = ['add_f1', 'add_f5', 'add_f6']
     hideFields(functionFieldsIds)
     showFormField(`add_${fieldId}`)
@@ -83,19 +82,20 @@ const saveRuleForm = async (ruleId) => {
 
     if(ruleProtocol == "MODBUS") {
         ruleCommand = document.getElementById(`${ruleId}_MODBUS_rule_command`);
+        const ruleCommandId = ruleCommand.options[ruleCommand.selectedIndex].id;
         rule['command'] = ruleCommand.value;
 
-        if(ruleCommand.id === "f1") {
-            rule['start_address'] = document.getElementById(`${ruleId}f1_starting_address`).value;
-            rule['end_address'] = document.getElementById(`${ruleId}f1_last_address`).value;
+        if(ruleCommandId === "f1") {
+            rule['start_register'] = document.getElementById(`${ruleId}f1_start_register`).value;
+            rule['end_register'] = document.getElementById(`${ruleId}f1_end_register`).value;
         }
         
-        if(ruleCommand.id == "f5") {
+        if(ruleCommandId == "f5") {
             rule['output_address'] = document.getElementById(`${ruleId}f5_output_address`).value;
             rule['value'] = document.getElementById(`${ruleId}f5_value`).value;
         }
 
-        if(ruleCommand.id == "f6") {
+        if(ruleCommandId == "f6") {
             rule['output_address'] = document.getElementById(`${ruleId}f6_output_address`).value;
             rule['start_register'] = document.getElementById(`${ruleId}f6_start_register`).value;
             rule['end_register'] = document.getElementById(`${ruleId}f6_end_register`).value;

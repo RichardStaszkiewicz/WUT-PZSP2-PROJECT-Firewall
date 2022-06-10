@@ -20,15 +20,6 @@
       "start_register": "0"
     },
     {
-      "end_address": "50",
-      "function": "f1",
-      "id": 1004,
-      "is_active": "false",
-      "name": "Accept MODBUS TCP reads from 0 to 100 on single registers",
-      "protocol": "MODBUS",
-      "start_address": "10"
-    },
-    {
       "command": "Read",
       "end_register": "10",
       "id": 2001,

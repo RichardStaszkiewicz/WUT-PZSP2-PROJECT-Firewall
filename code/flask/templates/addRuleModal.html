@@ -15,6 +15,7 @@
                 <div class="inputWrapper">
                     <label for="protocol">Protocol</label>
                     <select name="protocol" id="rule_protocol" class="input" onchange="triggerAddProtocolField(this.value)">
+                        <option disabled selected value> -- select an option -- </option>
                         <option value="MODBUS">MODBUS</option>
                         <option value="TCP">TCP</option>
                         <option value="SLMP">SLMP</option>
@@ -40,7 +41,7 @@
                 </div>
                 <div id="add_MODBUS" class="ruleFormField">
                     <label for="command">Command</label>
-                    <select name="command" id="MODBUS_rule_command" class="input" onchange="triggerAddFunctionField(this.value)">
+                    <select name="command" id="MODBUS_rule_command" class="input" onchange="triggerAddFunctionField()">
                         <option id="f1" value="Read Coils">Read Coils</option>
                         <option id="f1" value="Read Discrete Input">Read Discrete Input</option>
                         <option id="f1" value="Read Holding Registers">Read Holding Registers</option>
