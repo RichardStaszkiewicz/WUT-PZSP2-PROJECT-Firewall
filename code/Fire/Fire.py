@@ -39,7 +39,7 @@ def fifo_thread():
     global updateFlag
     while(True):
         with open(FIFO_PATH) as fifo:
-            fifo.read() 
+            fifo.read()
         updateFlag = 1
 
 ## Thread responsible for initial data gathering
@@ -77,9 +77,9 @@ class Fire(object):
         f = open(self.rules_file)
         data = json.load(f)
         self.rules = data["rules"]
-        print("update rules", self.rules)
+        print("Information: Rules have been updated")
         f.close()
-    
+
 
     def get_rules(self):
         return self.rules
@@ -111,21 +111,27 @@ class Fire(object):
             'source_port': str(sport),
             'destination_port': str(dport)
         }
-        
+
         drop = self.compare_with_rules(attributes)
         if not drop:
             if dport == MODBUS_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
                 drop = self.analyze_modbus_message(payload)
+                if drop:
+                    print("Firewall: MODBUS/TCP Packet dropped - blocked by MODBUS/TCP rules")
             elif sport == MODBUS_SERVER_PORT:
                 drop = False
             elif dport == SLMP_SERVER_PORT:
                 payload = bytes(tran_pkt.payload)
                 drop = self.analyze_slmp_message(payload)
                 if drop:
+                    print("Firewall: SLMP Packet dropped - blocked by SLMP rules")
                     self.send_slmp_error(pkt)
             elif sport == SLMP_SERVER_PORT:
                 drop = False
+        else:
+            print("Firewall: Packet dropped - blocked by TCP rules")
+
         if drop:
             self.reject_packet(pkt, "\nPacket rejected\n" + ip_pkt.show(dump=True))
         else:
@@ -142,18 +148,14 @@ class Fire(object):
                 if set(attributes.keys()).issubset(rule.keys()):
                     match = True
                     for attr in attributes:
-                        #print("ATTRIBUTE", attributes[attr], rule[attr])
                         if rule[attr] != 'ANY':
                             if attr == "end_register":
-                                print("INSIDE MAX")
                                 match = int(attributes['end_register']) <= int(rule['end_register'])
                             elif attr == "start_register":
-                                print("INSIDE MIN")
                                 match = int(attributes['start_register']) >= int(rule['start_register'])
                             else:
                                 match = (rule[attr] == attributes[attr])
                         if not match:
-                            print("ATTRIBUTE", attributes[attr], rule[attr])
                             break
                     if match:
                         drop = False
@@ -199,7 +201,7 @@ class Fire(object):
     # @param payload Data from tcp/udp packet
     def analyze_slmp_message(self, payload):
         print('analysinng SLMP')
-        function_codes2names = { 
+        function_codes2names = {
             b'\x01\x04' : 'Read',
             b'\x01\x14' : 'Write',
             # '0403' : 'Device Read Random',
@@ -214,7 +216,7 @@ class Fire(object):
             # 2 : "Read from word devices in 1 word units"
         }
         attributes = {}
-     
+
         if len(payload) > 0:
             command = payload[11:13]
             subcommand = payload[13:15]
@@ -222,7 +224,7 @@ class Fire(object):
             dev_code = payload[18:19]
             no_of_dev_pts = payload[19:21]
 
-            
+
             quantity = int.from_bytes(payload[19:20], 'little')
             start_register = int.from_bytes(payload[15:16], 'little') # ponieważ roboczo plc_write/ plc_read zmienia tylko jeden bajt
 
@@ -237,14 +239,13 @@ class Fire(object):
             if  function_codes2names[command] == "Read":
                 attributes.update({'end_register' : start_register + quantity - 1})
 
-        
-            print(payload,"\n",attributes)
+
             return self.compare_with_rules(attributes)
         else:
             drop = False
             return drop
-        
-    
+
+
     ## Method forwarding the accepted message packeges onward to a defended subnet
     # @param self The object pointer
     # @param message The network message fulfiling the firewall requirenments to be send onward
