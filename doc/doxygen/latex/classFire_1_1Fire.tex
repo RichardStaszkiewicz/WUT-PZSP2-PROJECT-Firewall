@@ -1,0 +1,222 @@
+\hypertarget{classFire_1_1Fire}{}\doxysection{Fire.\+Fire Class Reference}
+\label{classFire_1_1Fire}\index{Fire.Fire@{Fire.Fire}}
+
+
+Inheritance diagram for Fire.\+Fire\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=134pt]{classFire_1_1Fire__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Fire.\+Fire\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=134pt]{classFire_1_1Fire__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+None \mbox{\hyperlink{classFire_1_1Fire_a76961420cef550a54a846457f19762bc}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, rules\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+None \mbox{\hyperlink{classFire_1_1Fire_a9e6896f863d26b6e1edad2c810ec7452}{update\+\_\+rules}} (self)
+\begin{DoxyCompactList}\small\item\em Method reading rules from config file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classFire_1_1Fire_a1dd8cb91eba1421866fd45d98cc9146c}\label{classFire_1_1Fire_a1dd8cb91eba1421866fd45d98cc9146c}} 
+def {\bfseries get\+\_\+rules} (self)
+\item 
+def \mbox{\hyperlink{classFire_1_1Fire_aae85a110c8f4c4042a3706ef1e88aabe}{analyze\+\_\+tcp\+\_\+ip}} (self, pkt)
+\begin{DoxyCompactList}\small\item\em Method analyzing packets in terms of T\+C\+P/\+IP rules. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classFire_1_1Fire_aff51b300c117dde36f6dea31307f4a02}{compare\+\_\+with\+\_\+rules}} (self, attributes)
+\begin{DoxyCompactList}\small\item\em Method comparing packets with rules. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classFire_1_1Fire_a1348471d46ce36fa33f6f0a7327296bd}{analyze\+\_\+modbus\+\_\+message}} (self, payload)
+\begin{DoxyCompactList}\small\item\em Method analyzing complete message under firewall rules. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classFire_1_1Fire_aae1a25b127fe8cfc0cce26356d95ad1d}{analyze\+\_\+slmp\+\_\+message}} (self, payload)
+\begin{DoxyCompactList}\small\item\em Method analyzing captured S\+L\+MP packet message under fire rules. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classFire_1_1Fire_a9350e43e1af8cd7a4e5443dfcfba1ed8}{accept\+\_\+packet}} (self, pkt, message)
+\begin{DoxyCompactList}\small\item\em Method forwarding the accepted message packeges onward to a defended subnet. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classFire_1_1Fire_a102d75fb5d9c0b60b92335280e5344b8}{reject\+\_\+packet}} (self, pkt, message)
+\begin{DoxyCompactList}\small\item\em Method rejecting the given message due to some error. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classFire_1_1Fire_a659fbe75ac7043279633437f33c39dcd}{send\+\_\+slmp\+\_\+error}} (self, pkt)
+\begin{DoxyCompactList}\small\item\em Method sending error message to slmp client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFire_1_1Fire_a837bc8dad38dfa4842f063cae48536a7}\label{classFire_1_1Fire_a837bc8dad38dfa4842f063cae48536a7}} 
+{\bfseries rules\+\_\+file}
+\item 
+\mbox{\Hypertarget{classFire_1_1Fire_a7da3ee1c6e22d104ff3567291bb0d4cf}\label{classFire_1_1Fire_a7da3ee1c6e22d104ff3567291bb0d4cf}} 
+{\bfseries logger}
+\item 
+\mbox{\Hypertarget{classFire_1_1Fire_abbed1c69c1c73d02d3d62ccb34e5fb89}\label{classFire_1_1Fire_abbed1c69c1c73d02d3d62ccb34e5fb89}} 
+{\bfseries rules}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFire_1_1Fire_afda2b99ce68fc236df653cf9b9518fd7}\label{classFire_1_1Fire_afda2b99ce68fc236df653cf9b9518fd7}} 
+list \mbox{\hyperlink{classFire_1_1Fire_afda2b99ce68fc236df653cf9b9518fd7}{rules}} = \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em Keeps all rules required for filtering. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classFire_1_1Fire_a76961420cef550a54a846457f19762bc}\label{classFire_1_1Fire_a76961420cef550a54a846457f19762bc}} 
+\index{Fire.Fire@{Fire.Fire}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!Fire.Fire@{Fire.Fire}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily  None Fire.\+Fire.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{rules\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & The object pointer \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classFire_1_1Fire_a9350e43e1af8cd7a4e5443dfcfba1ed8}\label{classFire_1_1Fire_a9350e43e1af8cd7a4e5443dfcfba1ed8}} 
+\index{Fire.Fire@{Fire.Fire}!accept\_packet@{accept\_packet}}
+\index{accept\_packet@{accept\_packet}!Fire.Fire@{Fire.Fire}}
+\doxysubsubsection{\texorpdfstring{accept\_packet()}{accept\_packet()}}
+{\footnotesize\ttfamily def Fire.\+Fire.\+accept\+\_\+packet (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pkt,  }\item[{}]{message }\end{DoxyParamCaption})}
+
+
+
+Method forwarding the accepted message packeges onward to a defended subnet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & The object pointer \\
+\hline
+{\em message} & The network message fulfiling the firewall requirenments to be send onward \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classFire_1_1Fire_a1348471d46ce36fa33f6f0a7327296bd}\label{classFire_1_1Fire_a1348471d46ce36fa33f6f0a7327296bd}} 
+\index{Fire.Fire@{Fire.Fire}!analyze\_modbus\_message@{analyze\_modbus\_message}}
+\index{analyze\_modbus\_message@{analyze\_modbus\_message}!Fire.Fire@{Fire.Fire}}
+\doxysubsubsection{\texorpdfstring{analyze\_modbus\_message()}{analyze\_modbus\_message()}}
+{\footnotesize\ttfamily def Fire.\+Fire.\+analyze\+\_\+modbus\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{payload }\end{DoxyParamCaption})}
+
+
+
+Method analyzing complete message under firewall rules. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & The object pointer \\
+\hline
+{\em payload} & Data from tcp/udp packet \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classFire_1_1Fire_aae1a25b127fe8cfc0cce26356d95ad1d}\label{classFire_1_1Fire_aae1a25b127fe8cfc0cce26356d95ad1d}} 
+\index{Fire.Fire@{Fire.Fire}!analyze\_slmp\_message@{analyze\_slmp\_message}}
+\index{analyze\_slmp\_message@{analyze\_slmp\_message}!Fire.Fire@{Fire.Fire}}
+\doxysubsubsection{\texorpdfstring{analyze\_slmp\_message()}{analyze\_slmp\_message()}}
+{\footnotesize\ttfamily def Fire.\+Fire.\+analyze\+\_\+slmp\+\_\+message (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{payload }\end{DoxyParamCaption})}
+
+
+
+Method analyzing captured S\+L\+MP packet message under fire rules. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & The object pointer \\
+\hline
+{\em payload} & Data from tcp/udp packet \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classFire_1_1Fire_aae85a110c8f4c4042a3706ef1e88aabe}\label{classFire_1_1Fire_aae85a110c8f4c4042a3706ef1e88aabe}} 
+\index{Fire.Fire@{Fire.Fire}!analyze\_tcp\_ip@{analyze\_tcp\_ip}}
+\index{analyze\_tcp\_ip@{analyze\_tcp\_ip}!Fire.Fire@{Fire.Fire}}
+\doxysubsubsection{\texorpdfstring{analyze\_tcp\_ip()}{analyze\_tcp\_ip()}}
+{\footnotesize\ttfamily def Fire.\+Fire.\+analyze\+\_\+tcp\+\_\+ip (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pkt }\end{DoxyParamCaption})}
+
+
+
+Method analyzing packets in terms of T\+C\+P/\+IP rules. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & The object pointer \\
+\hline
+{\em pkt} & Packet recieved from netfilter queue \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classFire_1_1Fire_aff51b300c117dde36f6dea31307f4a02}\label{classFire_1_1Fire_aff51b300c117dde36f6dea31307f4a02}} 
+\index{Fire.Fire@{Fire.Fire}!compare\_with\_rules@{compare\_with\_rules}}
+\index{compare\_with\_rules@{compare\_with\_rules}!Fire.Fire@{Fire.Fire}}
+\doxysubsubsection{\texorpdfstring{compare\_with\_rules()}{compare\_with\_rules()}}
+{\footnotesize\ttfamily def Fire.\+Fire.\+compare\+\_\+with\+\_\+rules (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{attributes }\end{DoxyParamCaption})}
+
+
+
+Method comparing packets with rules. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & The object pointer \\
+\hline
+{\em attributes} & List of packet attributes to compare with rules \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classFire_1_1Fire_a102d75fb5d9c0b60b92335280e5344b8}\label{classFire_1_1Fire_a102d75fb5d9c0b60b92335280e5344b8}} 
+\index{Fire.Fire@{Fire.Fire}!reject\_packet@{reject\_packet}}
+\index{reject\_packet@{reject\_packet}!Fire.Fire@{Fire.Fire}}
+\doxysubsubsection{\texorpdfstring{reject\_packet()}{reject\_packet()}}
+{\footnotesize\ttfamily def Fire.\+Fire.\+reject\+\_\+packet (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pkt,  }\item[{}]{message }\end{DoxyParamCaption})}
+
+
+
+Method rejecting the given message due to some error. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & The object pointer \\
+\hline
+{\em message} & The network message fulfiling the firewall requirenments to be send onward \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classFire_1_1Fire_a659fbe75ac7043279633437f33c39dcd}\label{classFire_1_1Fire_a659fbe75ac7043279633437f33c39dcd}} 
+\index{Fire.Fire@{Fire.Fire}!send\_slmp\_error@{send\_slmp\_error}}
+\index{send\_slmp\_error@{send\_slmp\_error}!Fire.Fire@{Fire.Fire}}
+\doxysubsubsection{\texorpdfstring{send\_slmp\_error()}{send\_slmp\_error()}}
+{\footnotesize\ttfamily def Fire.\+Fire.\+send\+\_\+slmp\+\_\+error (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pkt }\end{DoxyParamCaption})}
+
+
+
+Method sending error message to slmp client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & The object pointer \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classFire_1_1Fire_a9e6896f863d26b6e1edad2c810ec7452}\label{classFire_1_1Fire_a9e6896f863d26b6e1edad2c810ec7452}} 
+\index{Fire.Fire@{Fire.Fire}!update\_rules@{update\_rules}}
+\index{update\_rules@{update\_rules}!Fire.Fire@{Fire.Fire}}
+\doxysubsubsection{\texorpdfstring{update\_rules()}{update\_rules()}}
+{\footnotesize\ttfamily  None Fire.\+Fire.\+update\+\_\+rules (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Method reading rules from config file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & The object pointer \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+code/\+Fire/Fire.\+py\end{DoxyCompactItemize}
