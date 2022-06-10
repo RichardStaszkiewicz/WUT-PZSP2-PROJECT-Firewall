@@ -46,24 +46,10 @@ addRuleBtn.onclick = () => {
 
     if(ruleProtocol === "MODBUS") {
         ruleCommand = document.getElementById('MODBUS_rule_command');
-        const ruleCommandId = ruleCommand.options[ruleCommand.selectedIndex].id;
+
+        rule['start_register'] = document.getElementById('rule_start_register').value;
+        rule['end_register'] = document.getElementById('rule_end_register').value;
         rule['command'] = ruleCommand.value;
-
-        if(ruleCommandId === "f1") {
-            rule['start_register'] = document.getElementById('f1_rule_start_register').value;
-            rule['end_register'] = document.getElementById('f1_rule_end_register').value;
-        }
-        
-        if(ruleCommandId === "f5") {
-            rule['output_address'] = document.getElementById('f5_rule_output_address').value;
-            rule['value'] = document.getElementById('f5_rule_value').value;
-        }
-
-        if(ruleCommandId === "f6") {
-            rule['output_address'] = document.getElementById('f6_rule_output_address').value;
-            rule['start_register'] = document.getElementById('f6_rule_start_register').value;
-            rule['end_register'] = document.getElementById('f6_rule_end_register').value;
-        }
     }
 
     if(ruleProtocol === "SLMP") {

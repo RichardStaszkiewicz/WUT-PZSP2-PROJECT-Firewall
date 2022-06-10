@@ -32,26 +32,10 @@ const triggerAddProtocolField = (fieldId) => {
     showFormField(`add_${fieldId}`)
 }
 
-const triggerAddFunctionField = () => {
-    const selectedField = document.getElementById(`MODBUS_rule_command`);
-    const fieldId = selectedField.options[selectedField.selectedIndex].id;
-    const functionFieldsIds = ['add_f1', 'add_f5', 'add_f6']
-    hideFields(functionFieldsIds)
-    showFormField(`add_${fieldId}`)
-}
-
 const triggerProtocolField = (fieldId, id) => {
     const protocolsIds = [`${id}_MODBUS`, `${id}_TCP`, `${id}_SLMP`];
     hideFields(protocolsIds)
     showFormField(`${id}_${fieldId}`);
-}
-
-const triggerFunctionField = (id) => {
-    const selectedField = document.getElementById(`${id}_MODBUS_rule_command`);
-    const fieldId = selectedField.options[selectedField.selectedIndex].id;
-    const functionFieldsIds = [`${id}_f1`, `${id}_f5`, `${id}_f6`];
-    hideFields(functionFieldsIds);
-    showFormField(`${id}_${fieldId}`)
 }
 
 const saveRuleForm = async (ruleId) => {
@@ -82,24 +66,10 @@ const saveRuleForm = async (ruleId) => {
 
     if(ruleProtocol == "MODBUS") {
         ruleCommand = document.getElementById(`${ruleId}_MODBUS_rule_command`);
-        const ruleCommandId = ruleCommand.options[ruleCommand.selectedIndex].id;
         rule['command'] = ruleCommand.value;
+        rule['start_register'] = document.getElementById(`${ruleId}start_register`).value;
+        rule['end_register'] = document.getElementById(`${ruleId}end_register`).value;
 
-        if(ruleCommandId === "f1") {
-            rule['start_register'] = document.getElementById(`${ruleId}f1_start_register`).value;
-            rule['end_register'] = document.getElementById(`${ruleId}f1_end_register`).value;
-        }
-        
-        if(ruleCommandId == "f5") {
-            rule['output_address'] = document.getElementById(`${ruleId}f5_output_address`).value;
-            rule['value'] = document.getElementById(`${ruleId}f5_value`).value;
-        }
-
-        if(ruleCommandId == "f6") {
-            rule['output_address'] = document.getElementById(`${ruleId}f6_output_address`).value;
-            rule['start_register'] = document.getElementById(`${ruleId}f6_start_register`).value;
-            rule['end_register'] = document.getElementById(`${ruleId}f6_end_register`).value;
-        }
     }
 
     if(ruleProtocol == "SLMP") {

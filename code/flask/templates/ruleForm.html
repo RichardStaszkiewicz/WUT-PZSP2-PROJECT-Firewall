@@ -38,50 +38,24 @@
         </div>
         <div id="{{ rule['id'] }}_MODBUS" class="ruleFormField">
             <label for="command">Command</label>
-            <select name="command" id="{{ rule['id'] }}_MODBUS_rule_command" class="input" onchange="triggerFunctionField(`{{ rule['id'] }}`)">
-                <option id="f1" value="Read Coils">Read Coils</option>
-                <option id="f1" value="Read Discrete Input">Read Discrete Input</option>
-                <option id="f1" value="Read Holding Registers">Read Holding Registers</option>
-                <option id="f1" value="Read Input Registers">Read Input Registers</option>
-                <option id="f5" value="Write Single Coil">Write Single Coil</option>
-                <option id="f6" value="Write Single Registers">Write Single Registers</option>
-                <option id="f1" value="Write Multiple Coils">Write Multiple Coils</option>
-                <option id="f1" value="Write Multiple Registers">Write Multiple Registers</option>
-                <option id="f1" value="Read/Write Multiple Registers">Read/Write Multiple Registers</option>
+            <select name="command" id="{{ rule['id'] }}_MODBUS_rule_command" class="input">
+                <option value="Read Coils">Read Coils</option>
+                <option value="Read Discrete Input">Read Discrete Input</option>
+                <option value="Read Holding Registers">Read Holding Registers</option>
+                <option value="Read Input Registers">Read Input Registers</option>
+                <option value="Write Single Coil">Write Single Coil</option>
+                <option value="Write Single Registers">Write Single Registers</option>
+                <option value="Write Multiple Coils">Write Multiple Coils</option>
+                <option value="Write Multiple Registers">Write Multiple Registers</option>
+                <option value="Read/Write Multiple Registers">Read/Write Multiple Registers</option>
             </select>
-            <div id="{{ rule['id'] }}_f1" class="ruleFormField">
-                <div class="inputWrapper">
-                    <label to="start_register">Start Register</label>
-                    <input label="start_register" type="text" id="{{ rule['id'] }}f1_start_register" class="input" value="{{ rule['start_register'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="end_register">End Register</label>
-                    <input label="end_register" type="text" id="{{ rule['id'] }}f1_end_register" class="input" value="{{ rule['end_register'] }}">
-                </div>
+            <div class="inputWrapper">
+                <label to="start_register">Start Register</label>
+                <input label="start_register" type="text" id="{{ rule['id'] }}start_register" class="input" value="{{ rule['start_register'] }}">
             </div>
-            <div id="{{ rule['id'] }}_f5" class="ruleFormField">
-                <div class="inputWrapper">
-                    <label to="output_address">Output Address</label>
-                    <input label="output_address" type="text" id="{{ rule['id'] }}f5_output_address" class="input" value="{{ rule['output_address'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="value">Value</label>
-                    <input label="value" type="text" id="{{ rule['id'] }}f5_value" class="input" value="{{ rule['value'] }}">
-                </div>
-            </div>
-            <div id="{{ rule['id'] }}_f6" class="ruleFormField">
-                <div class="inputWrapper">
-                    <label to="output_address">Output Address</label>
-                    <input label="output_address" type="text" id="{{ rule['id'] }}f6_output_address" class="input" value="{{ rule['output_address'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="start_register">Start Register</label>
-                    <input label="start_register" type="text" id="{{ rule['id'] }}f6_start_register" class="input" value="{{ rule['start_register'] }}">
-                </div>
-                <div class="inputWrapper">
-                    <label to="end_register">End Register</label>
-                    <input label="end_register" type="text" id="{{ rule['id'] }}f6_end_register" class="input" value="{{ rule['end_register'] }}">
-                </div>
+            <div class="inputWrapper">
+                <label to="end_register">End Register</label>
+                <input label="end_register" type="text" id="{{ rule['id'] }}end_register" class="input" value="{{ rule['end_register'] }}">
             </div>
         </div>
         <div id="{{ rule['id'] }}_SLMP" class="ruleFormField">
