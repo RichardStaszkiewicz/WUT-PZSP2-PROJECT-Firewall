@@ -6,25 +6,30 @@ Repository of PZSP2 project.
 Raspberry Firewall for SLMP and MODBUS protocols along with interactive Web interface.
 
 ## Installation
-**Instalation manual as for _1753eed_ commit**
+**Instalation manual as for _0791ef9_ commit**
 
-## Server & Client
+### Server & Client
 
-### SLMP Simulators
+#### SLMP Simulators
 SLMP Simulators are accessible in /materials/SLMP directory.
 **ATTENTION1** Simulator requires python2
 
-### Modbus Simulators
+#### Modbus Simulators
 MODBUS/TCP Simulators are accessible in /code/tests directory.
 To use those, one shall execute command **pip install -Ur code/tests/requirements.txt**
 **ATTENTION1** Simulator requires python3
 
-## RaspberryPi
-In order to set up environment, run as superuser commands:
+### RaspberryPi
+#### System setup
+On RaspberryPi shall be installed python3 interpreter along with iptables packet - if using Rasbian distribution the superuser command **apt-get install python3 iptables** shall be sufficient.
+
+#### Python environment setup
+In order to set up working environment, run as superuser commands:
 **sh code/flask/setup_frontend.sh** - the command sets up Configuration module
 **pip3 install -Ur code/requirements.txt** - the command sets up Fire module & unit tests
 
 ## Running
+**ATTENTION!** all below actions shall be taken after the physical connection of both Client and Server to RaspberryPi.
 ### Setting up Client
 1. Configure static IP
 To do so, edit the dhcpcd.conf file or use your OS GUI and set it to 192.168.2.2/24.
@@ -55,19 +60,29 @@ To run Configuration module, run from main repository directory command **python
 2. Accessing the configuration module
 To access configuration module, open in Web Browser the IP:5000 as visible after running previous command.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### Visualisation
+![Visualisation of network build by scripts](doc/stage3/Fire_schema.drawio\ (2).png)
 
-## Test and Deploy
+## Usage
+To use product, physically connect ethernet wire to Eth0 interface of Raspberry to Client and Eth1 to Server. Next proceed as in **Instalation** and **Running** sections.
+
+## Test
+To test, run as superuser command **coverage run --source=. -m unittest discover -s code/tests/** from main repository directory.
 
 ## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Support availible exclusively on demand as the product comes with no warranty ("as is"). If having minor issues feel free to contact corresponding author.
 
 ## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Corresponding author: Richard Staszkiewicz (richard.staszkiewicz@gmail.com)
+Szymon Dyszewski
+Jakub Jabłoński
+Bartłomiej Kosiński
+Bartłomiej Szymański
+
+*We would like to thank Professor Krzysztof Cabaj for inspiration and firm grip on project functionality aspects. Additionaly we acknowledge our grattitude towards PZSP2 expert panel, namely Jarosław Chudziak, Tomasz Kruk and Robert Nowak, for their valuable remarks along with our PZSP2 coordinator, Klara Borowa, for her personal engagement and help with timing management.*
 
 ## License
-For open source projects, say how it is licensed.
+The project is availible under MIT open license.
 
 ## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Projects aims for improvment of the infrastructure from router to switch.
