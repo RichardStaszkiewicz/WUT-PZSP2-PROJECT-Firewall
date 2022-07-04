@@ -325,7 +325,8 @@ class TestFire(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
+    os.remove(JSON_FILE)
+    
     #coverage run --source=. -m unittest discover -s code/tests/
     # coverage report
 
