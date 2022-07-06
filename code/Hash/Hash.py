@@ -29,12 +29,12 @@ def register_user(login, password, filepath):
             return False
 
     salt = os.urandom(8)
-    salted_password = password + salt
+    
     h = hashlib.sha384()
-    h.update(salted_password.encode())
+    h.update(password.encode())
     h.update(salt)
 
-    data['users'].append({'login' : login, 'password' : h.hexdigest(), 'salt' : salt })   
+    data['users'].append({'login' : login, 'password' : h.hexdigest(), 'salt' : str(salt) })   
     
     with open(filepath,"w") as passwd_file:
         json.dump(data, passwd_file)
