@@ -2,8 +2,43 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+const setRuleFormFields = (ruleId) => {
+    const rule = RULES.filter((rule) => {
+        return rule.id == ruleId;
+    })[0];
+
+    const protocolSelect = document.getElementById(`${rule.id}_protocol`);
+    let protocolAmount = 0;
+    while(protocolSelect[protocolAmount] != null){
+        protocolAmount += 1;
+    };
+
+    for(i = 0; i < protocolAmount; i++){
+        if(protocolSelect[i].text == rule.protocol){
+            protocolSelect[i].selected = true;
+            triggerProtocolField(protocolSelect[i].text, rule.id);
+        };
+    };
+
+    if(rule.protocol !== 'TCP'){
+        const commandSelect = document.getElementById(`${rule.id}_${rule.protocol}_rule_command`);
+        let commandAmount = 0;
+        while(commandSelect[commandAmount] != null){
+            commandAmount += 1;
+        }
+
+        for(i = 0; i < commandAmount; i++){
+            if(commandSelect[i].text == rule.command){
+                commandSelect[i].selected = true;
+            }
+        }
+    }
+}
+
 const triggerRuleForm = (ruleId) => {
     const ruleForm = document.getElementById(`ruleForm_${ruleId}`);
+
+    setRuleFormFields(ruleId);
 
     ruleForm.style.display = "block";
 }

@@ -50,8 +50,6 @@ def update_rules():
 
         if request.args.get('action') == 'deleteRule':
             rule_to_delete = request.get_json()[0]
-            print(rule_to_delete)
-            print(RULES)
             RULES.remove(rule_to_delete)
             return 'ok'
 

@@ -12,7 +12,7 @@
         </div>
         <div class="inputWrapper">
             <label for="protocol">Protocol</label>
-            <select name="protocol" id="{{ rule['id'] }}_protocol" class="input" selected="{{ rule['protocol'] }}" onchange="triggerProtocolField(this.value, `{{ rule['id'] }}`)">
+            <select name="protocol" id="{{ rule['id'] }}_protocol" class="input" onchange="triggerProtocolField(this.value, `{{ rule['id'] }}`)">
                 <option value="MODBUS">MODBUS</option>
                 <option value="TCP">TCP</option>
                 <option value="SLMP">SLMP</option>
