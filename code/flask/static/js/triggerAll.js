@@ -2,6 +2,22 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+const deleteRule = async (ruleId) => {
+    const rule = RULES.filter((rule) => {
+        return rule.id == ruleId
+    });
+
+    fetch('/getRules?action=deleteRule', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json',
+        },
+        body: JSON.stringify(rule)
+    })
+    await sleep(1000);
+    window.location.reload(true);
+}
+
 const enableAll = async () => {
     fetch('/getRules?action=enableAll', {
         method: 'POST',

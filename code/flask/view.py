@@ -48,9 +48,16 @@ def update_rules():
             subprocess.call("./code/RunFifoScript.sh")
             return 'ok'
 
+        if request.args.get('action') == 'deleteRule':
+            rule_to_delete = request.get_json()[0]
+            print(rule_to_delete)
+            print(RULES)
+            RULES.remove(rule_to_delete)
+            return 'ok'
+
         modified_rule = request.get_json()
         for i in range(len(RULES)):
-            if RULES[i]['id'] == modified_rule['id']:
+            if RULES[i].get('id') == modified_rule['id']:
                 RULES[i] = modified_rule
                 return 'ok'
         RULES.append(modified_rule)
