@@ -20,7 +20,7 @@ LOGS = get_logs()
 IS_LOGIN = False
 USERNAME = 'admin'
 PASSWORD = 'admin'
-FILEPATH = 'code/tests/passwd_temp.json'
+FILEPATH = 'data/passwd.json'
 
 @app.route('/getRules', methods=['GET', 'POST'])
 def update_rules():
@@ -79,7 +79,7 @@ def home():
 
 
 @app.route('/', methods=['GET', 'POST'])
-def login():
+def login():https://pentestmonkey.net/blog/direnum
     global IS_LOGIN
     error = None
     if request.method == 'POST':
