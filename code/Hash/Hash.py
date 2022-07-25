@@ -17,11 +17,10 @@ def get_user(login, filepath):
 
 def is_password_correct(login, password, filepath):
     user = get_user(login, filepath)
-
+    h = hashlib.sha384()
+    
     if user:
-        h = hashlib.sha384()
         h.update(password.encode())
-        #try catch 
         h.update(user['salt'].encode())
 
     return h.hexdigest() == user['password']
