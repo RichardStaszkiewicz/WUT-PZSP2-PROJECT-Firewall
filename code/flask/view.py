@@ -1,4 +1,5 @@
 import json
+from typing import Hashable
 from flask import Flask, jsonify, render_template, request, redirect, url_for
 import os
 import subprocess
@@ -6,6 +7,10 @@ from time import sleep
 
 from rules import get_rules
 from logs import get_logs
+# 
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'Hash'))
+import Hash
 
 
 app = Flask(__name__)
@@ -15,6 +20,7 @@ LOGS = get_logs()
 IS_LOGIN = False
 USERNAME = 'admin'
 PASSWORD = 'admin'
+FILEPATH = 'code/tests/passwd_temp.json'
 
 @app.route('/getRules', methods=['GET', 'POST'])
 def update_rules():
@@ -77,11 +83,18 @@ def login():
     global IS_LOGIN
     error = None
     if request.method == 'POST':
-        if request.form['username'] != USERNAME or request.form['password'] != PASSWORD:
+        # NEW
+        if not Hash.is_password_correct(request.form['username'],request.form['password'], FILEPATH):
             error = 'Invalid Credentials. Please try again.'
-        if request.form['username'] == USERNAME and request.form['password'] == PASSWORD:
+        if Hash.is_password_correct(request.form['username'],request.form['password'], FILEPATH):
             IS_LOGIN = True
-            return redirect(url_for('home'))
+            return redirect(url_for('home')) 
+        # OLD
+        # if request.form['username'] != USERNAME or request.form['password'] != PASSWORD:
+        #     error = 'Invalid Credentials. Please try again.'
+        # if request.form['username'] == USERNAME and request.form['password'] == PASSWORD:
+        #     IS_LOGIN = True
+        #     return redirect(url_for('home'))
     return render_template('login.html', error=error)
 
 if __name__ == "__main__":
