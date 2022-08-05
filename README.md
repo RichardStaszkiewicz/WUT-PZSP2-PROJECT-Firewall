@@ -22,6 +22,20 @@ To use those, one shall execute command **pip install -Ur code/tests/requirement
 ### RaspberryPi
 #### System setup
 On RaspberryPi shall be installed python3 interpreter along with iptables packet - if using Rasbian distribution the superuser command **apt-get install python3 iptables** shall be sufficient.
+To allow forwarding go to /etc/sysctl.conf and uncomment __net.ipv4.ip_forward=1__ line.
+Be sure to preform next steps having brought up interaces - you can use command **ip link set dev <interface name> up**.
+To create bridge forwarding packets between eth0 and eth1 do as below:
+    1. Run as superuser **apt-get install bridge-utils**
+    2. Run as superuser **brctl addbr <bridge name>**
+    3. Run as superuser **ip addr add 192.168.1.55/24 dev <bridge name>**
+    3. Run as superuser **brctl addif <bridge name> eth0 eth1**
+    4. Add following line to /etc/dhcpcd.conf file:
+        __denyinterfaces eth0 eth1__
+    5. Add following lines to /etc/network/interfaces file:
+        __auto <bridge name>__
+        __iface <bridge name> inet manual__
+        __bridge_ports eth0 eth1__
+    6. Reboot
 
 #### Python environment setup
 In order to set up working environment, run as superuser commands:
