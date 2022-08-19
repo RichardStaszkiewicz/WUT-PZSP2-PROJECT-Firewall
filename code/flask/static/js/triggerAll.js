@@ -62,3 +62,14 @@ const fetchLogs = async () => {
     await sleep(1000);
     window.location.reload(true);
 }
+
+const logout = async () => {
+    fetch('/getRules?action=logout', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json',
+        },
+    })
+    await sleep(1000);
+    window.location.reload(true);
+}

@@ -18,13 +18,14 @@ app = Flask(__name__)
 RULES = get_rules()
 LOGS = get_logs()
 IS_LOGIN = False
-USERNAME = 'admin'
-PASSWORD = 'admin'
+# USERNAME = 'admin'
+# PASSWORD = 'admin'
 FILEPATH = 'data/passwd.json'
 
 @app.route('/getRules', methods=['GET', 'POST'])
 def update_rules():
     global LOGS
+    global IS_LOGIN
 
     if request.method == 'POST':
 
@@ -42,6 +43,10 @@ def update_rules():
             LOGS = get_logs()
             return 'ok'
 
+        if request.args.get('action') == "logout":
+            IS_LOGIN = False
+            return 'ok'
+        
         if request.args.get('action') == 'save':
             rules_data = request.get_json()
             data = {}
@@ -79,7 +84,7 @@ def home():
 
 
 @app.route('/', methods=['GET', 'POST'])
-def login():https://pentestmonkey.net/blog/direnum
+def login():#https://pentestmonkey.net/blog/direnum
     global IS_LOGIN
     error = None
     if request.method == 'POST':

@@ -23,7 +23,10 @@ def is_password_correct(login, password, filepath):
         h.update(password.encode())
         h.update(user['salt'].encode())
 
-    return h.hexdigest() == user['password']
+    try:
+        return h.hexdigest() == user['password']
+    except KeyError:
+        return False
 
 
 def register_user(login, password, filepath):
